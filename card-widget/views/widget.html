@@ -1,0 +1,248 @@
+{%- import 'card-link-widget:card-link-layout-fragment.html' as cardLinkLayout -%}
+
+{%- if data.widget.cardType == 'simple' -%}
+  {%- set cardType = 'simple' -%}
+{%- elseif data.widget.cardType == 'mixed' -%}
+  {%- set cardType = 'mixed' -%}
+{%- elseif data.widget.cardType == 'rich' -%}
+  {%- set cardType = 'rich' -%}
+{%- elseif data.widget.cardType == 'overlay' -%}
+  {%- set cardType = 'overlay' -%}
+{%- elseif data.widget.cardType == 'horizontal' -%}
+  {%- set cardType = 'horizontal' -%}
+{%- else -%}
+  {%- set cardType = 'simple' -%}
+{%- endif -%}
+
+{%- if data.widget.cardClass -%}
+  {%- set cardClass = data.widget.cardClass -%}
+{%- endif -%}
+
+{%- if data.widget.cardStyle -%}
+  {%- set cardStyle = data.widget.cardstyle -%}
+{%- endif -%}
+
+{%- if data.widget.horizontalAlignment == 'centre' -%}
+  {%- set horizontalAlignmentClass = 'text-center' -%}
+{%- elseif data.widget.horizontalAlignment == 'right' -%}
+  {%- set horizontalAlignmentClass = 'text-end' -%}
+{%- else -%}
+  {%- set horizontalAlignmentClass = '' -%}
+{%- endif -%}
+
+{%- if data.widget.verticalAlignment == 'top' -%}
+  {%- set rowAlignmentClass = "align-items-start" -%}
+{%- elseif data.widget.verticalAlignment == 'centre' -%}
+  {%- set rowAlignmentClass = "align-items-center" -%}
+{%- elseif data.widget.verticalAlignment == 'bottom' -%}
+  {%- set rowAlignmentClass = "align-items-end" -%}
+{%- else -%}
+  {%- set rowAlignmentClass = "align-items-start" -%}
+{%- endif -%}
+
+{%- set overlayPositionClass = null -%}
+{%- if data.widget.overlayPosition == 'tl' -%}
+  {%- set overlayPositionClass = 'card__overlay--top-left'-%}
+{%- elif data.widget.overlayPosition == 'tc' -%}
+  {%- set overlayPositionClass = 'card__overlay--top-centre'-%}
+{%- elif data.widget.overlayPosition == 'tr' -%}
+  {%- set overlayPositionClass = 'card__overlay--top-right'-%}
+{%- elif data.widget.overlayPosition == 'cl' -%}
+  {%- set overlayPositionClass = 'card__overlay--centre-left'-%}
+{%- elif data.widget.overlayPosition == 'centre' -%}
+  {%- set overlayPositionClass = 'card__overlay--centre'-%}
+{%- elif data.widget.overlayPosition == 'cr' -%}
+  {%- set overlayPositionClass = 'card__overlay--centre-right'-%}
+{%- elif data.widget.overlayPosition == 'bl' -%}
+  {%- set overlayPositionClass = 'card__overlay--bottom-left'-%}
+{%- elif data.widget.overlayPosition == 'bc' -%}
+  {%- set overlayPositionClass = 'card__overlay--bottom-centre'-%}
+{%- elif data.widget.overlayPosition == 'br' -%}
+  {%- set overlayPositionClass = 'card__overlay--bottom-right'-%}
+{%- else -%}
+{%- endif -%}
+
+{%- if data.widget.horizontalCardImagePlacement == 'left' -%}
+  {%- set horizontalCardImagePlacement = "left" -%}
+{%- elseif data.widget.horizontalCardImagePlacement == 'right' -%}
+  {%- set horizontalCardImagePlacement = "right" -%}
+{%- else -%}
+  {%- set horizontalCardImagePlacement = "left" -%}
+{%- endif -%}
+
+{%- if data.widget.horizontalCardColumnSplit == '16-84' -%}
+  {%- set imageColumnClass = "col-12 col-md-4 col-lg-2" -%}
+  {%- set contentColumnClass = "col-12 col-md-8 col-lg-10" -%}
+{%- elif data.widget.horizontalCardColumnSplit == '25-75' -%}
+  {%- set imageColumnClass = "col-12 col-md-5 col-lg-3" -%}
+  {%- set contentColumnClass = "col-12 col-md-7 col-lg-9" -%}
+{%- elif data.widget.horizontalCardColumnSplit == '33-67' -%}
+  {%- set imageColumnClass = "col-12 col-md-4 col-lg-4" -%}
+  {%- set contentColumnClass = "col-12 col-md-8 col-lg-8" -%}
+{%- elif data.widget.horizontalCardColumnSplit == '50-50' -%}
+  {%- set imageColumnClass = "col-12 col-md-6 col-lg-6" -%}
+  {%- set contentColumnClass = "col-12 col-md-6 col-lg-6" -%}
+{%- else -%}
+  {%- set imageColumnClass = "col-12 col-md-6 col-lg-6" -%}
+  {%- set contentColumnClass = "col-12 col-md-6 col-lg-6" -%}
+{%- endif -%}
+
+{%- if data.widget.cardBorderColour -%}
+  {%- set cardBorderClass = 'border-1 border-solid' -%}
+  {%- set cardBorderColour = data.widget.cardBorderColour -%}
+  {%- set cardForegroundColour = (cardBorderColour | truncate(7, true, "")) -%}
+  {%- set cardBorderStyle = 'color:' + cardForegroundColour + '22; border-color:' + data.widget.cardBorderColour + '; ' -%}
+{%- endif -%}
+
+{%- if data.widget.drawImageBorders -%}
+  {%- set imageBorderClass = 'card__image--draw-border' -%}
+  {%- set imageBorderColour = data.widget.cardBorderColour -%}
+  {%- set imageForegroundColour = (imageBorderColour | truncate(7, true, "")) -%}
+  {%- set imageBorderStyle = 'color:' + imageForegroundColour + '22; border-color:' + imageBorderColour + ';' -%}
+{%- endif -%}
+
+{%- set textColourStyle = 'color:var(--mp-body-colour);' -%}
+{%- if data.widget.textColour -%}
+  {%- set textColourStyle = 'color:' + data.widget.textColour + '; ' -%}
+{%- endif -%}
+
+{%- if data.widget.backgroundColour -%}
+  {%- set cardBackgroundColourStyle = 'background:' + data.widget.backgroundColour + ';' -%}
+{%- endif -%}
+
+{%- if data.widget.headerBackgroundColour -%}
+  {%- set cardHeaderBackgroundColourStyle = 'background:' + data.widget.headerBackgroundColour + ';' -%}
+{%- endif -%}
+
+{%- if data.widget.headerTextColour -%}
+  {%- set headerTextColourStyle = 'color:' + data.widget.headerTextColour + '; ' -%}
+{%- endif -%}
+
+{%- if data.widget.backgroundStyle -%}
+  {%- set cardBackgroundStyle = data.widget.backgroundStyle -%}
+{%- endif -%}
+
+{%- if data.widget.headerStyle -%}
+  {%- set cardHeaderStyle = data.widget.headerStyle -%}
+{%- endif -%}
+
+{%- if data.widget.cardWidth == '25' -%}
+  {%- set cardWidthClass = 'w-25' -%}
+{%- elseif data.widget.cardWidth == '50' -%}
+  {%- set cardWidthClass = 'w-50' -%}
+{%- elseif data.widget.cardWidth == '75' -%}
+  {%- set cardWidthClass = 'w-75' -%}
+{%- elseif data.widget.cardWidth == '100' -%}
+  {%- set cardWidthClass = 'w-100' -%}
+{%- else -%}
+  {%- set cardWidthClass = '' -%}
+{%- endif -%}
+
+{%- set cardAlignmentClass = null -%}
+{%- if data.widget.cardAlignment == 'left' -%}
+  {%- set cardAlignmentClass = 'block--left-align' -%}
+{%- elif data.widget.cardAlignment == 'centre' -%}
+  {%- set cardAlignmentClass = 'block--centre-align' -%}
+{%- elif data.widget.cardAlignment == 'right' -%}
+  {%- set cardAlignmentClass = 'block--right-align' -%}
+{%- else -%}
+{%- endif -%}
+
+{%- if data.widget.cardProportionalHeight == '100' -%}
+  {%- set cardHeightStyle = 'height:100%;' -%}
+{%- elseif data.widget.cardProportionalHeight == '0' -%}
+  {%- set cardHeightStyle = 'height:auto;' -%}
+{%- elseif data.widget.cardProportionalHeight > '0' and data.widget.cardProportionalHeight < '100' -%}
+  {%- set cardHeightStyle = 'max-height:' + data.widget.cardProportionalHeight + 'vh;' + 'min-height:' + data.widget.cardProportionalHeight + 'vh;overflow-y:scroll;' -%} 
+{%- endif -%}
+
+<div data-card-widget
+    {% if data.widget.wrapInColumn %}
+     class="{% if data.widget.columnClass %}{{ data.widget.columnClass }}{% else %}col{% endif %}">
+    <div
+        {% endif %}
+        class="card {% if cardType == 'horizontal' %}card--horizontal card--image-{{ horizontalCardImagePlacement }}{% endif %} {{ cardAlignmentClass }} {{ cardWidthClass }} {{ horizontalAlignmentClass }} {{ cardBorderClass }} {% if cardClass %}{{ cardClass }}{% else %}{% if data.widget.wrapInColumn %}{% else %}mt-4{% endif %}{% endif %}"
+        style="{{ cardStyle }} {{ cardHeightStyle }} {{ cardBorderStyle }} {{ cardBackgroundColourStyle }}">
+
+        {%- if data.widget.useCardHeader -%}
+        <div class="{% if data.widget.headerClass %}{{ data.widget.headerClass }}{% else %}card-header{% endif %}"
+             style="{{ cardHeaderBackgroundColourStyle }} {{ headerTextColourStyle }} {{ cardHeaderStyle }}">
+            {% area data.widget, 'cardHeader' %}
+        </div>
+        {%- elseif cardType == 'mixed' or cardType == 'rich' -%}
+          {%- if data.widget.imageCapPlacement == 'top' -%}
+            {% area data.widget, 'topImage' %}
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if cardType == 'horizontal' -%}
+        <div class="row g-0 {{ rowAlignmentClass }}">
+            {%- if horizontalCardImagePlacement == 'left' -%}
+            <div class="card__image-column--horizontal {% if imageColumnClass %}{{ imageColumnClass }}{% else %}col-md-4{% endif %}">
+                <div class="card__image-container card__image-container--image-left {{ imageBorderClass }}"
+                     style="{{ imageBorderStyle }}">
+                    {% area data.widget, 'horizontalImageLeft' %}
+                </div>
+            </div>
+            {%- endif -%}
+            <div class="card__copy-container{% if contentColumnClass %} {{ contentColumnClass }} {% else %} col-md-8 {% endif %}">
+                {%- endif -%}
+
+                {%- if cardType == 'overlay' -%}
+                  {% area data.widget, 'backgroundImage' %}
+                {%- endif -%}
+
+        <div class="{% if cardType == 'overlay' %}card-img-overlay{% else %}card-body{% endif %} {{ rowAlignmentClass }}"
+             style="{{ cardBackgroundStyle }} {{ textColourStyle }}">
+            {%- if cardType == 'simple' or cardType == 'mixed' -%}
+              {%- if data.widget.cardTitle -%}<h5 class="card-title" style="{{ headerTextColourStyle }}">{{ data.widget.cardTitle }}</h5>{%- endif -%}
+              {%- if data.widget.cardSubtitle -%}<h6 class="card-subtitle" style="{{ headerTextColourStyle }}">{{ data.widget.cardSubtitle }}</h6>{%- endif -%}
+            <p class="card-text">{{ data.widget.cardText }}</p>
+            {%- elseif cardType == 'rich' or cardType == 'overlay' or cardType == 'horizontal' -%}
+              {%- if cardType == 'overlay' -%}
+            <div class="card__overlay-wrapper {{ overlayPositionClass }}"> 
+              {%- endif -%}
+              {%- if data.widget.cardTitle -%}<h5 class="card-title" style="{{ headerTextColourStyle }}">{{ data.widget.cardTitle }}</h5>{%- endif -%}
+
+              {%- if data.widget.cardSubtitle -%}<h6 class="card-subtitle" style="{{ headerTextColourStyle }}">{{ data.widget.cardSubtitle }}</h6>{%- endif -%}
+              {% area data.widget, 'body' %}
+
+              {%- if cardType == 'overlay' -%}
+            </div>
+              {%- endif -%}
+            {%- endif -%}
+
+            {%- if data.widget.cardLinks[0] -%}
+              {%- for cardLink in data.widget.cardLinks -%}
+                {%- render cardLinkLayout.link(cardLink.link.items[0]) -%}
+              {%- endfor -%}
+            {%- endif -%}
+        </div>
+
+        {%- if cardType == 'horizontal' -%}
+            </div>
+            {%- if horizontalCardImagePlacement == 'right' -%}
+            <div class="card__image-column--horizontal {% if imageColumnClass %}{{ imageColumnClass }}{% else %}col-md-4{% endif %}">
+                <div class="card__image-container card__image-container--image-right {{ imageBorderClass }}"
+                     style="{{ imageBorderStyle }}">
+                    {% area data.widget, 'horizontalImageRight' %}
+                </div>
+            </div>
+            {%- endif -%}
+        </div>
+        {%- endif -%}
+
+        {%- if data.widget.useCardFooter -%}
+        <div class="{% if data.widget.headerClass %}{{ data.widget.headerClass }}{% else %}card-footer text-muted{% endif %}"
+             style="{{ cardHeaderBackgroundColourStyle }} {{ headerTextColourStyle }} {{ cardHeaderStyle }}">
+            {% area data.widget, 'cardFooter' %}
+        </div>
+        {%- elseif cardType == 'mixed' or cardType == 'rich' -%}
+          {%- if data.widget.imageCapPlacement == 'bottom' -%}
+            {% area data.widget, 'bottomImage' %}
+          {%- endif -%}
+        {%- endif -%}
+        {% if data.widget.wrapInColumn %}
+    </div>
+    {% endif %}
+</div>

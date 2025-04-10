@@ -1,0 +1,69 @@
+{%- if data.widget.alignFigure == 'left' -%}
+  {%- set figureAlignmentClass = "figure--left-align" -%}
+{%- elif data.widget.alignFigure == 'right' -%}
+  {%- set figureAlignmentClass = "figure--right-align" -%}
+{%- elif data.widget.alignFigure == 'centre' -%}
+  {%- set figureAlignmentClass = "figure--centre" -%}
+{%- else -%}
+  {%- set figureAlignmentClass = '' -%}
+{%- endif -%}
+
+{%- if data.widget.figureWidth == '20' -%}
+  {%- set figureWidthClass = "figure--20-wide" -%}
+{%- elif data.widget.figureWidth == '25' -%}
+  {%- set figureWidthClass = "figure--20-wide" -%}
+{%- elif data.widget.figureWidth == '33' -%}
+  {%- set figureWidthClass = "figure--33-wide" -%}
+{%- elif data.widget.figureWidth == '40' -%}
+  {%- set figureWidthClass = "figure--40-wide" -%}
+{%- elif data.widget.figureWidth == '50' -%}
+  {%- set figureWidthClass = "figure--50-wide" -%}
+{%- elif data.widget.figureWidth == '60' -%}
+  {%- set figureWidthClass = "figure--60-wide" -%}
+{%- elif data.widget.figureWidth == '66' -%}
+  {%- set figureWidthClass = "figure--66-wide" -%}
+{%- elif data.widget.figureWidth == '75' -%}
+  {%- set figureWidthClass = "figure--75-wide" -%}
+{%- elif data.widget.figureWidth == '80' -%}
+  {%- set figureWidthClass = "figure--80-wide" -%}
+{%- else -%}
+  {%- set figureWidthClass = "figure--100-wide" -%}
+{%- endif -%}
+
+<figure class="{% if data.widget.appendToFigureClass == false %}{{ data.widget.figureClass }}{% else %}figure {{ figureAlignmentClass }} {{ figureWidthClass }} {{ data.widget.figureClass }}{% endif %}"
+        {% if data.widget.figureStyle %}style="{{ data.widget.figureStyle }}"{% endif %}>
+    {%- if data.widget.figureTitle and data.widget.figureTitle | length > 0 -%}
+    <div class="figure__title">{{ data.widget.figureTitle }}</div>
+    {%- endif -%}
+    {% area data.widget, 'enclosedContent' %}
+    {%- if data.widget.displayCaption -%}
+    <figcaption class="figure__caption figure-caption">
+      {%- if data.widget.figureCaption.items[0] -%}
+        {% area data.widget, 'figureCaption' %}
+      {%- else -%}
+        {%- if data.widget.enclosedContent.items[0].type == 'image' -%}
+        {%- set imageObject = data.widget.enclosedContent.items[0]._image -%}
+          {%- if imageObject[0] -%}
+            {%- if imageObject[0].title != '' -%}
+        <div class="figure__caption--title">{{ data.widget.enclosedContent.items[0]._image[0].title }}</div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if data.widget.displayCredit == true -%}
+        {%- if data.widget.enclosedContent.items[0].type == 'image' -%}
+          {%- set imageObject = data.widget.enclosedContent.items[0]._image -%}
+          {%- if imageObject[0] -%}
+            {%- if imageObject[0].credit != '' -%}
+        <div class="figure__caption--credit-text">
+            {%- if imageObject[0].creditUrl != '' -%}<a href="{{ data.widget.enclosedContent.items[0]._image[0].creditUrl }}">{%- endif -%}
+              {{ data.widget.enclosedContent.items[0]._image[0].credit }}</div>
+            {%- if imageObject[0].creditUrl != '' -%}</a>{%- endif -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+    </figcaption>
+    {%- endif -%}
+</figure>

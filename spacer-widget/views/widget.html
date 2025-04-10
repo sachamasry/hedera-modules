@@ -1,0 +1,37 @@
+{%- if data.widget.spacerHeight== '1' -%}
+{%- set spacerHeightClass = "spacer--1-high" -%}
+{%- elif data.widget.spacerHeight== '2' -%}
+{%- set spacerHeightClass = "spacer--2-high" -%}
+{%- elif data.widget.spacerHeight== '3' -%}
+{%- set spacerHeightClass = "spacer--3-high" -%}
+{%- elif data.widget.spacerHeight== '4' -%}
+{%- set spacerHeightClass = "spacer--4-high" -%}
+{%- elif data.widget.spacerHeight== '5' -%}
+{%- set spacerHeightClass = "spacer--5-high" -%}
+{%- elif data.widget.spacerHeight== '6' -%}
+{%- set spacerHeightClass = "spacer--6-high" -%}
+{%- elif data.widget.spacerHeight== '7' -%}
+{%- set spacerHeightClass = "spacer--7-high" -%}
+{%- elif data.widget.spacerHeight== '8' -%}
+{%- set spacerHeightClass = "spacer--8-high" -%}
+{%- elif data.widget.spacerHeight== '9' -%}
+{%- set spacerHeightClass = "spacer--9-high" -%}
+{%- elif data.widget.spacerHeight== '10' -%}
+{%- set spacerHeightClass = "spacer--10-high" -%}
+{%- elif data.widget.spacerHeight== '11' -%}
+{%- set spacerHeightClass = "spacer--11-high" -%}
+{%- elif data.widget.spacerHeight== '12' -%}
+{%- set spacerHeightClass = "spacer--12-high" -%}
+{%- elif data.widget.spacerHeight== '13' -%}
+{%- set spacerHeightClass = "spacer--13-high" -%}
+{%- elif data.widget.spacerHeight== '14' -%}
+{%- set spacerHeightClass = "spacer--14-high" -%}
+{%- elif data.widget.spacerHeight== '15' -%}
+{%- set spacerHeightClass = "spacer--15-high" -%}
+{%- else -%}
+{%- set spacerHeightClass = "spacer--3-high" -%}
+{%- endif -%}
+
+<div data-spacer-widget
+     class="{{ spacerHeightClass }}">
+</div>

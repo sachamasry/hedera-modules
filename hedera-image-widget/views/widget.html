@@ -1,0 +1,66 @@
+{%- import 'hedera-image-widget:image-layout-fragment.html' as imageLayoutFragment -%}
+
+{%- set defaultImgClass = "apostrophe-widget--image img-fluid rounded" -%}
+{%- if data.options.className -%}
+  {%- set imageClass = data.options.className -%}
+{%- elif data.manager.options.className -%}
+  {%- set imageClass = data.manager.options.className -%}
+{%- else -%}
+  {%- set imageClass = defaultImgClass -%}
+{%- endif -%}
+
+{%- if data.widget.imageClass -%}
+  {%- set imageClass = imageClass + ' ' + data.widget.imageClass -%}
+{%- endif -%}
+
+{%- set sizeAttribute = null -%}
+{%- if data.widget.size -%}
+  {%- set sizeAttribute = data.widget.size -%}
+{%- elseif data.options.size -%}
+  {%- set sizeAttribute = data.options.size -%}
+{%- else -%}
+  {%- set sizeAttribute = '' -%}
+{%- endif -%}
+
+{%- if data.options.dimensionAttrs -%}
+  {%- set dimensionAttrs = data.options.dimensionAttrs -%}
+{%- elif data.manager.options.dimensionAttrs  -%}
+  {%- set dimensionAttrs = data.manager.options.dimensionAttrs  -%}
+{%- endif -%}
+
+{%- set loadingAttribute = null -%}
+{%- if data.widget.loadingAttribute == 'eager' -%}
+  {%- set loadingAttribute = 'eager' -%}
+{%- elif data.widget.loadingAttribute == 'lazy' -%}
+  {%- set loadingAttribute = 'lazy' -%}
+{%- else -%}
+  {%- set loadingAttribute = 'auto' -%}
+{%- endif -%}
+
+{%- set decodingAttribute = null -%}
+{%- if data.widget.loadingAttribute == 'eager' -%}
+  {%- set decodingAttribute = 'sync' -%}
+{%- elif data.widget.loadingAttribute == 'lazy' -%}
+  {%- set decodingAttribute = 'async' -%}
+{%- else -%}
+  {%- set decodingAttribute = 'auto' -%}
+{%- endif -%}
+
+{%- set imagePlaceholderColour = data.global.defaultPlaceholderColour -%}
+
+{%- set imageStyle = "background-color: " + imagePlaceholderColour + ";" -%}
+
+{%- set imageObject = apos.image.first(data.widget._image) -%}
+{%- set imageWidth = imageObject.width -%}
+{%- set imageHeight = imageObject.height -%}
+{%- set imageAspectRatio = imageWidth / imageHeight -%}
+
+{%- if data.widget.setDimensionAttributesToRootElement -%}
+<script>
+   document.documentElement.style.setProperty('--cover-image-width', '{{ imageWidth }}px');
+   document.documentElement.style.setProperty('--cover-image-height', '{{ imageHeight }}px');
+   document.documentElement.style.setProperty('--cover-image-ar', '{{ imageAspectRatio }}');
+</script>
+{%- endif -%}
+
+{%- render imageLayoutFragment.image(imageObject, sizeAttribute, imageClass, imageStyle, loadingAttribute, decodingAttribute) -%}

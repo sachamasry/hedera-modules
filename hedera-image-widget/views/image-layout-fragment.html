@@ -1,0 +1,24 @@
+{% fragment image(imageObject, dimensionAttributes, imageClass, imageStyle, loadingAttribute, decodingAttribute) %}
+  {%- if imageObject -%}
+    <img {% if imageClass %} class="{{ imageClass }}"{% endif %}
+         srcset="{{ apos.image.srcset(imageObject) }}"
+         src="{{ apos.attachment.url(imageObject, { size: data.widget.size or data.options.size or 'full' }) }}"
+         alt="{{ imageObject._alt or '' }}"
+         title="{{ imageObject.title }}"
+         {%- if dimensionAttributes -%}
+           {%- if imageObject.width -%} width="{{ imageObject.width }}" {%- endif -%}
+           {%- if imageObject.height -%} height="{{ imageObject.height }}" {%- endif -%}
+         {%- endif -%}
+         {%- if data.contextOptions and data.contextOptions.sizes -%}
+           sizes="{{ contextOptionSizes }}"
+         {%- endif -%}
+         {%- if loadingAttribute -%} loading="{{ loadingAttribute }}"{%- endif -%}
+         {%- if decodingAttribute -%} decoding="{{ decodingAttribute }}"{%- endif -%}
+         {%- if apos.attachment.hasFocalPoint(imageObject) -%}
+           style="object-position: {{ apos.attachment.focalPointToObjectPosition(imageObject) }}; {{ imageStyle }}"
+         {%- else -%}
+           style="{{ imageStyle }}"
+         {%- endif -%}
+    />
+  {%- endif -%}
+{% endfragment %}

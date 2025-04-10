@@ -1,0 +1,104 @@
+{%- set styleString = '' -%}
+{%- if data.widget.backgroundColour -%}
+  {%- set styleString = styleString + 'background-color: ' + data.widget.backgroundColour + ';' -%}
+{%- endif -%}
+{%- if data.widget.borderColour -%}
+  {%- set styleString = styleString + 'border: 1px solid ' + data.widget.borderColour + ';' -%}
+{%- endif -%}
+
+{%- set borderRadiusClass = '' -%}
+{%- if data.widget.borderRadius -%}
+  {%- set borderRadiusClass = 'rounded-border-' + data.widget.borderRadius -%}
+{%- endif -%}
+
+{%- if data.widget.containerPurpose == 'container' -%}
+  {%- set containerPurposeClass = 'container' -%}
+{%- elseif data.widget.containerPurpose == 'containing-block' -%}
+  {%- set containerPurposeClass = '' -%}
+{%- elseif data.widget.containerPurpose == 'flexbox' -%}
+  {%- set containerPurposeClass = 'container--flexbox' -%}
+{%- elseif data.widget.containerPurpose == 'card-group-container' -%}
+  {%- set containerPurposeClass = 'card-group' -%}
+{%- elseif data.widget.containerPurpose == 'card-grid-container' -%}
+  {%- set columnsPerRowClass = '' -%}
+  {%- if data.widget.columnsPerRowExtraSmall -%}
+    {%- set columnsPerRowClass = columnsPerRowClass + 'container--row-cols-' + data.widget.columnsPerRowExtraSmall + ' ' -%}
+  {%- endif -%}
+  {%- if data.widget.columnsPerRowSmall -%}
+    {%- set columnsPerRowClass = columnsPerRowClass + 'container--row-cols-sm-' + data.widget.columnsPerRowSmall + ' ' -%}
+  {%- endif -%}
+  {%- if data.widget.columnsPerRowMedium -%}
+    {%- set columnsPerRowClass = columnsPerRowClass + 'container--row-cols-md-' + data.widget.columnsPerRowMedium + ' ' -%}
+  {%- endif -%}
+  {%- if data.widget.columnsPerRowLarge -%}
+    {%- set columnsPerRowClass = columnsPerRowClass + 'container--row-cols-lg-' + data.widget.columnsPerRowLarge + ' ' -%}
+  {%- endif -%}
+  {%- if data.widget.columnsPerRowExtraLarge -%}
+    {%- set columnsPerRowClass = columnsPerRowClass + 'container--row-cols-xl-' + data.widget.columnsPerRowExtraLarge + ' ' -%}
+  {%- endif -%}
+  {%- if data.widget.columnsPerRowExtraExtraLarge -%}
+    {%- set columnsPerRowClass = columnsPerRowClass + 'container--row-cols-xxl-' + data.widget.columnsPerRowExtraExtraLarge + ' ' -%}
+  {%- endif -%}
+
+  {%- set containerPurposeClass = 'container--row ' + columnsPerRowClass -%}
+{%- else -%}
+  {%- set containerPurposeClass = '' -%}
+{%- endif -%}
+
+{%- if data.widget.containerPurpose == 'flexbox' or data.widget.containerPurpose == 'card-grid-container' -%}
+  {%- if data.widget.containerContentGutter -%}
+    {%- set containerContentGutterClass = 'container--flexbox--gutter-' + data.widget.containerContentGutter + '' -%}
+  {%- else -%}
+    {%- set containerContentGutterClass = 'container--flexbox--gutter-0' -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- if data.widget.containerPurpose == 'flexbox' -%}
+  {%- if data.widget.containerContentGap -%}
+    {%- set containerContentGapClass = 'container--flexbox--gap-' + data.widget.containerContentGap + '' -%}
+  {%- else -%}
+    {%- set containerContentGapClass = 'container--flexbox--gap-0' -%}
+  {%- endif -%}
+
+  {%- if data.widget.containerJustifyContent == 'start' -%}
+    {%- set containerJustifyContentClass = 'container--flexbox--justify-content-start' -%}
+  {%- elif data.widget.containerJustifyContent == 'end' -%}
+    {%- set containerJustifyContentClass = 'container--flexbox--justify-content-end' -%}
+  {%- elif data.widget.containerJustifyContent == 'centre' -%}
+    {%- set containerJustifyContentClass = 'container--flexbox--justify-content-centre' -%}
+  {%- elif data.widget.containerJustifyContent == 'between' -%}
+    {%- set containerJustifyContentClass = 'container--flexbox--justify-content-between' -%}
+  {%- elif data.widget.containerJustifyContent == 'around' -%}
+    {%- set containerJustifyContentClass = 'container--flexbox--justify-content-around' -%}
+  {%- elif data.widget.containerJustifyContent == 'evenly' -%}
+    {%- set containerJustifyContentClass = 'container--flexbox--justify-content-evenly' -%}
+  {%- else -%}
+    {%- set containerJustifyContentClass = '' -%}
+  {%- endif -%}
+{%- endif -%}
+
+<div data-container-block-widget
+     {% if data.wigdet.containerId %}id="{{ data.widget.containerId }}"{% endif %}
+     class="{{ containerPurposeClass }} {{ containerJustifyContentClass }} {% if data.widget.containerPurpose == 'card-grid-container' %}{{ containerContentGutterClass }}{% elseif data.widget.containerPurpose == 'flexbox' %}{{ containerContentGapClass }}{% endif %} {{ borderRadiusClass }} {{ data.widget.containerClass }}"
+     style="{{ styleString }} {% if data.widget.containerStyle %}{{ data.widget.containerStyle}}{% endif %}">
+
+    {%- if data.widget.containerPurpose == 'container-with-background' -%}
+    <div {% if data.widget.containerBackgroundId %}id="{{ data.widget.containerBackgroundId }}"{% endif %}
+         class="{{ data.widget.containerBackgroundClass }}"
+         {% if data.widget.containerBackgroundStyle %}style="{{ data.widget.containerBackgroundStyle }}"{% endif %}>
+        {% area data.widget, 'containerBackground' %}
+    </div>
+    {%- endif -%}
+
+    {%- if data.widget.containerPurpose != 'card-grid-container' and data.widget.containerPurpose != 'flexbox' -%}
+    <div {% if data.widget.containerContentsId %}id="{{ data.widget.containerContentsId }}"{% endif %}
+         class="{% if data.widget.containerPurpose != 'containing-block' %}container{% endif %} {{ data.widget.containerContentsClass }}"
+         {% if data.widget.containerContentsStyle %}style="{{ data.widget.containerContentsStyle }}"{% endif %}>
+    {%- endif -%}
+
+        {% area data.widget, 'containerContents' %}
+
+    {%- if data.widget.containerPurpose != 'card-grid-container' and data.widget.containerPurpose != 'flexbox' -%}
+    </div>
+    {%- endif -%}
+</div>

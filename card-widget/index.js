@@ -1,3 +1,5 @@
+import colourPalette from "../colourPalette.js";
+
 export default {
   extend: "@apostrophecms/widget-type",
   options: {
@@ -321,7 +323,6 @@ export default {
             "horizontal-rule": {},
             verse: {},
             quote: {},
-            "lead-paragraph": {},
             testimonial: {},
             list: {},
             "list-group": {},
@@ -550,7 +551,7 @@ export default {
         label: "Card background colour",
         options: {
           pickerOptions: {
-            presetColors: import("../../lib/options").brandColours,
+            presetColors: colourPalette,
           },
         },
       },
@@ -559,7 +560,7 @@ export default {
         label: "Foreground text colour",
         options: {
           pickerOptions: {
-            presetColors: import("../../lib/options").brandColours,
+            presetColors: colourPalette,
           },
         },
       },
@@ -568,7 +569,7 @@ export default {
         label: "Card header and footer background colour",
         options: {
           pickerOptions: {
-            presetColors: import("../../lib/options").brandColours,
+            presetColors: colourPalette,
           },
         },
       },
@@ -577,7 +578,7 @@ export default {
         label: "Header and footer text colour",
         options: {
           pickerOptions: {
-            presetColors: import("../../lib/options").brandColours,
+            presetColors: colourPalette,
           },
         },
       },
@@ -586,7 +587,7 @@ export default {
         label: "Card border colour",
         options: {
           pickerOptions: {
-            presetColors: import("../../lib/options").brandColours,
+            presetColors: colourPalette,
           },
         },
       },

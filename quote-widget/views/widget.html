@@ -1,0 +1,39 @@
+{%- if data.widget.quotationType == 'blockquote' -%}
+{%- set blockClass = 'blockquote' -%}
+{%- elif data.widget.quotationType == 'pullquote' -%}
+{%- set blockClass = 'pullquote' -%}
+{%- endif -%}
+
+{%- if data.widget.alignBlock == 'left' -%}
+{%- set figureAlignmentClass = "figure--left-align" -%}
+{%- elif data.widget.alignBlock == 'right' -%}
+{%- set figureAlignmentClass = "figure--right-align" -%}
+{%- elif data.widget.alignBlock == 'centre' -%}
+{%- set figureAlignmentClass = "figure--centre" -%}
+{%- else -%}
+{%- set textAlignmentClass = '' -%}
+{%- endif -%}
+
+{%- if data.widget.alignText == 'left' -%}
+{%- set textAlignmentClass = "text--left-align" -%}
+{%- elif data.widget.alignText == 'right' -%}
+{%- set textAlignmentClass = "text--right-align" -%}
+{%- elif data.widget.alignText == 'centre' -%}
+{%- set textAlignmentClass = "text--centre" -%}
+{%- else -%}
+{%- set textAlignmentClass = '' -%}
+{%- endif -%}
+
+<figure data-quote-widget
+        class="{{ blockClass }} {{ figureAlignmentClass }} {{ textAlignmentClass }}">
+    <blockquote class=""
+                {% if data.widget.citationUrl %}cite="{{ data.widget.citationUrl }}"{%- endif -%}>
+        {% area data.widget, 'quotation' %}
+    </blockquote>
+
+    {%- if data.widget.quotationType == 'blockquote' and data.widget.citation.items[0] -%}
+    <figcaption class="blockquote-footer">
+        {% area data.widget, 'citation' %}
+    </figcaption>
+    {%- endif -%}
+</figure>

@@ -1,0 +1,137 @@
+{%- import 'card-link-widget:card-link-layout-fragment.html' as cardLinkLayout -%}
+
+{%- set contentType = '' -%}
+{%- set contentPath = '' -%}
+{%- set contentTitle = '' -%}
+{%- if data.widget.linkType === 'page' and data.widget._page and data.widget._page[0] -%}
+  {%- set contentType = 'page' -%}
+  {%- set contentPath = data.widget._page[0]._url -%}
+  {%- set contentTitle = data.widget._page[0].title -%}
+{%- elif data.widget.linkType === 'article' and data.widget._article and data.widget._article[0] -%}
+  {%- set contentPath = data.widget._article[0]._url -%}
+  {%- set contentTitle = data.widget._article[0].title -%}
+  {%- set contentSubTitle = data.widget._article[0].subTitle -%}
+  {%- set contentPublishedAt = data.widget._article[0].publishedAt -%}
+  {%- if data.widget._article[0].featuredImageIds[0] -%}
+    {%- set contentImageObject = apos.attachment.first(data.widget._article[0]._featuredImage) -%}
+  {%- elseif data.widget._article[0].mastheadImageIds[0] -%}
+    {%- set contentImageObject = apos.attachment.first(data.widget._article[0]._mastheadImage) -%}
+  {%- elseif apos.attachment.first(data.global._defaultArticleFeatureImage) -%}
+    {%- set contentImageObject = apos.attachment.first(data.global._defaultArticleFeatureImage) -%}
+  {%- endif -%}
+{%- elif data.widget.linkType === 'author' and data.widget._author and data.widget._author[0] -%}
+  {%- set contentPath = data.widget._author[0]._url -%}
+  {%- set contentTitle = data.widget._author[0].title -%}
+  {%- set contentSubTitle = data.widget._author[0].jobTitle -%}
+  {%- if apos.attachment.first(data.widget._author[0].profileImage) -%}
+    {%- set contentImageObject = apos.attachment.first(data.widget._author[0].profileImage) -%}
+  {%- elseif data.widget._author[0].mastheadImageIds[0] -%}
+    {%- set contentImageObject = apos.attachment.first(data.widget._author[0]._mastheadImage) -%}
+  {%- elseif apos.attachment.first(data.global._defaultAuthorFeatureImage) -%}
+    {%- set contentImageObject = apos.attachment.first(data.global._defaultAuthorFeatureImage) -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- set cardType = 'horizontal' -%}
+
+{%- if data.widget.horizontalAlignment == 'centre' -%}
+  {%- set horizontalAlignmentClass = 'text-center' -%}
+{%- elseif data.widget.horizontalAlignment == 'right' -%}
+  {%- set horizontalAlignmentClass = 'text-end' -%}
+{%- else -%}
+  {%- set horizontalAlignmentClass = '' -%}
+{%- endif -%}
+
+{%- if data.widget.verticalAlignment == 'top' -%}
+  {%- set rowAlignmentClass = "align-items-start" -%}
+{%- elseif data.widget.verticalAlignment == 'centre' -%}
+  {%- set rowAlignmentClass = "align-items-center" -%}
+{%- elseif data.widget.verticalAlignment == 'bottom' -%}
+  {%- set rowAlignmentClass = "align-items-end" -%}
+{%- else -%}
+  {%- set rowAlignmentClass = "align-items-start" -%}
+{%- endif -%}
+
+{%- if data.widget.horizontalCardImagePlacement == 'left' -%}
+  {%- set horizontalCardImagePlacement = "left" -%}
+{%- elseif data.widget.horizontalCardImagePlacement == 'right' -%}
+  {%- set horizontalCardImagePlacement = "right" -%}
+{%- else -%}
+  {%- set horizontalCardImagePlacement = "left" -%}
+{%- endif -%}
+
+{%- if data.widget.cardBorderColour -%}
+  {%- set cardBorderClass = 'border-1 border-solid' -%}
+  {%- set cardBorderStyle = 'border-color:' + data.widget.cardBorderColour + '; ' -%}
+{%- endif -%}
+
+{%- if data.widget.textColour -%}
+  {%- set textColourStyle = 'color:' + data.widget.textColour + '; ' -%}
+{%- endif -%}
+
+{%- if data.widget.backgroundColour -%}
+  {%- set cardBackgroundColourStyle = 'background:' + data.widget.backgroundColour + ';' -%}
+{%- endif -%}
+
+{%- if data.widget.headerBackgroundColour -%}
+  {%- set cardHeaderBackgroundColourStyle = 'background:' + data.widget.headerBackgroundColour + ';' -%}
+{%- endif -%}
+
+{%- if data.widget.headerTextColour -%}
+  {%- set headerTextColourStyle = 'color:' + data.widget.headerTextColour + '; ' -%}
+{%- endif -%}
+
+<div data-teaser-link-widget
+     class="teaser-link-card card purple-border {{ horizontalAlignmentClass }} {{ cardBorderClass }} mt-4"
+     style="{{ cardBorderStyle }} {{ cardBackgroundColourStyle }}">
+    <a class="teaser-link-card__wrapping-link"
+       href="{{ contentPath }}" alt="{{ contentTitle }}">
+        <div class="row g-0 {{ rowAlignmentClass }} overflow-hidden">
+            {%- if horizontalCardImagePlacement == 'left' -%}
+            <div class="col-md-4">
+                <div class="horizontal-card__image-container--image-left">
+                    {%- if contentType == 'page' -%}
+                    {% area data.widget, 'horizontalImageLeft' %}
+                    {%- else -%}
+                    <img srcset="{{ apos.image.srcset(contentImageObject) }}"
+                         src="{{ apos.attachment.url(contentImageObject) }}"
+                         class="img-fluid rounded-start w-100"
+                         style="background-color:{{ imagePlaceholderColour }};"
+                         alt="{{ contentImageObject._alt }}" />
+                    {%- endif -%}
+                </div>
+            </div>
+            {%- endif -%}
+
+            <div class="col-md-8">
+                <div class="card-body"
+                     style="{{ cardBackgroundStyle }} {{ textColourStyle }}">
+                    <h4 class="article-listing__title">{{ contentTitle }}</h4>
+                    {%- if contentSubTitle -%}
+                    <h3 class="article-listing__subtitle purple-text">{{ contentSubTitle }}</h3>
+                    {%- endif -%}
+                    {%- if contentPublishedAt -%}
+                    <div class="article-listing__published-date violet-text">{{ contentPublishedAt | date("MMMM D, YYYY") }}</div>
+                    {%- endif -%}
+                    {% area data.widget, 'body' %}
+                </div>
+            </div>
+
+            {%- if horizontalCardImagePlacement == 'right' -%}
+            <div class="col-md-4">
+                <div class="horizontal-card__image-container--image-right">
+                    {%- if contentType == 'page' -%}
+                    {% area data.widget, 'horizontalImageRight' %}
+                    {%- else -%}
+                    <img srcset="{{ apos.image.srcset(contentImageObject) }}"
+                         src="{{ apos.attachment.url(contentImageObject) }}"
+                         class="img-fluid rounded-end w-100"
+                         style="background-color:{{ imagePlaceholderColour }};"
+                         alt="{{ contentImageObject._alt }}" />
+                    {%- endif -%}
+                </div>
+            </div>
+            {%- endif -%}
+        </div>
+    </a>
+</div>

@@ -33,14 +33,13 @@ export default {
         options: {
           widgets: {
             "@apostrophecms/rich-text": {},
-            image: {},
+            "hedera-image": {},
             figure: {},
             "@apostrophecms/video": {},
             "@apostrophecms/html": {},
             "container-block": {},
             spacer: {},
             "horizontal-rule": {},
-            link: {},
           },
         },
       },

@@ -1,0 +1,37 @@
+{% fragment link(link) %}
+  {%- set path = '' -%}
+  {%- set linkTitle = '' -%}
+  {%- if link.linkType === 'page' and link._page and link._page[0] -%}
+    {%- set path = link._page[0]._url -%}
+    {%- set linkTitle = link._page[0].title -%}
+  {%- elif link.linkType === 'article' and link._article and link._article[0] -%}
+    {%- set path = link._article[0]._url -%}
+    {%- set linkTitle = link._article[0].title -%}
+  {%- elif link.linkType === 'author' and link._author and link._author[0] -%}
+    {%- set path = link._author[0]._url -%}
+    {%- set linkTitle = link._author[0].title -%}
+  {%- elif link.linkType === 'topic' and link._topic and link._topic[0] -%}
+    {%- set path = link._topic[0]._url -%}
+    {%- set linkTitle = link._topic[0].title -%}
+  {%- elif link.linkType === 'tag' and link._tag and link._tag[0] -%}
+    {%- set path = link._tag[0]._url -%}
+    {%- set linkTitle = link._tag[0].title -%}
+  {%- elif link.linkType === 'file' and link._file and link._file[0] -%}
+    {%- set fileObject = apos.attachment.first(link._file) -%}
+    {%- set path = apos.attachment.url(fileObject) -%}
+    {%- set linkTitle = link._file[0].title -%}
+  {%- elif link.linkType === 'image' and link._image and link._image[0] -%}
+    {%- set imageObject = apos.attachment.first(link._image) -%}
+    {%- set path = apos.attachment.url(imageObject) -%}
+    {%- set linkTitle = link._image[0].title -%}
+  {%- elif link.linkType === 'custom' -%}
+    {%- set path = link.customUrl -%}
+  {%- endif -%}
+
+<a data-card-link-widget
+   href="{{- path -}}"
+   class="card-link {{ link.linkClass }}"
+   {% if link.target[0] === '_blank' -%} target="_blank" {% endif -%}
+   {% if link.linkStyle -%} style="{{ link.linkStyle }}" {% endif -%}
+   {% if link.downloadLink -%} download{% endif -%}>{{- link.label or linkTitle -}}</a>
+{% endfragment %}

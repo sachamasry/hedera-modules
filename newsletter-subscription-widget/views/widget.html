@@ -1,0 +1,268 @@
+{%- macro random_int(len) -%}
+  {%- for n in range(len) -%}
+    {{ [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f']|random }}
+  {%- endfor -%}
+{%- endmacro -%}
+
+{%- set randomisedSuffix = random_int(4) -%}
+
+{%- if data.global.siteMode == true -%}
+  {%- set backendApiBaseUrl = data.global.productionModeBackendApiBaseUrl -%}
+{%- else -%}
+  {%- set backendApiBaseUrl = data.global.developmentModeBackendApiBaseUrl -%}
+{%- endif -%}
+
+{%- if data.global.newsletterSubscriptionFormActionEndpoint -%}
+  {%- set actionUrl = backendApiBaseUrl + data.global.newsletterSubscriptionFormActionEndpoint -%}
+{%- elseif data.widget.formActionEndpoint-%}
+  {%- set actionUrl = backendApiBaseUrl + data.widget.formActionEndpoint -%}
+{%- else -%}
+  {%- set actionUrl = '' -%}
+{%- endif -%}
+
+{%- set hCaptchaSitekey = data.global.hCaptchaSitekey -%}
+
+{%- if data.global.newsletterSubscriptionFormEmailAddressPlaceholderText -%}
+  {%- set emailAddressPlaceholderText = data.global.newsletterSubscriptionFormEmailAddressPlaceholderText -%}
+{%- elseif data.widget.formActionUrl-%}
+  {%- set emailAddressPlaceholderText = data.widget.emailAddressPlaceholderText -%}
+{%- else -%}
+  {%- set emailAddressPlaceholderText = 'Your email' -%}
+{%- endif -%}
+
+{%- if data.global.newsletterSubscriptionFormFirstNamePlaceholderText -%}
+  {%- set firstNamePlaceholderText = data.global.newsletterSubscriptionFormFirstNamePlaceholderText -%}
+{%- elseif data.widget.formActionUrl-%}
+  {%- set firstNamePlaceholderText = data.widget.firstNamePlaceholderText -%}
+{%- else -%}
+  {%- set firstNamePlaceholderText = 'Your name' -%}
+{%- endif -%}
+
+{%- if data.global.newsletterSubscriptionFormLastNamePlaceholderText -%}
+  {%- set lastNamePlaceholderText = data.global.newsletterSubscriptionFormLastNamePlaceholderText -%}
+{%- elseif data.widget.formActionUrl-%}
+  {%- set lastNamePlaceholderText = data.widget.lastNamePlaceholderText -%}
+{%- else -%}
+  {%- set lastNamePlaceholderText = 'Your surname' -%}
+{%- endif -%}
+
+{%- if data.global.newsletterSubscriptionFormButtonPlaceholderText -%}
+  {%- set buttonPlaceholderText = data.global.newsletterSubscriptionFormButtonPlaceholderText -%}
+{%- elseif data.widget.formActionUrl-%}
+  {%- set buttonPlaceholderText = data.widget.buttonPlaceholderText -%}
+{%- else -%}
+  {%- set buttonPlaceholderText = 'Join now' -%}
+{%- endif -%}
+
+{%- set marketingConsentContext = data.widget.marketingConsentContext -%}
+
+{%- if data.global._newsletterSubscriptionFormOnSuccessNotification[0] -%}
+  {%- set onSuccessNotificationUrl = data.global._newsletterSubscriptionFormOnSuccessNotification[0]._url -%}
+{%- elseif data.widget._onSuccessNotification[0] -%}
+  {%- set onSuccessNotificationUrl = data.widget._onSuccessNotification[0]._url -%}
+{%- else -%}
+  {%- set onSuccessNotificationUrl = '' -%}
+{%- endif -%}
+
+{%- if data.global._newsletterSubscriptionFormOnFailureNotification[0] -%}
+  {%- set onFailureNotificationUrl = data.global._newsletterSubscriptionFormOnFailureNotification[0]._url -%}
+{%- elseif data.widget._onFailureNotification[0] -%}
+  {%- set onFailureNotificationUrl = data.widget._onFailureNotification [0]._url-%}
+{%- else -%}
+  {%- set onFailureNotificationUrl = '' -%}
+{%- endif -%}
+
+{%- if data.global.newsletterSubscriptionFormSubscribeToListId -%}
+  {%- set subscribeToListId = data.global.newsletterSubscriptionFormSubscribeToListId -%}
+{%- elseif data.widget.subscribeToListId -%}
+  {%- set subscribeToListId = data.widget.subscribeToListId-%}
+{%- else -%}
+  {%- set subscribeToListId = '' -%}
+{%- endif -%}
+
+{%- if data.global.newsletterSubscriptionFormTagWithTagId -%}
+  {%- set tagWithTagId = data.global.newsletterSubscriptionFormTagWithTagId -%}
+{%- elseif data.widget.subscribeToListId -%}
+  {%- set tagWithTagId = data.widget.tagWithTagId-%}
+{%- else -%}
+  {%- set tagWithTagId = '' -%}
+{%- endif -%}
+
+{%- if data.widget.subscriptionFormVariant == 'small' -%}
+  {%- set formVariant = 'small' -%}
+  {%- set sectionContainerClass = 'container' -%}
+{%- elseif data.widget.subscriptionFormVariant == 'medium' -%}
+  {%- set formVariant = 'medium' -%}
+  {%- set sectionContainerClass = '' -%}
+{%- elseif data.widget.subscriptionFormVariant == 'large' -%}
+  {%- set formVariant = 'large' -%}
+  {%- set sectionContainerClass = '' -%}
+{%- endif -%}
+
+<section data-newsletter-subscription-widget
+         class="signup-form-section {{ data.widget.containerClass }} {{ sectionContainerClass }}"
+         {% if data.widget.containerStyle %}style="{{ data.widget.containerStyle }}"{% endif %}>
+    {%- if data.widget.formHeading -%}<h4 class="mb-4">{{ data.widget.formHeading }}</h4>{%- endif -%}
+
+    {%- if data.widget.precedingContent -%}
+    {% area data.widget, 'precedingContent' %}
+    {%- endif -%}
+
+    <form class="signup-form signup-form--{{ formVariant }} {% if formVariant == 'small' %}row{% endif %} {{ data.widget.formClass }}"
+          {% if data.widget.formStyle %}style="{{ data.widget.formStyle }}"{% endif %}
+          name="newsletter-signup-form-{{ randomisedSuffix }}"
+          id="newsletter-signup-form-{{ randomisedSuffix }}"
+          action="{{ actionUrl }}"
+          data-src-url-element-id="srcURL-{{ randomisedSuffix }}"
+          data-plts-element-id="plts-{{ randomisedSuffix }}"
+          data-mtt-element-id="mtt-{{ randomisedSuffix }}"
+          data-bt="2513"
+          method="post">
+        {%- if formVariant == 'small' -%}
+        <div class="col-12 col-md-6">
+        {%- else -%}
+        <div>
+        {%- endif -%}
+            <input name="verify_email"
+                   type="email"
+                   onclick="set_field_ts('fets-{{ randomisedSuffix }}')"
+                   onkeyup="set_field_ts('fets-{{ randomisedSuffix }}')"
+                   class="signup-form__control form-control signup-form__control--email mb-4"
+                   autocomplete="off"
+                   placeholder="Your email address">
+            <input name="first_name"
+                   class="signup-form__control form-control mb-4"
+                   onclick="set_field_ts('fets-{{ randomisedSuffix }}')"
+                   onkeyup="set_field_ts('fets-{{ randomisedSuffix }}')"
+                   autocomplete="off"
+                   {%- if formVariant == 'small' -%}
+                   type="hidden"
+                   tabindex="-1"
+                   readonly="readonly"
+                   {%- else -%}
+                   type="text"
+                   required="required"
+                   minlength="2"
+                   {%- endif -%}
+                   placeholder="{{ firstNamePlaceholderText }}"
+                   value="">
+            <input name="last_name"
+                   class="signup-form__control form-control mb-4"
+                   onclick="set_field_ts('fets-{{ randomisedSuffix }}')"
+                   onkeyup="set_field_ts('fets-{{ randomisedSuffix }}')"
+                   autocomplete="off"
+                   {%- if formVariant == 'small' or formVariant == 'medium' -%}
+                   type="hidden"
+                   tabindex="-1"
+                   readonly="readonly"
+                   {%- else -%}
+                   type="text"
+                   required="required"
+                   minlength="2"
+                   {%- endif -%}
+                   placeholder="{{ lastNamePlaceholderText }}"
+                   value="">
+            <input name="email"
+                   type="email"
+                   class="signup-form__control form-control {% if formVariant == 'small' %}{% else %}mb-4{%- endif %}"
+                   onclick="set_field_ts('fets-{{ randomisedSuffix }}')"
+                   onkeyup="set_field_ts('fets-{{ randomisedSuffix }}')"
+                   autocomplete="off"
+                   required="required"
+                   placeholder="{{ emailAddressPlaceholderText }}"
+                   value="">
+            <div class="h-captcha {% if formVariant == 'small' %}mt-4{% endif %}"
+                 data-sitekey="{{ hCaptchaSitekey }}"></div>
+            {%- if formVariant == 'small' -%}
+        </div>
+        <div class="col-auto">
+            {%- else -%}
+        </div>
+        <div class="d-grid">
+            {%- endif -%}
+            <button id="submit-{{ randomisedSuffix }}"
+                    class="signup-form__submit-button btn {% if formVariant == 'medium' or formVariant == 'large' %}btn-block mt-3{% endif %}"
+                    onclick="set_field_ts('fsts-{{ randomisedSuffix }}', true)">{{ buttonPlaceholderText }} <i class="ti-angle-right ml-3"></i></button>
+        </div>
+        <input name="wf"
+               id="srcURL-{{ randomisedSuffix }}"
+               type="hidden"
+               readonly="readonly"
+               autocomplete="off"
+               tabindex="-1"
+               data-matomo-ignore
+               value="">
+        <input name="plts"
+               id="plts-{{ randomisedSuffix }}"
+               type="hidden"
+               readonly="readonly"
+               autocomplete="off"
+               tabindex="-1"
+               data-matomo-ignore
+               value="">
+        <input name="fets"
+               id="fets-{{ randomisedSuffix }}"
+               type="hidden"
+               readonly="readonly"
+               autocomplete="off"
+               tabindex="-1"
+               data-matomo-ignore
+               value="">
+        <input name="fsts"
+               id="fsts-{{ randomisedSuffix }}"
+               type="hidden"
+               readonly="readonly"
+               autocomplete="off"
+               tabindex="-1"
+               data-matomo-ignore
+               value="">
+        <input name="mtt"
+               id="mtt-{{ randomisedSuffix }}"
+               type="hidden"
+               readonly="readonly"
+               autocomplete="off"
+               tabindex="-1"
+               data-matomo-ignore
+               value="">
+        <input name="mcc"
+               id="mcc-{{ randomisedSuffix }}"
+               type="hidden"
+               readonly="readonly"
+               autocomplete="off"
+               tabindex="-1"
+               data-matomo-ignore
+               value="{{ marketingConsentContext }}">
+        <input name="s"
+               type="hidden"
+               readonly="readonly"
+               autocomplete="off"
+               tabindex="-1"
+               data-matomo-ignore
+               value="{{ onSuccessNotificationUrl }}">
+        <input name="f"
+               type="hidden"
+               readonly="readonly"
+               autocomplete="off"
+               tabindex="-1"
+               data-matomo-ignore
+               value="{{ onFailureNotificationUrl }}">
+        <input name="l"
+               type="hidden"
+               readonly="readonly"
+               autocomplete="off"
+               tabindex="-1"
+               data-matomo-ignore
+               value="{{ subscribeToListId }}">
+        <input name="t"
+               type="hidden"
+               readonly="readonly"
+               autocomplete="off"
+               tabindex="-1"
+               data-matomo-ignore
+               value="{{ tagWithTagId }}" />
+    </form>
+
+    {%- if data.widget.succeedingContent -%}
+      {% area data.widget, 'succeedingContent' %}
+    {%- endif -%}
+</section>

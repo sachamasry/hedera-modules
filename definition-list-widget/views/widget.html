@@ -1,0 +1,9 @@
+<dl data-definition-list-widget
+    class="row">
+    {%- for definition in data.widget.termsAndDefinitions -%}
+    <dt class="col-12 col-md-3">{{ definition.term }}</dt>
+    <dd class="col-12 col-md-9">
+        <p>{{ definition.definition }}</p>
+    </dd>
+    {%- endfor -%}
+</dl>

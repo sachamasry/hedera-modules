@@ -1,0 +1,8 @@
+{%- import 'reusable-content-page:reusable-content-fragment.html' as reusableContentLayout -%}
+
+<aside data-aside-widget>
+    {%- if data.widget._linkedContent[0] -%}
+      {%- set linkedContent = data.widget._linkedContent[0] -%}
+      {%- render reusableContentLayout.reusableContentRender(linkedContent) -%}
+    {%- endif -%}
+</aside>

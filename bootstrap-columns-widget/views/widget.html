@@ -1,0 +1,151 @@
+{%- if data.widget.columnCount == '1' -%}
+  {%- set columnCount = 1 -%}
+  {%- set columnOneClass = "col-12 col-md-8 offset-md-2" -%}
+{%- elif data.widget.columnCount == '2' -%}
+  {%- set columnCount = 2 -%}
+  {%- if data.widget.twoColumnSplit == '16-84' -%}
+    {%- set columnOneClass = "col-12 col-md-4 col-lg-2" -%}
+    {%- set columnTwoClass = "col-12 col-md-8 col-lg-10" -%}
+  {%- elif data.widget.twoColumnSplit == '25-75' -%}
+    {%- set columnOneClass = "col-12 col-md-5 col-lg-3" -%}
+    {%- set columnTwoClass = "col-12 col-md-7 col-lg-9" -%}
+  {%- elif data.widget.twoColumnSplit == '33-67' -%}
+    {%- set columnOneClass = "col-12 col-md-4 col-lg-4" -%}
+    {%- set columnTwoClass = "col-12 col-md-8 col-lg-8" -%}
+  {%- elif data.widget.twoColumnSplit == '50-50' -%}
+    {%- set columnOneClass = "col-12 col-md-6 col-lg-6" -%}
+    {%- set columnTwoClass = "col-12 col-md-6 col-lg-6" -%}
+  {%- elif data.widget.twoColumnSplit == '67-33' -%}
+    {%- set columnOneClass = "col-12 col-md-8 col-lg-8" -%}
+    {%- set columnTwoClass = "col-12 col-md-4 col-lg-4" -%}
+  {%- elif data.widget.twoColumnSplit == '75-25' -%}
+    {%- set columnOneClass = "col-12 col-md-7 col-lg-9" -%}
+    {%- set columnTwoClass = "col-12 col-md-5 col-lg-3" -%}
+  {%- elif data.widget.twoColumnSplit == '84-16' -%}
+    {%- set columnOneClass = "col-12 col-md-8 col-lg-10" -%}
+    {%- set columnTwoClass = "col-12 col-md-4 col-lg-2" -%}
+  {%- else -%}
+    {%- set columnOneClass = "col-12 col-md-6 col-lg-6" -%}
+    {%- set columnTwoClass = "col-12 col-md-6 col-lg-6" -%}
+  {%- endif -%}
+{%- elif data.widget.columnCount == '3' -%}
+  {%- set columnCount = 3 -%}
+  {%- if data.widget.threeColumnSplit == '16-68-16' -%}
+    {%- set columnOneClass = "col-12 col-md-3 col-lg-2" -%}
+    {%- set columnTwoClass = "col-12 col-md-6 col-lg-8" -%}
+    {%- set columnThreeClass = "col-12 col-md-3 col-lg-2" -%}
+  {%- elif data.widget.threeColumnSplit == '25-50-25' -%}
+    {%- set columnOneClass = "col-12 col-md-3 col-lg-3" -%}
+    {%- set columnTwoClass = "col-12 col-md-6 col-lg-6" -%}
+    {%- set columnThreeClass = "col-12 col-md-3 col-lg-3" -%}
+  {%- elif data.widget.threeColumnSplit == '33-33-33' -%}
+    {%- set columnOneClass = "col-12 col-md-4 col-lg-4" -%}
+    {%- set columnTwoClass = "col-12 col-md-4 col-lg-4" -%}
+    {%- set columnThreeClass = "col-12 col-md-4 col-lg-4" -%}
+  {%- else -%}
+    {%- set columnOneClass = "col-12 col-md-4 col-lg-4" -%}
+    {%- set columnTwoClass = "col-12 col-md-4 col-lg-4" -%}
+    {%- set columnThreeClass = "col-12 col-md-4 col-lg-4" -%}
+  {%- endif -%}
+{%- elif data.widget.columnCount == '4' -%}
+  {%- set columnCount = 4 -%}
+  {%- set columnOneClass = "col-6 col-sm-6 col-md-3 col-lg-3" -%}
+  {%- set columnTwoClass = "col-6 col-sm-6 col-md-3 col-lg-3" -%}
+  {%- set columnThreeClass = "col-6 col-sm-6 col-md-3 col-lg-3" -%}
+  {%- set columnFourClass = "col-6 col-sm-6 col-md-3 col-lg-3" -%}
+{%- elif data.widget.columnCount == '5' -%}
+  {%- set columnCount = 5 -%}
+  {%- set columnOneClass = "col" -%}
+  {%- set columnTwoClass = "col" -%}
+  {%- set columnThreeClass = "col" -%}
+  {%- set columnFourClass = "col" -%}
+  {%- set columnFiveClass = "col" -%}
+{%- elif data.widget.columnCount == '6' -%}
+  {%- set columnCount = 6 -%}
+  {%- set columnOneClass = "col-3 col-sm-4 col-md-3 col-lg-2 offset-sm-1 offset-md-2 offset-lg-0" -%}
+  {%- set columnTwoClass = "col-3 col-sm-4 col-md-3 col-lg-2 offset-sm-1 offset-md-2 offset-lg-0" -%}
+  {%- set columnThreeClass = "col-3 col-sm-4 col-md-3 col-lg-2 offset-sm-1 offset-md-2 offset-lg-0" -%}
+  {%- set columnFourClass = "col-3 col-sm-4 col-md-3 col-lg-2 offset-sm-1 offset-md-2 offset-lg-0" -%}
+  {%- set columnFiveClass = "col-3 col-sm-4 col-md-3 col-lg-2 offset-sm-1 offset-md-2 offset-lg-0" -%}
+  {%- set columnSixClass = "col-3 col-sm-4 col-md-3 col-lg-2 offset-sm-1 offset-md-2 offset-lg-0" -%}
+{%- elif data.widget.columnCount == '7' -%}
+  {%- set columnCount = 7 -%}
+  {%- set columnOneClass = "col" -%}
+  {%- set columnTwoClass = "col" -%}
+  {%- set columnThreeClass = "col" -%}
+  {%- set columnFourClass = "col" -%}
+  {%- set columnFiveClass = "col" -%}
+  {%- set columnSixClass = "col" -%}
+  {%- set columnSevenClass = "col" -%}
+{%- elif data.widget.columnCount == '8' -%}
+  {%- set columnCount = 8 -%}
+  {%- set columnOneClass = "col" -%}
+  {%- set columnTwoClass = "col" -%}
+  {%- set columnThreeClass = "col" -%}
+  {%- set columnFourClass = "col" -%}
+  {%- set columnFiveClass = "col" -%}
+  {%- set columnSixClass = "col" -%}
+  {%- set columnSevenClass = "col" -%}
+  {%- set columnEightClass = "col" -%}
+{%- endif -%}
+
+{%- if data.widget.verticalAlignment == 'top' -%}
+  {%- set rowAlignmentClass = "align-items-start" -%}
+{%- elif data.widget.verticalAlignment == 'centre' -%}
+  {%- set rowAlignmentClass = "align-items-center" -%}
+{%- elif data.widget.verticalAlignment == 'bottom' -%}
+  {%- set rowAlignmentClass = "align-items-end" -%}
+{%- else -%}
+  {%- set rowAlignmentClass = "align-items-start" -%}
+{%- endif -%}
+<section data-columns-widget
+         class="columnar-section {% if data.widget.sectionContainer %}container{% endif %} {{ data.widget.sectionClass -}}">
+    <div class="columnar-section__row row {{ rowAlignmentClass }} {{ data.widget.rowClass -}}">
+        <div class="columnar-section__column {% if data.widget.appendToColumnOneClass %}{{ columnOneClass }}{% endif %} {{ data.widget.columnOneClass }}"
+             {%- if data.widget.columnOneStyle -%}style="{{ data.widget.columnOneStyle }}"{%- endif -%}>
+            {% area data.widget, 'columnOne' %}
+        </div>
+        {%- if columnCount > 1 -%}
+        <div class="columnar-section__column {% if data.widget.appendToColumnTwoClass %}{{ columnTwoClass }}{% endif %} {{ data.widget.columnTwoClass }}"
+             {%- if data.widget.columnTwoStyle -%}style="{{ data.widget.columnTwoStyle }}"{%- endif -%}>
+            {% area data.widget, 'columnTwo' %}
+        </div>
+        {%- endif -%}
+        {%- if columnCount > 2 -%}
+        <div class="columnar-section__column {% if data.widget.appendToColumnThreeClass %}{{ columnThreeClass }}{% endif %} {{ data.widget.columnThreeClass }}"
+             {%- if data.widget.columnTwoStyle -%}style="{{ data.widget.columnThreeStyle }}"{%- endif -%}>
+            {% area data.widget, 'columnThree' %}
+        </div>
+        {%- endif -%}
+        {%- if columnCount > 3 -%}
+        <div class="columnar-section__column {% if data.widget.appendToColumnFourClass %}{{ columnFourClass }}{% endif %} {{ data.widget.columnFourClass }}"
+             {%- if data.widget.columnFourStyle -%}style="{{ data.widget.columnFourStyle }}"{%- endif -%}>
+            {% area data.widget, 'columnFour' %}
+        </div>
+        {%- endif -%}
+        {%- if columnCount > 4 -%}
+        <div class="columnar-section__column {% if data.widget.appendToColumnFiveClass %}{{ columnFiveClass }}{% endif %} {{ data.widget.columnFiveClass }}"
+             {%- if data.widget.columnFiveStyle -%}style="{{ data.widget.columnFiveStyle }}"{%- endif -%}>
+            {% area data.widget, 'columnFive' %}
+        </div>
+        {%- endif -%}
+        {%- if columnCount > 5 -%}
+        <div class="columnar-section__column {% if data.widget.appendToColumnSixClass %}{{ columnSixClass }}{% endif %} {{ data.widget.columnSixClass }}"
+             {%- if data.widget.columnSixStyle -%}style="{{ data.widget.columnSixStyle }}"{%- endif -%}>
+            {% area data.widget, 'columnSix' %}
+        </div>
+        {%- endif -%}
+        {%- if columnCount > 6 -%}
+        <div class="columnar-section__column {% if data.widget.appendToColumnSevenClass %}{{ columnSevenClass }}{% endif %} {{ data.widget.columnSevenClass }}"
+             {%- if data.widget.columnSevenStyle -%}style="{{ data.widget.columnSevenStyle }}"{%- endif -%}>
+            {% area data.widget, 'columnSeven' %}
+        </div>
+        {%- endif -%}
+        {%- if columnCount > 7 -%}
+        <div class="columnar-section__column {% if data.widget.appendToColumnEightClass %}{{ columnEightClass }}{% endif %} {{ data.widget.columnEightClass }}"
+             {%- if data.widget.columnEightStyle -%}style="{{ data.widget.columnEightStyle }}"{%- endif -%}>
+            {% area data.widget, 'columnEight' %}
+        </div>
+        {%- endif -%}
+    </div>
+</section>

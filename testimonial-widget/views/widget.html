@@ -1,0 +1,31 @@
+<div data-testimonial-widget
+     id="{{- data.widget.testimonialId -}}"
+     class="{{ data.widget.testimonialContainerClass -}}"
+     {% if data.widget.testimonialContainerStyle %} style="{{ data.widget.testimonialContainerStyle }}" {%- endif -%}>
+    <div class="testimonial-item-content">
+        <div class="test-author-thumb mb-4">
+            {%- if data.widget.testimonialImageClass or data.widget.testimonialImageStyle -%}
+            <div class="{{ data.widget.testimonialImageClass }}"
+                 style="{{ data.widget.testiomonialImageStyle }}">
+            {%- endif -%}
+            {% area data.widget, 'testimonialImage' %}
+            {%- if data.widget.testimonialImageClass or data.widget.testimonialImageStyle -%}
+            </div>
+            {%- endif -%}
+            <div class="test-author-info mt-4">
+                <h4 class="{% if data.widget.testimonialNameClass %}{{ data.widget.testimonialNameClass }}{% else %}mb-0 mt-2{% endif %}"
+                    {% if data.widget.testimonialNameStyle %} style="{{ data.widget.testimonialNameStyle }}"{% endif %}>{{- data.widget.testimonialName -}}</h4>
+                <p class="{% if data.widget.testimonialCredentialsClass %}{{ data.widget.testimonialCredentialsClass }}{% else %}text--small-caps{% endif %}"
+                   {% if data.widget.testimonialCredentialsStyle %} style="{{ data.widget.testimonialCredentialsStyle }}"{% endif %}>{{- data.widget.testimonialCredentials -}}</p>
+            </div>
+        </div>
+        {%- if data.widget.testimonialImageClass or data.widget.testimonialImageStyle -%}
+        <div class="{{ data.widget.testimonialBodyClass }}"
+             style="{{ data.widget.testiomonialBodyStyle }}">
+        {%- endif -%}
+        {% area data.widget, 'testimonialBody' %}
+        {%- if data.widget.testimonialImageClass or data.widget.testimonialImageStyle -%}
+        </div>
+        {%- endif -%}
+    </div>
+</div>

@@ -1,0 +1,164 @@
+{# modules/article-page/views/show.html #}
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="progress__container">
+    <div class="progress__bar"></div>
+</div>
+
+<main class="main-page-content">
+    <div class="article-display__page-header container">
+      <div class="row">
+          <div class="col-12 px-5 py-5">
+              <div class="page-banner__content">
+                  <h1 class='page-banner__title {% if pageBannerTitleClass %}{{ pageBannerTitleClass }}{% endif %} font-weight-bold mb-2'>{{ data.piece.title }}</h1>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <article class="section section-page-display article-display-page page-body container">
+        <div class="row">
+            <div class="col-12 col-md-8 offset-md-2">
+                <div class="article-display__author-and-date-container d-flex flex-row justify-content-between align-items-center gap-3 my-4 px-3">
+                    <div class="article-display__published-date">{{ data.piece.publishedAt | date("D MMMM YYYY") }}</div>
+
+                    <div class="article-display__author-and-topic-container d-flex flex-row justify-content-between align-items-center gap-2">
+                        {%- if data.piece.authorIds[0] -%}
+                        {%- for author in data.piece._author -%}
+
+                        {%- set imageObjectProfile = apos.attachment.first(author.profileImage) -%}
+                        {%- if imageObjectProfile -%}
+                        <a href="{{ author._url }}"
+                            alt="{{ author.title }}"
+                            class="article-display__author-profile-image--link">
+                            <div class="article-display__author-profile-image-window">
+                                <img srcset="{{ apos.attachment.url(imageObjectProfile) }}"
+                                    src="{{ apos.attachment.url(imageObjectProfile) }}"
+                                    class="article-display__author-profile-image img-fluid rounded-start"
+                                    style="background-color:{{ imagePlaceholderColour }};"
+                                    alt="{{ imageObjectProfile._alt }}" />
+                            </div>
+                        </a>
+                        {%- else -%}
+                        {%- endif -%}
+                        <span class="article-display__author-name d-inline-block">
+                            {%- set comma = joiner() -%}
+                            {{ comma() }} <a href="{{ author._url }}"
+                                             alt="{{ author.title }}">{{ author.title }}</a>
+                        </span>
+                        {%- endfor -%}
+                        {%- endif -%}
+
+                        {%- if data.piece.authorIds[0] and data.piece.topicsIds[0] %}
+                        <span class="d-inline-block ml-1 mr-1"> in </span>
+                        {%- elseif data.piece.topicsIds[0] -%}
+                        <span class="d-inline-block mr-2">In </span>
+                        {%- endif -%}
+
+                        {% if data.piece.topicsIds[0] %}
+                        <span class="article-display__topics d-inline-block">
+                            {%- set comma = joiner() -%}
+                            {%- for topic in data.piece._topics -%}
+                            {{ comma() }} <a href="{{ topic._url }}"
+                                             alt="{{ topic.title }}">{{ topic.title }}</a>
+                            {%- endfor -%}</span>
+                        {%- endif -%}
+                    </div>
+                    </div>
+
+                    {%- if data.piece.subTitle -%}
+                    <h2 class="article-display__subtitle mt-4">{{ data.piece.subTitle }}</h2>
+                    {%- endif -%}
+
+                    {% area data.piece, 'body' %}
+
+                    <hr class="mt-5 mb-5"></hr>
+
+                    <p><small class="article-disclaimer small-text--muted">{{ data.global.articleDisclaimerText }}</small></p>
+
+                    {%- if data.piece.tagsIds[0] -%}
+                    <hr class="mt-5 mb-5"></hr>
+                    <div class="article-display__tags-list d-flex gap-3">
+                        {% for tag in data.piece._tags %}
+                        <a href="{{ tag._url }}"
+                           class="article-display__tag rounded-2"
+                           alt="{{ tag.title }}">{{ tag.title }}</a>
+                        {% endfor %}
+                    </div>
+                    {%- endif -%}
+                </div>
+            </div>
+            <div class="inter-article-navigation next-and-previous row mt-5">
+                {%- if data.next -%}
+                <div class="col-12 col-md-6">
+                    <div class="article-listing__card article-listing__card--small--previous card mb-3">
+                        <div class="article-listing__card-backdrop"></div>
+
+                        <div class="row g-0">
+                            <div class="col-12 text-start">
+                                <a href="{{ data.next._url }}" alt="{{ data.next.title }}"
+                                    class="article-listing__card--previous-link d-block py-3 px-5">
+                                    <h4 class="article-listing__card--previous-heading position-relative text-start">Previous article
+                                        <div class="previous-arrow">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 17.5">
+                                              <path d="M7.28 2.03A.75.75 0 0 0 6.22.97l-5.5 5.5c-.3.3-.3.77 0 1.06l5.5 5.5a.75.75 0 0 0 1.06-1.06L2.31 7l4.97-4.97Z"/>
+                                            </svg>
+                                        </div>
+                                    </h4>
+                                    <div class="article-listing__published-date">{{ data.next.publishedAt | date("D MMMM YYYY") }}</div>
+                                    <h5 class="article-listing__title">{{ data.next.title }}</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%- else -%}
+                <div class="col-12 col-md-6"></div>
+                {%- endif -%}
+                {%- if data.previous -%}
+                <div class="col-12 col-md-6">
+                    <div class="article-listing__card article-listing__card--small--next card mb-3">
+                        <div class="article-listing__card-backdrop"></div>
+
+                        <div class="row g-0">
+                            <div class="col-12 order-2 order-lg-1 text-start text-md-end">
+                                <a href="{{ data.previous._url }}" alt="{{ data.previous.title }}"
+                                    class="article-listing__card--next-link d-block py-3 px-5">
+                                    <h4 class="article-listing__card--next-heading position-relative text-start text-md-end">Next article
+                                        <div class="next-arrow">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 17.5">
+                                                <path d="M.72 2.03A.75.75 0 0 1 1.78.97l5.5 5.5c.3.3.3.77 0 1.06l-5.5 5.5a.75.75 0 0 1-1.06-1.06L5.69 7 .72 2.03Z"/>
+                                            </svg>
+                                        </div>
+                                    </h4>
+                                    <div class="article-listing__published-date pt-3">{{ data.previous.publishedAt | date("D MMMM YYYY") }}</div>
+                                    <h5 class="article-listing__title">{{ data.previous.title }}</h5>
+                               </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%- endif -%}
+            </div>
+            <div class="inter-article-navigation row">
+                <div class="col-12">
+                    <div class="inter-article-navigation__more-articles position-relative">
+                        <div class="inter-article-navigation__more-articles-backdrop"></div>
+
+                        <a class="article-listing__link--more-articles position-relative py-3 px-5"
+                            href="{{ data.page._url }}">
+                            <h4 class="article-listing__link--more-articles-heading">More articles
+                                <div class="next-arrow">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 17.5">
+                                        <path d="M.72 2.03A.75.75 0 0 1 1.78.97l5.5 5.5c.3.3.3.77 0 1.06l-5.5 5.5a.75.75 0 0 1-1.06-1.06L5.69 7 .72 2.03Z"/>
+                                    </svg>
+                                </div>
+                            </h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    </article>
+</main>
+{% endblock %}

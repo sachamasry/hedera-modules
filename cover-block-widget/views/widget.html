@@ -1,0 +1,100 @@
+{%- set blockAlignmentClass = null -%}
+{%- if data.widget.blockAlignment == 'left' -%}
+  {%- set blockAlignmentClass = 'block--left-align' -%}
+{%- elif data.widget.blockAlignment == 'centre' -%}
+  {%- set blockAlignmentClass = 'block--centre-align' -%}
+{%- elif data.widget.blockAlignment == 'right' -%}
+  {%- set blockAlignmentClass = 'block--right-align' -%}
+{%- else -%}
+{%- endif -%}
+
+{%- set blockWidthClass = null -%}
+{%- if data.widget.blockWidth == '20' -%}
+  {%- set blockWidthClass = "block--20-wide" -%}
+{%- elif data.widget.blockWidth == '25' -%}
+  {%- set blockWidthClass = "block--20-wide" -%}
+{%- elif data.widget.blockWidth == '33' -%}
+  {%- set blockWidthClass = "block--33-wide" -%}
+{%- elif data.widget.blockWidth == '40' -%}
+  {%- set blockWidthClass = "block--40-wide" -%}
+{%- elif data.widget.blockWidth == '50' -%}
+  {%- set blockWidthClass = "block--50-wide" -%}
+{%- elif data.widget.blockWidth == '60' -%}
+  {%- set blockWidthClass = "block--60-wide" -%}
+{%- elif data.widget.blockWidth == '66' -%}
+  {%- set blockWidthClass = "block--66-wide" -%}
+{%- elif data.widget.blockWidth == '75' -%}
+  {%- set blockWidthClass = "block--75-wide" -%}
+{%- elif data.widget.blockWidth == '80' -%}
+  {%- set blockWidthClass = "block--80-wide" -%}
+{%- else -%}
+  {%- set blockWidthClass = "block--100-wide" -%}
+{%- endif -%}
+
+{%- set minimumHeightOfBlock = null -%}
+{%- if data.widget.fullHeightBlock -%}
+  {%- set minimumHeightOfBlock = 'min-height: 100vh;' -%}
+{%- elif data.widget.minimumHeightOfBlock -%}
+  {%- set minimumHeightOfBlock = 'min-height: ' + data.widget.minimumHeightOfBlock + 'rem;' -%}
+{%- endif -%}
+
+{%- set blockClass = null -%}
+{%- if data.widget.fullBleedBlock-%}
+  {%- set blockClass = 'cover-block cover-block--full-bleed' -%}
+{%- elif data.widget.minimumHeightOfBlock -%}
+  {%- set blockClass = 'cover-block' -%}
+{%- endif -%}
+
+{%- set foregroundPositionClass = null -%}
+{%- if data.widget.foregroundPosition == 'tl' -%}
+  {%- set foregroundPositionClass = 'cover-block--top-left-foreground'-%}
+{%- elif data.widget.foregroundPosition == 'tc' -%}
+  {%- set foregroundPositionClass = 'cover-block--top-centre-foreground'-%}
+{%- elif data.widget.foregroundPosition == 'tr' -%}
+  {%- set foregroundPositionClass = 'cover-block--top-right-foreground'-%}
+{%- elif data.widget.foregroundPosition == 'cl' -%}
+  {%- set foregroundPositionClass = 'cover-block--centre-left-foreground'-%}
+{%- elif data.widget.foregroundPosition == 'centre' -%}
+{%- elif data.widget.foregroundPosition == 'cr' -%}
+  {%- set foregroundPositionClass = 'cover-block--centre-right-foreground'-%}
+{%- elif data.widget.foregroundPosition == 'bl' -%}
+  {%- set foregroundPositionClass = 'cover-block--bottom-left-foreground'-%}
+{%- elif data.widget.foregroundPosition == 'bc' -%}
+  {%- set foregroundPositionClass = 'cover-block--bottom-centre-foreground'-%}
+{%- elif data.widget.foregroundPosition == 'br' -%}
+  {%- set foregroundPositionClass = 'cover-block--bottom-right-foreground'-%}
+{%- else -%}
+{%- endif -%}
+
+{%- set blockBackgroundColour = '' -%}
+{%- if data.widget.blockColour -%}
+  {%- set blockBackgroundColour = 'background: ' + data.widget.blockColour + ';' -%}
+{%- endif -%}
+
+{%- set foregroundTextColour = '' -%}
+{%- if data.widget.foregroundTextColour -%}
+  {%- set foregroundTextColour = 'color: ' + data.widget.foregroundTextColour + ';' -%}
+{%- endif -%}
+
+{%- set foregroundBlockBackgroundColour = '' -%}
+{%- if data.widget.foregroundBlockBackgroundColour -%}
+  {%- set foregroundBlockBackgroundColour = 'background: ' + data.widget.foregroundBlockBackgroundColour + ';' -%}
+{%- endif -%}
+
+{%- set foregroundBlockBorderColour = '' -%}
+{%- if data.widget.foregroundBlockBorderColour -%}
+  {%- set foregroundBlockBorderColour = 'border-color: ' + data.widget.foregroundBlockBorderColour + ';' -%}
+{%- endif -%}
+
+<div data-cover-block-widget
+     class="{{ blockClass }} {{ blockAlignmentClass }} {{ blockWidthClass }} {{ foregroundPositionClass }} {{ data.widget.blockClass -}}"
+     style="{%- if minimumHeightOfBlock -%}{{ minimumHeightOfBlock }}{% endif %} {% if data.widget.blockStyle -%}{{ data.widget.blockStyle }}{%- endif -%}">
+    {% area data.widget, 'backgroundMedia' %}
+    <div class="cover-block__background"
+         style="{{ blockBackgroundColour }}">
+    </div>
+    <div class="cover-block__foreground {{ data.widget.foregroundBlockClass -}}"
+         style="{{ foregroundTextColour }} {{ foregroundBlockBackgroundColour }} {{ foregroundBlockBorderColour }} {{ data.widget.foregroundBlockStyle -}}">
+        {% area data.widget, 'foregroundBlock' %}
+    </div>
+</div>

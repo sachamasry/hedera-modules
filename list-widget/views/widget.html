@@ -1,0 +1,72 @@
+{%- set listStyle = '' %}
+{%- if data.widget.listStyle -%}
+  {%- set listStyle = data.widget.listStyle -%}
+{%- endif -%}
+
+{%- set treeType = false -%}
+{%- if data.widget.listType == 'ordered' -%}
+  {%- set listTypeElement = 'ol' -%}
+  {%- set listTypeClass = '' -%}
+{%- elif data.widget.listType == 'inline' -%}
+  {%- set listTypeElement = 'ul' -%}
+  {%- set listTypeClass = 'list-inline' -%}
+  {%- set listItemClass = 'list-inline-item' -%}
+  {%- set listItemDelimiterClass = 'list-inline-item--delimiter' -%}
+{%- elif data.widget.listType == 'tree' -%}
+  {%- set listTypeElement = 'ul' -%}
+  {%- set listTypeClass = 'list-tree' -%}
+  {%- set treeType = true -%}
+{%- else -%}
+  {%- set listTypeElement = 'ul' -%}
+  {%- set listTypeClass = '' -%}
+{%- endif -%}
+
+{%- if data.widget.listType == 'unordered' and data.widget.unorderedListType == 'none' -%}
+  {%- set listStyle = 'list-style-type: none;' + listStyle -%}
+{%- elif data.widget.listType == 'unordered' and data.widget.unorderedListType == 'circle' -%}
+  {%- set listStyle = 'list-style-type: circle;' + listStyle -%}
+{%- elif data.widget.listType == 'unordered' and data.widget.unorderedListType == 'square' -%}
+  {%- set listStyle = 'list-style-type: square;' + listStyle -%}
+{%- elif data.widget.listType == 'unordered' and data.widget.unorderedListType == 'custom' -%}
+  {%- set listStyle = 'list-style-type: \'' + data.widget.customListMarker + ' \'; list-style-position: outside;' + listStyle -%}
+{%- endif -%}
+
+<{{ listTypeElement }} data-list-widget
+  {% if listTypeElement == 'ol' %}
+    type="{{ data.widget.orderedListType }}"
+    start="{{ data.widget.orderedListStart }}"
+    {% if data.widget.reverseNumbering %} reversed {% endif %}
+  {%- endif -%}
+
+    class="{{ listTypeClass }} {% if listClass %}{{ listClass }}{% endif %}"
+    {% if listStyle %}style="{{ listStyle }}"{% endif %}>
+  {%- for item in data.widget.listItems -%}
+    <li {% if listItemClass %}class="{{ listItemClass }}"{% endif %}
+        {% if treeType and item.nestListWithinItem == true %}style="list-style:none;"{% endif %}>
+      {%- if data.widget.listType == 'inline' and data.widget.enumerateInlineListItems -%}
+      <span class="list-inline-item--enumeration">{{ loop.index }}</span>
+      {%- endif -%}
+      {%- if treeType and item.nestListWithinItem == true -%}
+      <details {% if data.widget.expandedTree %}open{% endif %}>
+        <summary style="list-style: disclosure-closed outside;">
+      {%- endif -%}
+      {%- if item.useSpecialListItem == true -%}
+        {% area item, 'specialItem' %}
+      {%- else -%}
+        {{ item.listItem }}
+      {%- endif -%}
+      {%- if treeType and item.nestListWithinItem == true -%}
+        </summary>
+      {%- endif -%}
+      {%- if item.nestListWithinItem == true -%}
+        {% area item, 'nestedList' %}
+      {%- endif -%}
+      {%- if treeType and item.nestListWithinItem == true -%}
+      </details>
+      {%- endif -%}
+      {%- if data.widget.listType == 'inline' and not loop.last -%}
+      <span class="{{ listItemDelimiterClass }}">{{ data.widget.inlineListDelimiter }}</span>
+      {%- endif -%}
+    </li>
+  {%- endfor -%}
+</{{ listTypeElement }}>

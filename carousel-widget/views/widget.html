@@ -1,0 +1,92 @@
+{%- set carouselHeight = null -%}
+{%- if data.widget.fullHeightCarousel -%}
+  {%- set carouselHeight = 'height: 100vh;' -%}
+{%- elseif data.widget.carouselHeight > 0 -%}
+  {%- set carouselHeight = 'height: ' + data.widget.carouselHeight + 'rem;' -%}
+{%- else -%}
+{%- endif -%}
+
+{%- if data.widget.slideTransitionType == 'fade' -%}
+  {%- set carouselTransitionTypeClass = 'carousel-fade' -%}
+{%- elif data.widget.slideTransitionType == 'fade' -%}
+  {%- set carouselTransitionTypeClass = '' -%}
+{%- endif -%}
+
+{%- if data.widget.sliderVariant == 'default' -%} 
+  {%- set carouselClass = 'carousel slide' -%}
+{%- elseif data.widget.sliderVariant == 'dark' -%} 
+  {%- set carouselClass = 'carousel carousel-dark slide' -%}
+{%- endif -%}
+
+{%- if data.widget.appendToCarouselClass -%}
+  {%- set carouselClass = carouselClass + ' ' + data.widget.carouselClass -%}
+{%- else -%}
+  {%- set carouselClass = data.widget.carouselClass -%}
+{%- endif -%}
+
+{%- if data.widget.autoplayRegime == 'autoplay' or data.widget.autoplayRegime == 'manual' -%} 
+  {%- if data.widget.defaultSlideTransitionTime > '1000' -%}
+    {%- set defaultSlideTransitionTime = data.widget.defaultSlideTransitionTime -%}
+  {%- else -%}
+    {%- set defaultSlideTransitionTime = '1000' -%}
+  {%- endif -%}
+{%- endif -%}
+
+<section data-carousel-widget>
+    <div id="{{ data.widget.carouselId }}"
+         class="{{ carouselClass }} {{ carouselTransitionTypeClass }}"
+         {% if data.widget.autoplayRegime == 'autoplay' %} data-bs-ride="carousel"{% elseif data.widget.autoplayRegime == 'manual' %} data-bs-ride="true"{% else %} data-bs-ride="false"{% endif %}
+         {% if data.widget.loopThroughSlides %} data-bs-wrap="true"{% else %} data-bs-wrap="false"{% endif %}
+         {% if data.widget.disableTouchSwiping %} data-bs-touch="false"{% endif %}
+         {% if defaultSlideTransitionTime %} data-bs-interval="{{ defaultSlideTransitionTime }}"{% endif %}
+         {% if data.widget.disableReactToKeyboardEvents %} data-bs-keyboard="false"{% endif %}
+         {% if data.widget.pauseCyclingOnHover %} data-bs-pause="hover"{% else %} data-bs-pause="false"{% endif %}
+         style="{{ carouselHeight }} {% if data.widget.carouselStyle %}{{ data.widget.carouselStyle }}{% endif %}">
+        {%- if data.widget.showIndicators -%}
+        <div class="carousel-indicators">
+          {%- set slideCounter = 0 -%}
+          {%- for slide in data.widget.slides -%}
+            <button type="button"
+                    data-bs-target="#{{ data.widget.carouselId }}"
+                    data-bs-slide-to="{{ slideCounter }}"
+                    {% if slideCounter == 0 %} class="active" aria-current="true"{% endif %}
+                    aria-label="Slide {{slideCounter }}"></button>
+          {%- set slideCounter = slideCounter + 1 -%}
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+        <div class="carousel-inner">
+            {%- set slideCounter = 0 -%}
+            {%- for slide in data.widget.slides -%}
+            <div class="carousel-item {% if slideCounter == 0 %}active{% endif %}"
+                 {% if slide.overrideSlideTransitionTime and slide.slideTransitionTime %} data-bs-interval="{{ slide.slideTransitionTime }}"{% endif %}>
+                {%- if slide.body.items[0] -%}
+                  {% area slide, 'body' %}
+                {%- else -%}
+                <div class="carousel-caption d-none d-md-block">
+                    {%- if data.widget.displaySlideCaptions -%}
+                    <h5>{{ slide.title }}</h5>
+                    {%- endif -%}
+                    {%- if data.widget.displaySlideText -%}
+                    <p>{{ slide.slideText }}</p>
+                    {%- endif -%}
+                </div>
+                {%- endif -%}
+            </div>
+              {%- set slideCounter = slideCounter + 1 -%}
+            {%- endfor -%}
+        </div>
+        {%- if data.widget.showControls -%}
+        <button class="carousel-control-prev" type="button"
+                data-bs-target="#{{ data.widget.carouselId }}" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button"
+                data-bs-target="#{{ data.widget.carouselId }}" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        {%- endif -%}
+    </div>
+</section>

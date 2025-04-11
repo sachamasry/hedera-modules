@@ -53,7 +53,7 @@ export default {
         help: "Choose the background for this container, e.g. an image",
         options: {
           widgets: {
-            image: {},
+            "hedera-image": {},
             figure: {},
             "@apostrophecms/video": {},
             "@apostrophecms/html": {},
@@ -74,7 +74,7 @@ export default {
         options: {
           widgets: {
             "@apostrophecms/rich-text": {},
-            image: {},
+            "hedera-image": {},
             figure: {},
             "@apostrophecms/video": {},
             "@apostrophecms/html": {},
@@ -89,7 +89,6 @@ export default {
             list: {},
             "list-group": {},
             "definition-list": {},
-            link: {},
             button: {},
             card: {},
             "teaser-link": {},

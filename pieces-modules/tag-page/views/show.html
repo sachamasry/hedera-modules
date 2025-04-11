@@ -1,0 +1,87 @@
+{# modules/tag-page/views/show.html #}
+{% extends "layout.html" %}
+
+{%- import 'default-page:page-layout-fragment.html' as pageLayout -%}
+
+<!-- Use tag masthead, if defined, otherwise fall back to default 
+     global masthead -->
+{%- if apos.attachment.first(data.piece._mastheadImage) -%}
+  {%- set imageObjectMasthead = apos.attachment.first(data.piece._mastheadImage) -%}
+{%- elseif apos.attachment.first(data.global._defaultTagMastheadImage) -%}
+  {%- set imageObjectMasthead = apos.attachment.first(data.global._defaultTagMastheadImage) -%}
+{%- endif -%}
+
+{% block main %}
+<main class="main-page-content">
+    {%- render pageLayout.masthead(imageObjectMasthead, data.piece.title) -%}
+
+    <section class="section section-page-body">
+        <div class="container">
+            <div class="tag-display__description row">
+                <div class="col-12 col-md-8 offset-md-2">
+                    {%- if data.piece.description -%}
+                    <p>{{ data.piece.description }}</p>
+                    {%- endif -%}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="tag-display__articles col-12 col-md-8 offset-md-2">
+                    <div class="tag-display__article-listing violet-border pt-4">
+                        <h4 class="tag-display__article-listing-title">Articles tagged {{ data.piece.title }}</h4>
+
+                        {%- for article in data.piece._articles -%}
+                        <article class="article-listing mt-4">
+                            <div class="article-listing__card card mb-3 purple-border pt-4">
+                                <div class="row g-0 align-items-center">
+                                    <div class="col-12 col-lg-4">
+                                        <a href="{{ article._url }}" alt="{{ article.title }}">
+                                            {% set imageObjectArticle = apos.attachment.first(article._featuredImage) %}
+                                            {%- if imageObjectArticle -%}
+                                            <img srcset="{{ apos.image.srcset(imageObjectArticle) }}"
+                                                 src="{{ apos.attachment.url(imageObjectArticle) }}"
+                                                 class="img-fluid rounded-start w-100"
+                                                 alt="{{ apos.imageObjectArticle._alt }}" />
+                                            {%- elseif apos.attachment.first(data.global._defaultArticleFeatureImage) -%}
+                                            {%- set imageObjectArticle = apos.attachment.first(data.global._defaultArticleFeatureImage) -%}
+                                            <img srcset="{{ apos.image.srcset(imageObjectArticle) }}"
+                                                 src="{{ apos.attachment.url(imageObjectArticle) }}"
+                                                 class="img-fluid rounded-start w-100"
+                                                 alt="{{ imageObjectArticle._alt }}" />
+                                            {%- else -%}
+                                            {%- endif -%}
+                                        </a>
+                                    </div>
+                                    <div class="col-12 col-lg-8 px-lg-4">
+                                        <div class="article-listing__published-date violet-text">{{ article.publishedOn | date("MMMM D, YYYY") }}</div>
+                                        <a href="{{ article._url }}" alt="{{ article.title }}">
+                                            <h2 class="card-title article-listing__title">{{ article.title }}</h2>
+                                        </a>
+                                        
+                                        {%- if article.subTitle -%}
+                                        <h3 class="article-listing__subtitle purple-text">{{ article.subTitle }}</h3>
+                                        {%- endif -%}
+
+                                        <p class="card-text">
+                                            {% if article.openGraphDescription %}
+                                            {{ article.openGraphDescription }}
+                                            {% else %}
+                                            {{ article.body.items[0].content | safe | truncate }}
+                                            {% endif %}</p>
+                                        <p class="card-text article-listing__read-more-link"><small class="text-muted">
+                                            <a href="{{ article._url }}"
+                                               alt="{{ article.title }}"
+                                               class="button btn-outline-primary">Read more <i class="ti-angle-right ml-3"></i></a></small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        {%- endfor -%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

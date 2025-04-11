@@ -1,0 +1,29 @@
+{# modules/reusable-content-page/views/show.html #}
+{% extends "layout.html" %}
+
+{%- import 'default-page:page-layout-fragment.html' as pageLayout -%}
+{%- import 'reusable-content-page:reusable-content-fragment.html' as reusableContentLayout -%}
+
+<!-- Use notifications masthead, if defined, otherwise fall back to default 
+     global masthead -->
+{%- if apos.attachment.first(data.piece._mastheadImage) -%}
+  {%- set imageObjectMasthead = apos.attachment.first(data.piece._mastheadImage) -%}
+{%- elseif apos.attachment.first(data.global._defaultNotificationsMastheadImage) -%}
+  {%- set imageObjectMasthead = apos.attachment.first(data.global._defaultNotificationsMastheadImage) -%}
+{%- endif -%}
+
+{% block main %}
+<main class="main-page-content">
+    {%- render pageLayout.masthead(imageObjectMasthead, data.piece.title) -%}
+
+    <section class="section section-page-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-8 offset-md-2">
+                    {%- render reusableContentLayout.reusableContentRender(data.piece) -%}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

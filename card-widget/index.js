@@ -309,7 +309,7 @@ export default {
         options: {
           widgets: {
             "@apostrophecms/rich-text": {},
-            image: {
+            "hedera-image": {
               size: "one-sixth",
               dimensionAttrs: true,
             },
@@ -327,7 +327,6 @@ export default {
             list: {},
             "list-group": {},
             "definition-list": {},
-            link: {},
             button: {},
             "newsletter-subscription": {},
             "reusable-content-blocks": {},

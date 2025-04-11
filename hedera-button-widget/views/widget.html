@@ -1,0 +1,81 @@
+{%- set path = '' -%}
+{%- set linkTitle = '' -%}
+{%- if data.widget.linkType === 'page' and data.widget._page and data.widget._page[0] -%}
+  {%- set path = data.widget._page[0]._url -%}
+  {%- set linkTitle = data.widget._page[0].title -%}
+{%- elif data.widget.linkType === 'article' and data.widget._article and data.widget._article[0] -%}
+  {%- set path = data.widget._article[0]._url -%}
+  {%- set linkTitle = data.widget._article[0].title -%}
+{%- elif data.widget.linkType === 'author' and data.widget._author and data.widget._author[0] -%}
+  {%- set path = data.widget._author[0]._url -%}
+  {%- set linkTitle = data.widget._author[0].title -%}
+{%- elif data.widget.linkType === 'topic' and data.widget._topic and data.widget._topic[0] -%}
+  {%- set path = data.widget._topic[0]._url -%}
+  {%- set linkTitle = data.widget._topic[0].title -%}
+{%- elif data.widget.linkType === 'tag' and data.widget._tag and data.widget._tag[0] -%}
+  {%- set path = data.widget._tag[0]._url -%}
+  {%- set linkTitle = data.widget._tag[0].title -%}
+{%- elif data.widget.linkType === 'modal' and data.widget._modal and data.widget._modal[0] -%}
+  {%- set path = "" -%}
+  {%- set linkTitle = data.widget._modal[0].title -%}
+  {%- set aposDocId = data.widget._modal[0].aposDocId -%}
+  {%- set dataBsToggle = 'modal' -%}
+  {%- set targetElementId = data.widget._modal[0].slug -%}
+  {%- set onClickEvent = 'insertModalContentIntoDOM' -%}
+{%- elif data.widget.linkType === 'file' and data.widget._file and data.widget._file[0] -%}
+  {%- set fileObject = apos.attachment.first(data.widget._file) -%}
+  {%- set path = apos.attachment.url(fileObject) -%}
+  {%- set linkTitle = data.widget._file[0].title -%}
+{%- elif data.widget.linkType === 'image' and data.widget._image and data.widget._image[0] -%}
+  {%- set imageObject = apos.attachment.first(data.widget._image) -%}
+  {%- set path = apos.attachment.url(imageObject) -%}
+  {%- set linkTitle = data.widget._image[0].title -%}
+{%- elif data.widget.linkType === 'custom' -%}
+  {%- set path = data.widget.customUrl -%}
+{%- endif -%}
+
+{%- if data.widget.buttonType == 'cta' -%}
+  {%- set ctaButton = true -%}
+{%- elif data.widget.buttonType == 'custom' -%}
+  {%- set customButton = true -%}
+{%- endif -%}
+
+{%- set buttonFillColour = '' -%}
+{%- if customButton and data.widget.buttonFillColour -%}
+  {%- set buttonFillColour = 'background: ' + data.widget.buttonFillColour + ';' -%}
+{%- endif -%}
+
+{%- set buttonBorderColour = '' -%}
+{%- if customButton and data.widget.buttonBorderColour -%}
+  {%- set buttonBorderColour = 'border-color: ' + data.widget.buttonBorderColour + ';' -%}
+{%- endif -%}
+
+{%- set buttonTextColour = '' -%}
+{%- if customButton and data.widget.buttonTextColour -%}
+  {%- set buttonTextColour = 'color: ' + data.widget.buttonTextColour + ';' -%}
+{%- endif -%}
+
+{%- if customButton and data.widget.buttonFillStyle == 'filled' -%}
+  {%- set buttonFillStyle = 'button--filled' -%}
+{%- elif customButton and data.widget.buttonFillStyle == 'outlined' -%}
+  {%- set buttonFillStyle = 'button--outline' -%}
+  {%- set buttonFillColour = '' -%}
+{%- else -%}
+  {%- set buttonFillStyle = '' -%}
+{%- endif -%}
+
+{%- set buttonStyle = buttonFillColour + ' ' + buttonBorderColour + ' ' + buttonTextColour -%}
+<div data-button-widget
+     class="button-container {{ data.widget.containerClass }}"
+     {% if data.widget.containerStyle %}style="{{ data.widget.containerStyle }}"{% endif %}>
+    <a href="{{- path -}}"
+       class="btn {% if ctaButton %}button--cta-primary{% else %}{{ data.widget.buttonClass }} {{ buttonFillStyle }}{% endif %}"
+       {% if data.widget.target[0] === '_blank' %} target="_blank" {% endif %}
+       {% if data.widget.downloadLink %}download="{{ data.widget.overrideDownloadedFileName }}"{% endif %}
+       {% if data.widget.linkType === 'modal' %} 
+               data-bs-toggle="{{ dataBsToggle }}" 
+               data-bs-target="#{{ targetElementId }}" 
+               onClick="{{ onClickEvent }}('{{ targetElementId }}', '{{ aposDocId }}')"
+       {% endif %}
+       style="{{ buttonStyle }}">{{- data.widget.label or linkTitle }}{% if data.widget.includeNextArrow %} <i class="ti-angle-right ml-3"></i>{%- endif -%}</a>
+</div>

@@ -1,0 +1,18 @@
+{%- if data.widget.alignList == 'left' -%}
+{%- set listGroupAlignmentClass = "list-group--left-align" -%}
+{%- elif data.widget.alignList == 'right' -%}
+{%- set listGroupAlignmentClass = "list-group--right-align" -%}
+{%- elif data.widget.alignList == 'centre' -%}
+{%- set listGroupAlignmentClass = "list-group--centre" -%}
+{%- elif data.widget.alignList == 'flush' -%}
+{%- set listGroupAlignmentClass = "list-group--flush list-group-flush" -%}
+{%- else -%}
+{%- set listGroupAlignmentClass = '' -%}
+{%- endif -%}
+
+<{{ data.widget.listType }} data-list-group-widget
+    class="list-group {% if data.widget.listType == 'ol' %}list-group-numbered{%- endif -%} {{ listGroupAlignmentClass }}">
+    {%- for item in data.widget.listItems -%}
+    <li class="list-group-item">{% area item, 'listItem' %}</li>
+    {%- endfor -%}
+</{{ data.widget.listType }}>

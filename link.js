@@ -65,7 +65,7 @@ const link = {
     label: "Article to link",
     help: "Select article to link to",
     type: "relationship",
-    withType: "article",
+    withType: "hedera-article",
     max: 1,
     required: true,
     builders: {
@@ -76,14 +76,14 @@ const link = {
     },
     // Only if it's an article link
     if: {
-      linkType: "article",
+      linkType: "hedera-article",
     },
   },
   _author: {
     label: "Author to link",
     help: "Select author to link to",
     type: "relationship",
-    withType: "author",
+    withType: "hedera-author",
     max: 1,
     required: true,
     builders: {
@@ -94,14 +94,14 @@ const link = {
     },
     // Only if it's an author link
     if: {
-      linkType: "author",
+      linkType: "hedera-author",
     },
   },
   _topic: {
     label: "Topic to link",
     help: "Select topic to link to",
     type: "relationship",
-    withType: "topic",
+    withType: "hedera-topic",
     max: 1,
     required: true,
     builders: {
@@ -112,7 +112,7 @@ const link = {
     },
     // Only if it's a topic link
     if: {
-      linkType: "topic",
+      linkType: "hedera-topic",
     },
   },
   _tag: {
@@ -130,7 +130,7 @@ const link = {
     },
     // Only if it's a tag link
     if: {
-      linkType: "tag",
+      linkType: "hedera-tag",
     },
   },
   _file: {

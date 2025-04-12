@@ -1,8 +1,8 @@
 export default {
   extend: "@apostrophecms/piece-page-type",
   options: {
-    label: "Topic Page",
-    pluralLabel: "Topic Pages",
+    label: "Tag Page",
+    pluralLabel: "Tag Pages",
     perPage: 25,
   },
   fields: {

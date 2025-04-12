@@ -23,7 +23,7 @@ export default {
             },
             "@apostrophecms/video": {},
             "@apostrophecms/html": {},
-            columns: {},
+            "bootstrap-columns": {},
             "container-block": {},
             "horizontal-rule": {},
             verse: {},

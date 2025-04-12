@@ -1,9 +1,9 @@
-{# modules/tag-page/views/show.html #}
+{# modules/hedera-tag-page/views/show.html #}
 {% extends "layout.html" %}
 
 {%- import 'default-page:page-layout-fragment.html' as pageLayout -%}
 
-<!-- Use tag masthead, if defined, otherwise fall back to default 
+<!-- Use tag masthead, if defined, otherwise fall back to default
      global masthead -->
 {%- if apos.attachment.first(data.piece._mastheadImage) -%}
   {%- set imageObjectMasthead = apos.attachment.first(data.piece._mastheadImage) -%}
@@ -57,7 +57,7 @@
                                         <a href="{{ article._url }}" alt="{{ article.title }}">
                                             <h2 class="card-title article-listing__title">{{ article.title }}</h2>
                                         </a>
-                                        
+
                                         {%- if article.subTitle -%}
                                         <h3 class="article-listing__subtitle purple-text">{{ article.subTitle }}</h3>
                                         {%- endif -%}

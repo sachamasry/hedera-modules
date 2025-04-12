@@ -88,7 +88,7 @@ export default {
                   list: {},
                   "list-group": {},
                   "definition-list": {},
-                  button: {},
+                  "hedera-button": {},
                   card: {},
                   "teaser-link": {},
                   "reusable-content-blocks": {},

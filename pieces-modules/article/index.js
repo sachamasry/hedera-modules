@@ -51,7 +51,8 @@ export default {
       _tags: {
         type: "relationship",
         label: "Tags",
-        withType: "tag",
+        withType: "hedera-tag",
+        reverseOf: "_article",
         builders: {
           project: {
             title: 1,

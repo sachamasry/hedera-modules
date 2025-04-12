@@ -1,9 +1,9 @@
 export default {
   extend: "@apostrophecms/piece-type",
   options: {
-    label: "Article topic",
-    pluralLabel: "Article topics",
-    alias: "topic",
+    label: "Tag",
+    pluralLabel: "Tags",
+    alias: "article-tag",
     quickCreate: false,
     sort: {
       slug: 1,
@@ -15,17 +15,17 @@ export default {
     add: {
       title: {
         type: "string",
-        label: "Topic name",
+        label: "Tag name",
       },
       description: {
         type: "string",
-        label: "Describe what this topic encompasses",
+        label: "Describe what this tag encompasses",
         textarea: true,
       },
       _articles: {
         type: "relationshipReverse",
         withType: "article",
-        reverseOf: "_topics",
+        reverseOf: "_hedera-tags",
         withRelationships: ["_featuredImage"],
       },
     },

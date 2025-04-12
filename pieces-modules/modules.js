@@ -5,7 +5,7 @@ export default {
   "author-page": {},
   "reusable-content": {},
   "reusable-content-page": {},
-  tag: {},
+  "hedera-tag": {},
   "tag-page": {},
   topic: {},
   "topic-page": {},

@@ -118,7 +118,7 @@ export default {
         help: "Top image in a vertical card",
         options: {
           widgets: {
-            image: {
+            "hedera-image": {
               size: "one-sixth",
               dimensionAttrs: true,
               className: "card-img-top",
@@ -136,7 +136,7 @@ export default {
         help: "Bottom image in a vertical card",
         options: {
           widgets: {
-            image: {
+            "hedera-image": {
               size: "one-sixth",
               dimensionAttrs: true,
               className: "card-img-bottom",
@@ -154,7 +154,7 @@ export default {
         help: "Left image on a horizontal card",
         options: {
           widgets: {
-            image: {
+            "hedera-image": {
               size: "one-sixth",
               dimensionAttrs: true,
               className: "img-fluid rounded-border-start",
@@ -172,7 +172,7 @@ export default {
         help: "Right image on a horizontal card",
         options: {
           widgets: {
-            image: {
+            "hedera-image": {
               size: "one-sixth",
               dimensionAttrs: true,
               className: "img-fluid rounded-border-end",
@@ -190,7 +190,7 @@ export default {
         help: "Background card image",
         options: {
           widgets: {
-            image: {
+            "hedera-image": {
               size: "one-sixth",
               dimensionAttrs: true,
               className: "img-fluid rounded-border",
@@ -316,7 +316,7 @@ export default {
             figure: {},
             "@apostrophecms/video": {},
             "@apostrophecms/html": {},
-            columns: {},
+            "bootstrap-columns": {},
             "container-block": {},
             "cover-block": {},
             spacer: {},
@@ -327,7 +327,7 @@ export default {
             list: {},
             "list-group": {},
             "definition-list": {},
-            button: {},
+            "hedera-button": {},
             "newsletter-subscription": {},
             "reusable-content-blocks": {},
           },

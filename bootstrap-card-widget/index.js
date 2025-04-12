@@ -274,7 +274,7 @@ export default {
         options: {
           widgets: {
             "@apostrophecms/rich-text": {},
-            "@apostrophecms/html": {},
+            "hedera-html": {},
           },
         },
         if: {
@@ -296,7 +296,7 @@ export default {
         options: {
           widgets: {
             "@apostrophecms/rich-text": {},
-            "@apostrophecms/html": {},
+            "hedera-html": {},
           },
         },
         if: {
@@ -313,23 +313,23 @@ export default {
               size: "one-sixth",
               dimensionAttrs: true,
             },
-            figure: {},
+            "hedera-figure": {},
             "@apostrophecms/video": {},
-            "@apostrophecms/html": {},
+            "hedera-html": {},
             "bootstrap-columns": {},
-            "container-block": {},
-            "cover-block": {},
-            spacer: {},
+            "bootstrap-container-block": {},
+            "hedera-cover-block": {},
+            "bootstrap-spacer": {},
             "horizontal-rule": {},
-            verse: {},
-            quote: {},
-            testimonial: {},
-            list: {},
-            "list-group": {},
-            "definition-list": {},
+            "hedera-verse": {},
+            "hedera-quote": {},
+            "hedera-testimonial": {},
+            "bootstrap-list": {},
+            "bootstrap-list-group": {},
+            "hedera-definition-list": {},
             "hedera-button": {},
-            "newsletter-subscription": {},
-            "reusable-content-blocks": {},
+            "hedera-newsletter-subscription": {},
+            "hedera-reusable-content-blocks": {},
           },
         },
         if: {
@@ -356,7 +356,7 @@ export default {
               label: "link",
               options: {
                 widgets: {
-                  "card-link": {},
+                  "bootstrap-card-link": {},
                 },
               },
             },

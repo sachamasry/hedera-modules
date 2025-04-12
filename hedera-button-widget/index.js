@@ -1,7 +1,7 @@
 import colourPalette from "../colourPalette.js";
 
 export default {
-  extend: "link-widget",
+  extend: "hedera-link-widget",
   options: {
     label: "Button",
     description:

@@ -1,5 +1,5 @@
 export default {
-  extend: "link-widget",
+  extend: "hedera-link-widget",
   options: {
     label: "Card link",
   },

@@ -62,8 +62,8 @@ export default {
               type: "area",
               options: {
                 widgets: {
-                  list: {},
-                  "definition-list": {},
+                  "bootstrap-list": {},
+                  "hedera-definition-list": {},
                 },
               },
               if: {

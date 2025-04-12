@@ -1,5 +1,5 @@
 export default {
-  "custom-search-page": {},
   "hedera-default-page": {},
-  "private-page": {},
+  "hedera-private-page": {},
+  "hedera-search-page": {},
 };

@@ -1,0 +1,31 @@
+{% fragment masthead(imageObjectMasthead, mastheadTitle, skipStyleMastheadBackground, contrastingTitle) %}
+  {%- if data.global.defaultPlaceholderColour -%} 
+    {%- set imagePlaceholderColour = data.global.defaultPlaceholderColour -%}
+  {%- else -%}
+    {%- set imagePlaceholderColour = '#ddd' -%}
+  {%- endif -%}
+
+  {%- import 'image-widget:image-layout-fragment.html' as imageLayoutFragment -%}
+
+<section class="page-banner-area"
+         {% if skipStyleMastheadBackground %}{% else %}style="background-color:{{ imagePlaceholderColour }};"{% endif %}>
+  {%- if imageObjectMasthead -%}
+    {%- set pageBannerTitleClass = 'page-banner__title--light-colour page-banner__title--veil page-banner-area__title--contrasting' -%}
+  <div class="page-banner-area__masthead-container">
+      {%- render imageLayoutFragment.image(imageObjectMasthead, 'sizes', 'page-banner-area__masthead-image img-fluid rounded-start', '', 'auto', 'auto') -%}
+  </div>
+  {%- elseif contrastingTitle -%}
+    {%- set pageBannerTitleClass = 'page-banner__title--light-colour page-banner__title--veil page-banner-area__title--contrasting' -%}
+  {%- endif -%}
+
+  <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-lg-9 col-md-12 col-12 ">
+              <div class="page-banner-content text-center">
+                  <h1 class='page-banner__title {% if pageBannerTitleClass %}{{ pageBannerTitleClass }}{% endif %} display-4 font-weight-bold mb-2'>{{ mastheadTitle }}</h1>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+{% endfragment %}

@@ -1,0 +1,98 @@
+{%- set captionPositionClass = '' -%}
+{%- if data.widget.captionPosition == 'top' -%}
+{%- set captionPositionClass = 'caption--top' -%}
+{%- elif data.widget.captionPosition == 'bottom' -%}
+{%- set captionPositionClass = 'caption--bottom' -%}
+{%- else -%}
+{%- endif -%}
+
+{%- set tableDecorationOptions = '' -%}
+{%- for option in data.widget.tableOptions -%}
+{%- if option == 'striped' -%}
+{%- set tableDecorationOptions = tableDecorationOptions + ' table-striped' -%}
+{%- endif -%}
+
+{%- if option == 'hoverable' -%}
+{%- set tableDecorationOptions = tableDecorationOptions + ' table-hover' -%}
+{%- endif -%}
+
+{%- if option == 'compact' -%}
+{%- set tableDecorationOptions = tableDecorationOptions + ' table-sm' -%}
+{%- endif -%}
+{%- endfor -%}
+
+{%- if data.widget.tableBorder == 'bordered' -%}
+{%- set tableDecorationOptions = tableDecorationOptions + ' table-bordered' -%}
+{%- elif data.widget.tableBorder == 'borderless' -%}
+{%- set tableDecorationOptions = tableDecorationOptions + ' table-borderless' -%}
+{%- else -%}
+{%- endif -%}
+
+<section data-table-widget>
+    <table class="table table-responsive {{ captionPositionClass }} {{ tableDecorationOptions }}">
+        {%- if data.widget.caption -%}<caption>{{ data.widget.caption }}</caption>{%- endif -%}
+        {%- set tableHeaderRow = null -%}
+        {%- set tableContext = null -%}
+
+        {%- set tableRow = null -%}
+
+        {%- for row in data.widget.rows -%}
+
+        {%- if row.typeOfRow == 'header' -%}
+        {%- set tableHeaderRow = loop.index -%}
+
+        {%- if tableContext == 'table-body' -%}
+        </tbody>
+        {%- set tableContext = 'table-header' -%}
+        {%- else -%}
+        {%- set tableContext = 'table-header' -%}
+        {%- endif -%}
+
+        {%- if tableContext == 'table-header' -%}
+        <thead>
+            <tr>
+                {%- for column in row.columns -%}
+                <th scope="col">{{ column.cellContents }}</th>
+                {%- endfor -%}
+            </tr>
+        </thead>
+        {%- endif -%}
+
+        {%- elif row.typeOfRow == 'footer' -%}
+        {%- set tableFooterRow = loop.index -%}
+
+        {%- if tableContext == 'table-body' -%}
+        </tbody>
+        {%- set tableContext = 'table-footer' -%}
+        {%- else -%}
+        {%- set tableContext = 'table-footer' -%}
+        {%- endif -%}
+
+        {%- if tableContext == 'table-footer' -%}
+        <tfoot>
+            <tr>
+                {%- for column in row.columns -%}
+                <th scope="col">{{ column.cellContents }}</th>
+                {%- endfor -%}
+            </tr>
+        </tfoot>
+        {%- endif -%}
+        {%- else -%}
+
+        {%- set tableRow = loop.index -%}
+        {%- if tableRow == tableHeaderRow + 1 -%}
+        {%- set tableContext = 'table-body' -%}
+        <tbody>
+        {%- endif -%}
+            <tr>
+                {%- for column in row.columns -%}
+                <td>{{ column.cellContents }}</td>
+                {%- endfor -%}
+            </tr>
+        {%- if tableRow == loop.last -%}
+        </tbody>
+        {%- endif -%}
+        {%- endif -%}
+        {%- endfor -%}
+    </table>
+</section>

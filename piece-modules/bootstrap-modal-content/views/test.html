@@ -1,0 +1,41 @@
+{{ apos.util.log(data) }}
+
+{%- if data.products[0] -%}
+  {%- set modal = data.products[0] -%}
+
+  {%- if modal.presentWindowCloseButton === true and modal.windowCloseButtonLabel -%}
+    {%- set closeButtonLabel = modal.windowCloseButtonLabel -%}
+  {%- else -%}
+    {%- set closeButtonLabel = "Close" -%}
+  {%- endif -%}
+
+<div class="modal fade"
+     id="test-modal"
+     tabindex="-1"
+     aria-labelledby="streamingModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="streamingModalLabel">{{ modal.title }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="modal-body__stream-magic-pills"
+                 class="modal-body">
+                {% area modal, 'body' %}
+            </div>
+            {%- if modal.presentWindowCloseButton === true -%}
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ closeButtonLabel }}</button>
+            </div>
+            {%- endif -%}
+        </div>
+    </div>
+</div>
+{%- endif -%}
+
+<div id="apos-modal-data-container"
+     data-modal-title="{{ modal.title }}"
+     data-modal-present-window-close-button="{{ modal.presentWindowCloseButton }}"
+     data-modal-close-button-label="{{ closeButtonLabel }}"
+></div>

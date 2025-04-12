@@ -1,6 +1,7 @@
 export default {
   "aside-widget": {},
   "bootstrap-columns-widget": {},
+  "bootstrap-table-widget": {},
   "card-widget": {},
   "card-link-widget": {},
   "carousel-widget": {},
@@ -21,7 +22,12 @@ export default {
   "teaser-link-widget": {},
   "testimonial-widget": {},
   "verse-widget": {},
-  "pieces-modules": {
+  "page-modules": {
+    options: {
+      ignoreNoCodeWarning: true,
+    },
+  },
+  "piece-modules": {
     options: {
       ignoreNoCodeWarning: true,
     },

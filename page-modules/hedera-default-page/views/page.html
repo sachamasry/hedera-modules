@@ -1,0 +1,53 @@
+{#
+This is an example home page template. It inherits and extends a layout template
+that lives in the top-level views/ folder for convenience
+#}
+
+{% extends "layout.html" %}
+
+{%- set imagePlaceholderColour = data.global.defaultPlaceholderColour -%}
+
+{%- import 'default-page:page-layout-fragment.html' as pageLayout -%}
+
+<!-- Use page masthead, if defined, otherwise fall back to section masthead
+     (if any), otherwise fall back to global masthead -->
+{%- if apos.attachment.first(data.page._pageMastheadImage) -%}
+  {%- set imageObjectMasthead = apos.attachment.first(data.page._pageMastheadImage) -%}
+{%- elseif data.page._pageSection[0] and data.page._pageSection[0].applyMastheadImageToAllPagesInSection == true and data.page._pageSection[0]._sectionMastheadImage[0] -%}
+  {%- set imageObjectMasthead = apos.attachment.first(data.page._pageSection[0]._sectionMastheadImage) -%}
+{%- elseif apos.attachment.first(data.global._defaultPageMastheadImage) -%}
+  {%- set imageObjectMasthead = apos.attachment.first(data.global._defaultPageMastheadImage) -%}
+{%- endif -%}
+
+{% block main %}
+<main class="main-page-content">
+    {%- render pageLayout.masthead(imageObjectMasthead, data.page.title) -%}
+
+    {%- set bodyContainerClass = 'container' -%}
+    {%- if data.page.appendToPageBodyContainerClass -%}
+      {%- set bodyContainerClass = bodyContainerClass + ' ' + data.page.pageBodyContainerClass -%}
+    {%- else -%}
+      {%- set bodyContainerClass = data.page.pageBodyContainerClass -%}
+    {%- endif -%}
+
+    {%- set bodyColumnClass = 'col-12 col-md-8 offset-md-2' -%}
+    {%- if data.page.appendToPageBodyColumnClass -%}
+      {%- set bodyColumnClass = bodyColumnClass + ' ' + data.page.pageBodyColumnClass -%}
+    {%- else -%}
+      {%- set bodyColumnClass = data.page.pageBodyColumnClass -%}
+    {%- endif -%}
+
+    </body>
+    <section class="section section-page-body">
+        <div class="{{ bodyContainerClass }}"
+             {%- if data.page.bodyContainerStyle %} style="{{ data.page.bodyContainerStyle }}" {% endif -%}>
+            <div class="row">
+                <div class="{{ bodyColumnClass }}"
+                     {%- if data.page.bodyColumnStyle %} style="{{ data.page.bodyColumnStyle }}" {% endif -%}>
+                    {% area data.page, 'main' %}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

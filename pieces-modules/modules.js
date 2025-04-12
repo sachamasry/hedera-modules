@@ -6,7 +6,7 @@ export default {
   "reusable-content": {},
   "reusable-content-page": {},
   "hedera-tag": {},
-  "tag-page": {},
+  "hedera-tag-page": {},
   topic: {},
   "topic-page": {},
 };

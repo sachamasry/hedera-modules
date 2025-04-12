@@ -25,7 +25,7 @@ export default {
       _articles: {
         type: "relationshipReverse",
         withType: "article",
-        reverseOf: "_hedera-tags",
+        // reverseOf: "_hedera-tag",
         withRelationships: ["_featuredImage"],
       },
     },

@@ -119,7 +119,7 @@ const link = {
     label: "Tag to link",
     help: "Select tag to link to",
     type: "relationship",
-    withType: "tag",
+    withType: "hedera-tag",
     max: 1,
     required: true,
     builders: {

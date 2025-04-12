@@ -63,9 +63,9 @@
            {% if data.widget.target[0] === '_blank' %} target="_blank" {% endif %}
            {% if data.widget.linkStyle %}style="{{ data.widget.linkStyle }}"{% endif %}
            {% if data.widget.downloadLink %}download="{{ data.widget.overrideDownloadedFileName }}"{% endif %}
-           {% if data.widget.linkType === 'modal' %} 
-               data-bs-toggle="{{ dataBsToggle }}" 
-               data-bs-target="#{{ targetElementId }}" 
+           {% if data.widget.linkType === 'modal' %}
+               data-bs-toggle="{{ dataBsToggle }}"
+               data-bs-target="#{{ targetElementId }}"
                onClick="{{ onClickEvent }}('{{ targetElementId }}', '{{ aposDocId }}')"
            {% endif %}
            >{{ data.widget.label or linkTitle }}{% if rightArrow == true %} <i class="ti-angle-right ml-3"></i>{%- endif -%}</a>

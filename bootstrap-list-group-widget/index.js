@@ -87,7 +87,7 @@ export default {
                   "hedera-horizontal-rule": {},
                   "bootstrap-list": {},
                   "bootstrap-list-group": {},
-                  "hederaezdefinition-list": {},
+                  "hedera-definition-list": {},
                   "hedera-button": {},
                   "bootstrap-card": {},
                   "hedera-teaser-link": {},

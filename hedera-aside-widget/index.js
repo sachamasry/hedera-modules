@@ -13,7 +13,7 @@ export default {
       _linkedContent: {
         type: "relationship",
         label: "Select reusable content block to display here",
-        withType: "reusable-content",
+        withType: "hedera-reusable-content",
         max: 1,
       },
     },

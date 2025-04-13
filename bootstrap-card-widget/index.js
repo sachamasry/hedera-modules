@@ -320,7 +320,7 @@ export default {
             "bootstrap-container-block": {},
             "hedera-cover-block": {},
             "bootstrap-spacer": {},
-            "horizontal-rule": {},
+            "hedera-horizontal-rule": {},
             "hedera-verse": {},
             "hedera-quote": {},
             "hedera-testimonial": {},

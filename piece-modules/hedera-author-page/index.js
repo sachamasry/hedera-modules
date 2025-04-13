@@ -3,7 +3,7 @@ export default {
   options: {
     label: "Author Page",
     pluralLabel: "Author Pages",
-    pieceModuleName: "author",
+    pieceModuleName: "hedera-author",
   },
   fields: {
     add: {},

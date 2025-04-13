@@ -69,7 +69,7 @@ export default {
       _articles: {
         type: "relationshipReverse",
         withType: "hedera-article",
-        // reverseOf: "_hedera-author",
+        reverseOf: "_author",
         withRelationships: ["_featuredImage"],
       },
     },

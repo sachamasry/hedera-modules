@@ -3,7 +3,7 @@ export default {
   options: {
     label: "Article",
     pluralLabel: "Articles",
-    alias: "article",
+    alias: "hedera-article",
     quickCreate: true,
     sort: {
       publishedAt: -1,
@@ -40,7 +40,7 @@ export default {
       _topics: {
         type: "relationship",
         label: "Article topic",
-        withType: "topic",
+        withType: "hedera-topic",
         builders: {
           project: {
             title: 1,
@@ -63,7 +63,7 @@ export default {
       _author: {
         type: "relationship",
         label: "Author",
-        withType: "author",
+        withType: "hedera-author",
         withRelationships: ["@apostrophecms/image", "profileImage"],
         builders: {
           project: {
@@ -84,47 +84,47 @@ export default {
               columns: 4,
               widgets: {
                 "@apostrophecms/rich-text": {},
-                // 'list': {},
-                // 'definition-list': {},
-                // 'list-group': {},
-                // 'quote': {},
-                // 'verse': {},
-                // 'link': {},
+                "bootstrap-list": {},
+                "hedera-definition-list": {},
+                "bootstrap-list-group": {},
+                "hedera-quote": {},
+                "hedera-verse": {},
+                "hedera-link": {},
               },
             },
             media: {
               label: "Media",
               columns: 2,
               widgets: {
-                // 'figure': {},
-                image: {
+                "hedera-figure": {},
+                "hedera-image": {
                   size: "one-sixth",
                   dimensionAttrs: true,
                 },
                 "@apostrophecms/video": {},
-                // 'cover-block': {},
+                "hedera-cover-block": {},
               },
             },
             layout: {
               label: "Design and layout",
               columns: 2,
               widgets: {
-                // 'columns': {},
-                // 'container-block': {},
-                // 'spacer': {},
-                "horizontal-rule": {},
-                // 'button': {},
-                // 'card': {},
-                // 'carousel': {},
+                "bootstrap-columns": {},
+                "bootstrap-container-block": {},
+                "bootstrap-spacer": {},
+                "hedera-horizontal-rule": {},
+                "hedera-button": {},
+                "bootstrap-card": {},
+                "bootstrap-carousel": {},
               },
             },
             special: {
               label: "Special content",
               columns: 2,
               widgets: {
-                // 'teaser-link': {},
-                // 'testimonial': {},
-                // 'newsletter-subscription': {},
+                "hedera-teaser-link": {},
+                "hedera-testimonial": {},
+                "hedera-newsletter-subscription": {},
               },
             },
             embeds: {
@@ -135,8 +135,8 @@ export default {
               label: "Advanced layout options",
               columns: 2,
               widgets: {
-                // 'reusable-content-blocks': {},
-                // 'html': {},
+                "hedera-reusable-content-blocks": {},
+                "hedera-html": {},
               },
             },
           },

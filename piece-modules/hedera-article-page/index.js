@@ -3,7 +3,7 @@ export default {
   options: {
     label: "Article Page",
     pluralLabel: "Article Pages",
-    pieceModuleName: "article",
+    pieceModuleName: "hedera-article",
     previous: true,
     next: true,
   },

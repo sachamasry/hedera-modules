@@ -1,11 +1,11 @@
 {% fragment masthead(imageObjectMasthead, mastheadTitle, skipStyleMastheadBackground, contrastingTitle) %}
-  {%- if data.global.defaultPlaceholderColour -%} 
+  {%- if data.global.defaultPlaceholderColour -%}
     {%- set imagePlaceholderColour = data.global.defaultPlaceholderColour -%}
   {%- else -%}
     {%- set imagePlaceholderColour = '#ddd' -%}
   {%- endif -%}
 
-  {%- import 'image-widget:image-layout-fragment.html' as imageLayoutFragment -%}
+  {%- import 'hedera-image-widget:image-layout-fragment.html' as imageLayoutFragment -%}
 
 <section class="page-banner-area"
          {% if skipStyleMastheadBackground %}{% else %}style="background-color:{{ imagePlaceholderColour }};"{% endif %}>

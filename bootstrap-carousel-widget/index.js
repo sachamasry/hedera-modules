@@ -46,7 +46,7 @@ export default {
                   "bootstrap-columns": {},
                   "bootstrap-container-block": {},
                   "hedera-cover-block": {},
-                  "hedera-spacer": {},
+                  "bootstrap-spacer": {},
                   "hedera-horizontal-rule": {},
                   "hedera-verse": {},
                   "hedera-quote": {},

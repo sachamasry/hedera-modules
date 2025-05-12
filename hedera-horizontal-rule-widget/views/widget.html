@@ -3,6 +3,6 @@
 {%- set ruleColourStyle = 'border-color: ' + data.widget.ruleColour + ';' -%}
 {%- endif -%}
 
-<hr data-horizontal-rule-widget
+<hr class="horizontal-rule" data-horizontal-rule-widget
     {% if ruleColourStyle %}style="{{ ruleColourStyle }}"{%- endif -%}>
 </hr>

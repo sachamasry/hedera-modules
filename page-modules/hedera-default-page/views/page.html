@@ -6,16 +6,14 @@ data.global.defaultPlaceholderColour -%} {%- import
 
 <!-- Use page masthead, if defined, otherwise fall back to section masthead
      (if any), otherwise fall back to global masthead -->
-{%- if apos.attachment.first(data.page._pageMastheadImage) -%} {%- set
-imageObjectMasthead = apos.attachment.first(data.page._pageMastheadImage) -%}
-{%- elseif data.page._pageSection[0] and
-data.page._pageSection[0].applyMastheadImageToAllPagesInSection == true and
-data.page._pageSection[0]._sectionMastheadImage[0] -%} {%- set
-imageObjectMasthead =
-apos.attachment.first(data.page._pageSection[0]._sectionMastheadImage) -%} {%-
-elseif apos.attachment.first(data.global._defaultPageMastheadImage) -%} {%- set
-imageObjectMasthead =
-apos.attachment.first(data.global._defaultPageMastheadImage) -%} {%- endif -%}
+{%- if apos.attachment.first(data.page._pageMastheadImage) -%}
+    {%- set imageObjectMasthead = apos.attachment.first(data.page._pageMastheadImage) -%}
+{%- elseif data.page._pageSection[0] and data.page._pageSection[0].applyMastheadImageToAllPagesInSection == true and data.page._pageSection[0]._sectionMastheadImage[0] -%}
+    {%- set imageObjectMasthead = apos.attachment.first(data.page._pageSection[0]._sectionMastheadImage) -%}
+{%- elseif apos.attachment.first(data.global._defaultPageMastheadImage) -%}
+    {%- set imageObjectMasthead = apos.attachment.first(data.global._defaultPageMastheadImage) -%}
+{%- endif -%}
+
 {% block main %}
 <main class="main-page-content">
     {%- render pageLayout.masthead(imageObjectMasthead, data.page.title) -%} {%-

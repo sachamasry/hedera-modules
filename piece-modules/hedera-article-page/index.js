@@ -8,7 +8,20 @@ export default {
     next: true,
   },
   fields: {
-    add: {},
-    group: {},
+    add: {
+      _pageMastheadImage: {
+        label: "Page background image",
+        help: "If this page has a section, then it will take that background image by default; override it by specifying a different image here",
+        type: "relationship",
+        withType: "@apostrophecms/image",
+        max: 1,
+      },
+    },
+    group: {
+      basics: {
+        label: "Basics",
+        fields: ["title", "_pageMastheadImage", "main"],
+      },
+    },
   },
 };

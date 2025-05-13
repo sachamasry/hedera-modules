@@ -1,0 +1,31 @@
+{% fragment masthead(imageObjectMasthead, mastheadTitle, displayPageHeading, skipStyleMastheadBackground, contrastingTitle) %}
+  {%- if data.global.defaultPlaceholderColour -%}
+    {%- set imagePlaceholderColour = data.global.defaultPlaceholderColour -%}
+  {%- endif -%}
+
+  {%- import 'hedera-image-widget:image-layout-fragment.html' as imageLayoutFragment -%}
+
+<section class="page-banner {% if displayPageHeading == false %}mb-5{%- endif -%}"
+           {% if skipStyleMastheadBackground and imagePlaceholderColour %}{% else %}style="background-color:{{ imagePlaceholderColour }};"{% endif %}>
+  {%- if imageObjectMasthead -%}
+    {%- set pageBannerTitleClass = 'page-banner__title' -%}
+  <div class="page-banner__masthead-container">
+      {%- render imageLayoutFragment.image(imageObjectMasthead, 'sizes', 'page-banner__masthead-image img-fluid ', '', 'auto', 'auto') -%}
+  </div>
+  {%- elseif contrastingTitle -%}
+    {%- set pageBannerTitleClass = 'page-banner__title' -%}
+  {%- endif -%}
+
+  {%- if displayPageHeading -%}
+  <div class="page-banner__heading-container container">
+      <div class="page-banner__heading-row row justify-content-center">
+          <div class="page-banner__heading-column">
+              <div class="page-banner__heading-backdrop">
+                  <h1 class='page-banner__heading {% if pageBannerTitleClass %}{{ pageBannerTitleClass }}{% endif %} mb-2'>{{ mastheadTitle }}</h1>
+              </div>
+          </div>
+      </div>
+  </div>
+  {%- endif -%}
+</section>
+{% endfragment %}

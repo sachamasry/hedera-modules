@@ -16,39 +16,31 @@ data.global.defaultPlaceholderColour -%} {%- import
 
 {% block main %}
 <main class="main-page-content">
-    {%- render pageLayout.masthead(imageObjectMasthead, data.page.title) -%} {%-
-    set bodyContainerClass = 'container' -%} {%- if
-    data.page.appendToPageBodyContainerClass -%} {%- set bodyContainerClass =
-    bodyContainerClass + ' ' + data.page.pageBodyContainerClass -%} {%- else -%}
-    {%- set bodyContainerClass = data.page.pageBodyContainerClass -%} {%- endif
-    -%} {%- set bodyColumnClass = 'col-12 col-md-8 offset-md-2' -%} {%- if
-    data.page.appendToPageBodyColumnClass -%} {%- set bodyColumnClass =
-    bodyColumnClass + ' ' + data.page.pageBodyColumnClass -%} {%- else -%} {%-
-    set bodyColumnClass = data.page.pageBodyColumnClass -%} {%- endif -%}
+    {%- render pageLayout.masthead(imageObjectMasthead, data.page.title) -%}
+    {%- set bodyContainerClass = 'container' -%}
+    {%- if data.page.appendToPageBodyContainerClass -%}
+        {%- set bodyContainerClass = bodyContainerClass + ' ' + data.page.pageBodyContainerClass -%}
+    {%- else -%}
+        {%- set bodyContainerClass = data.page.pageBodyContainerClass -%}
+    {%- endif -%}
+
+    {%- set bodyColumnClass = 'col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2' -%}
+
+    {%- if data.page.appendToPageBodyColumnClass -%}
+        {%- set bodyColumnClass = bodyColumnClass + ' ' + data.page.pageBodyColumnClass -%}
+    {%- else -%}
+        {%- set bodyColumnClass = data.page.pageBodyColumnClass -%}
+    {%- endif -%}
 
     <section class="section section-page-body">
         <div
             class="{{ bodyContainerClass }}"
-            {%-
-            if
-            data.page.bodyContainerStyle
-            %}
-            style="{{ data.page.bodyContainerStyle }}"
-            {%
-            endif
-            -%}
+            {%- if data.page.bodyContainerStyle %} style="{{ data.page.bodyContainerStyle }}" {% endif -%}
         >
             <div class="row">
                 <div
                     class="{{ bodyColumnClass }}"
-                    {%-
-                    if
-                    data.page.bodyColumnStyle
-                    %}
-                    style="{{ data.page.bodyColumnStyle }}"
-                    {%
-                    endif
-                    -%}
+                    {%- if data.page.bodyColumnStyle %} style="{{ data.page.bodyColumnStyle }}" {% endif -%}
                 >
                     {% area data.page, 'main' %}
                 </div>

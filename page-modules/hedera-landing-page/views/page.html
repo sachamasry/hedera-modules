@@ -3,7 +3,7 @@ template that lives in the top-level views/ folder for convenience #}
 
 {% extends "layout.html" %}
 {%- set imagePlaceholderColour = data.global.defaultPlaceholderColour -%}
-{%- import 'hedera-landing-page:page-layout-fragment.html' as pageLayout -%}
+{%- import 'hedera-default-page:page-layout-fragment.html' as pageLayout -%}
 {%- set bodyColumnClass = 'col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2' -%}
 
 <!-- Use page masthead, if defined, otherwise fall back to section masthead
@@ -18,7 +18,7 @@ template that lives in the top-level views/ folder for convenience #}
 
 {% block main %}
 <main class="main-page-content">
-{%- render pageLayout.masthead(imageObjectMasthead, data.page.title, data.page.displayPageHeading) -%}
+{%- render pageLayout.masthead(imageObjectMasthead, data.page.title, data.page.suppressPageHeading) -%}
 
 {%- set bodyContainerClass = 'container' -%}
 

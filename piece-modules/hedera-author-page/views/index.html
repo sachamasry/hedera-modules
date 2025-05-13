@@ -3,9 +3,9 @@
 {% extends "layout.html" %}
 {% import '@apostrophecms/pager:macros.html' as pager with context %}
 
-{%- import 'default-page:page-layout-fragment.html' as pageLayout -%}
+{%- import 'hedera-default-page:page-layout-fragment.html' as pageLayout -%}
 
-<!-- Use author masthead, if defined, otherwise fall back to default 
+<!-- Use author masthead, if defined, otherwise fall back to default
      global masthead -->
 {%- if apos.attachment.first(data.piece._mastheadImage) -%}
   {%- set imageObjectMasthead = apos.attachment.first(data.piece._mastheadImage) -%}
@@ -38,16 +38,16 @@
                                     <a href="{{ author._url }}" alt="{{ author.title }}">
                                         <h2 class="card-title author-listing__title">{{ author.title }}</h2>
                                     </a>
-                                    
+
                                     {%- if author.jobTitle -%}
                                     <h3 class="author-listing__job-title purple-text">{{ author.jobTitle }}</h3>
                                     {%- endif -%}
-                                    
+
                                     <p class="card-text author-listing__description">
                                         {% if author.openGraphDescription %}
-                                        {{ author.openGraphDescription }}
+                                            {{ author.openGraphDescription }}
                                         {% else %}
-                                        {{ author.body.items[0].content | safe | truncate }}
+                                            {{ author.body.items[0].content | safe | truncate }}
                                         {% endif %}</p>
                                     <p class="card-text author-listing__read-more-link"><small class="text-muted">
                                         <a href="{{ author._url }}"

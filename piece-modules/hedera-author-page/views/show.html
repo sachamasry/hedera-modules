@@ -1,9 +1,9 @@
 {# modules/author-page/views/show.html #}
 {% extends "layout.html" %}
 
-{%- import 'default-page:page-layout-fragment.html' as pageLayout -%}
+{%- import 'hedera-default-page:page-layout-fragment.html' as pageLayout -%}
 
-<!-- Use author masthead, if defined, otherwise fall back to default 
+<!-- Use author masthead, if defined, otherwise fall back to default
      global masthead -->
 {%- if apos.attachment.first(data.piece._mastheadImage) -%}
   {%- set imageObjectMasthead = apos.attachment.first(data.piece._mastheadImage) -%}
@@ -15,7 +15,7 @@
 <main class="main-page-content">
     {%- render pageLayout.masthead(imageObjectMasthead, data.piece.title) -%}
 
-    <section class="section section-page-body">
+    <section class="main-content-section">
         <div class="container">
             <div class="row">
                 <div class="author-display__profile-and-articles col-12 col-lg-8 order-2 order-lg-1 violet-border">
@@ -51,7 +51,7 @@
                                         <a href="{{ article._url }}" alt="{{ article.title }}">
                                             <h2 class="card-title article-listing__title">{{ article.title }}</h2>
                                         </a>
-                                        
+
                                         {%- if article.subTitle -%}
                                         <h3 class="article-listing__subtitle purple-text">{{ article.subTitle }}</h3>
                                         {%- endif -%}
@@ -85,13 +85,15 @@
                         {%- endif -%}
                     </div>
 
-                    <h2 class="author-display__title purple-text mt-4">{{ data.piece.title }}</h2>
+                    <div class="author-display__profile-content">
+                        <h2 class="author-display__title purple-text mt-4">{{ data.piece.title }}</h2>
 
-                    {%- if data.piece.jobTitle -%}
-                    <h3 class="author-display__job-title purple-text mt-4">{{ data.piece.jobTitle }}</h3>
-                    {%- endif -%}
+                        {%- if data.piece.jobTitle -%}
+                        <h3 class="author-display__job-title purple-text mt-4">{{ data.piece.jobTitle }}</h3>
+                        {%- endif -%}
 
-                    {% area data.piece, 'body' %}
+                        {% area data.piece, 'body' %}
+                    </div>
                 </div>
             </div>
         </div>

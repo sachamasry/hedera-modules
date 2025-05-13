@@ -55,11 +55,11 @@ export default {
           },
         },
       },
-      displayPageHeading: {
+      suppressPageHeading: {
         type: "boolean",
-        label: "Display heading on this page",
-        help: "By default, landing pages display their headings. Turn this off to suppress this page's heading",
-        def: true,
+        label: "Hide page heading on this page",
+        help: "By default, landing pages display their headings. Turn this on to suppress this page's heading",
+        def: false,
       },
       excludeFromSearch: {
         type: "boolean",
@@ -109,7 +109,7 @@ export default {
         label: "Basics",
         fields: [
           "title",
-          "displayPageHeading",
+          "suppressPageHeading",
           "_pageSection",
           "_pageMastheadImage",
           "main",

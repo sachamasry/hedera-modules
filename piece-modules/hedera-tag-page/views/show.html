@@ -1,7 +1,7 @@
 {# modules/hedera-tag-page/views/show.html #}
 {% extends "layout.html" %}
 
-{%- import 'default-page:page-layout-fragment.html' as pageLayout -%}
+{%- import 'hedera-default-page:page-layout-fragment.html' as pageLayout -%}
 
 <!-- Use tag masthead, if defined, otherwise fall back to default
      global masthead -->
@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="tag-display__articles col-12 col-md-8 offset-md-2">
                     <div class="tag-display__article-listing violet-border pt-4">
-                        <h4 class="tag-display__article-listing-title">Articles tagged {{ data.piece.title }}</h4>
+                        <h4 class="tag-display__article-listing-title">Articles tagged <em>{{ data.piece.title }}</em></h4>
 
                         {%- for article in data.piece._articles -%}
                         <article class="article-listing mt-4">

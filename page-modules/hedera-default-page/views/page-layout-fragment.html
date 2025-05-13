@@ -1,29 +1,33 @@
-{% fragment masthead(imageObjectMasthead, mastheadTitle, skipStyleMastheadBackground, contrastingTitle) %}
-  {%- if data.global.defaultPlaceholderColour -%}
-    {%- set imagePlaceholderColour = data.global.defaultPlaceholderColour -%}
-  {%- endif -%}
+{% fragment masthead(imageObjectMasthead, mastheadHeading, suppressPageHeading, skipStyleMastheadBackground, contrastingHeading) %}
 
-  {%- import 'hedera-image-widget:image-layout-fragment.html' as imageLayoutFragment -%}
+{%- if data.global.defaultPlaceholderColour -%}
+    {%- set imagePlaceholderColour = data.global.defaultPlaceholderColour -%}
+{%- endif -%}
+
+{%- import 'hedera-image-widget:image-layout-fragment.html' as imageLayoutFragment -%}
 
 <section class="page-banner"
-           {% if skipStyleMastheadBackground and imagePlaceholderColour %}{% else %}style="background-color:{{ imagePlaceholderColour }};"{% endif %}>
+    {% if skipStyleMastheadBackground and imagePlaceholderColour %}{% else %}style="background-color:{{ imagePlaceholderColour }};"{% endif %}>
+
   {%- if imageObjectMasthead -%}
-    {%- set pageBannerTitleClass = 'page-banner__title' -%}
+    {%- set pageBannerHeadingClass = 'page-banner__heading' -%}
   <div class="page-banner__masthead-container">
       {%- render imageLayoutFragment.image(imageObjectMasthead, 'sizes', 'page-banner__masthead-image img-fluid ', '', 'auto', 'auto') -%}
   </div>
-  {%- elseif contrastingTitle -%}
-    {%- set pageBannerTitleClass = 'page-banner__title' -%}
+  {%- elseif contrastingHeading -%}
+    {%- set pageBannerHeadingClass = 'page-banner__heading' -%}
   {%- endif -%}
 
-  <div class="page-banner__heading-container container">
+  {%- if not(suppressPageHeading) -%}
+  <div class="page-banner__heading-container {% if not(imageObjectMasthead) %}page-banner__heading-container--no-masthead{% endif %} container">
       <div class="page-banner__heading-row row justify-content-center">
           <div class="page-banner__heading-column">
               <div class="page-banner__heading-backdrop">
-                  <h1 class='page-banner__heading {% if pageBannerTitleClass %}{{ pageBannerTitleClass }}{% endif %} mb-2'>{{ mastheadTitle }}</h1>
+                  <h1 class='page-banner__heading {% if pageBannerHeadingClass %}{{ pageBannerHeadingClass }}{% endif %} mb-2'>{{ mastheadHeading }}</h1>
               </div>
           </div>
       </div>
   </div>
+  {%- endif -%}
 </section>
 {% endfragment %}

@@ -19,8 +19,8 @@
         <div class="container">
             <div class="tag-display__description row">
                 <div class="col-12 col-md-8 offset-md-2">
-                    {%- if data.piece.description -%}
-                    <p>{{ data.piece.description }}</p>
+                    {%- if data.piece.body -%}
+                        {% area data.piece, 'body' %}
                     {%- endif -%}
                 </div>
             </div>
@@ -28,7 +28,11 @@
             <div class="row">
                 <div class="tag-display__articles col-12 col-md-8 offset-md-2">
                     <div class="tag-display__article-listing violet-border pt-4">
-                        <h4 class="tag-display__article-listing-title">Articles tagged <em>{{ data.piece.title }}</em></h4>
+                        {%- if data.piece._articles and data.piece._articles.length -%}
+                        <h2 class="tag-display__article-listing-title">Articles tagged <em>{{ data.piece.title }}</em></h2>
+                        {%- else -%}
+                        <p class="tag-display__article-listing-title">No articles</p>
+                        {%- endif -%}
 
                         {%- for article in data.piece._articles -%}
                         <article class="article-listing mt-4">

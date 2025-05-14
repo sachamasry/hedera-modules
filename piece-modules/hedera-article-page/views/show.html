@@ -1,12 +1,25 @@
 {# modules/article-page/views/show.html #}
 {% extends "layout.html" %}
 
+{%- import 'hedera-default-page:page-layout-fragment.html' as pageLayout -%}
+
+<!-- Use article masthead, if defined, otherwise fall back to default  global masthead -->
+{%- if apos.attachment.first(data.piece._mastheadImage) -%}
+  {%- set imageObjectMasthead = apos.attachment.first(data.piece._mastheadImage) -%}
+{%- elseif apos.attachment.first(data.piece._featuredImage) -%}
+  {%- set imageObjectMasthead = apos.attachment.first(data.piece._featuredImage) -%}
+{%- elseif apos.attachment.first(data.global._defaultArticleMastheadImage) -%}
+  {%- set imageObjectMasthead = apos.attachment.first(data.global._defaultArticleMastheadImage) -%}
+{%- endif -%}
+
 {% block main %}
 <div class="progress__container">
     <div class="progress__bar"></div>
 </div>
 
 <main class="main-page-content">
+    {%- render pageLayout.masthead(imageObjectMasthead, "") -%}
+
     <div class="article-display__page-header container">
       <div class="row">
           <div class="col-12 px-5 py-5">

@@ -27,9 +27,8 @@
                 <div class="article-listing__card card mb-3 purple-border">
                     <div class="row g-0 align-items-center">
                         <div class="col-12 col-md-6">
-                            {%- if article.featuredImageIds[0] -%} {%- set
-                            imageObject =
-                            apos.attachment.first(article._featuredImage) -%}
+                            {%- if article.featuredImageIds[0] -%}
+                                {%- set imageObject = apos.attachment.first(article._featuredImage) -%}
                             <a
                                 href="{{ article._url }}"
                                 alt="{{ article.title }}"
@@ -41,11 +40,21 @@
                                     alt="{{ imageObject._alt }}"
                                 />
                             </a>
-                            {%- elseif
-                            apos.attachment.first(data.global._defaultArticleFeatureImage)
-                            -%} {%- set imageObject =
-                            apos.attachment.first(data.global._defaultArticleFeatureImage)
-                            -%}
+                            {%- elseif article.mastheadImageIds[0] -%}
+                                {%- set imageObject = apos.attachment.first(article._mastheadImage) -%}
+                                <a
+                                    href="{{ article._url }}"
+                                    alt="{{ article.title }}"
+                                >
+                                    <img
+                                        srcset="{{ apos.image.srcset(imageObject) }}"
+                                        src="{{ apos.attachment.url(imageObject) }}"
+                                        class="img-fluid rounded-start w-100"
+                                        alt="{{ imageObject._alt }}"
+                                    />
+                                </a>
+                            {%- elseif apos.attachment.first(data.global._defaultArticleFeatureImage) -%}
+                                {%- set imageObject = apos.attachment.first(data.global._defaultArticleFeatureImage) -%}
                             <a
                                 href="{{ article._url }}"
                                 alt="{{ article.title }}"

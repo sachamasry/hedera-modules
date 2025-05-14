@@ -1,8 +1,9 @@
-{# This is an example home page template. It inherits and extends a layout
-template that lives in the top-level views/ folder for convenience #} {% extends
-"layout.html" %} {%- set imagePlaceholderColour =
-data.global.defaultPlaceholderColour -%} {%- import
-'hedera-default-page:page-layout-fragment.html' as pageLayout -%}
+{# This is an example home page template. It inherits and extends a layout template that lives in the top-level views/ folder for convenience #}
+
+{% extends "layout.html" %}
+
+{%- set imagePlaceholderColour = data.global.defaultPlaceholderColour -%}
+{%- import 'hedera-default-page:page-layout-fragment.html' as pageLayout -%}
 
 <!-- Use page masthead, if defined, otherwise fall back to section masthead
      (if any), otherwise fall back to global masthead -->

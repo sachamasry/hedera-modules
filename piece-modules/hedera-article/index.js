@@ -137,6 +137,7 @@ export default {
               columns: 2,
               widgets: {
                 "hedera-reusable-content-blocks": {},
+                "hedera-aside": {},
                 "hedera-html": {},
               },
             },

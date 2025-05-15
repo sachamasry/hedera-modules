@@ -69,6 +69,10 @@ export default {
             label: "50-50",
             value: "50-50",
           },
+          {
+            label: "100-0 (image only)",
+            value: "100-0",
+          },
         ],
         if: {
           cardType: "horizontal",
@@ -110,6 +114,12 @@ export default {
         ],
         if: {
           cardType: "horizontal",
+          $or: [
+            { horizontalCardColumnSplit: "16-84" },
+            { horizontalCardColumnSplit: "25-75" },
+            { horizontalCardColumnSplit: "33-67" },
+            { horizontalCardColumnSplit: "50-50" },
+          ],
         },
       },
       topImage: {
@@ -163,7 +173,10 @@ export default {
         },
         if: {
           cardType: "horizontal",
-          horizontalCardImagePlacement: "left",
+          $or: [
+            { horizontalCardImagePlacement: "left" },
+            { horizontalCardColumnSplit: "100-0" },
+          ],
         },
       },
       horizontalImageRight: {
@@ -337,6 +350,12 @@ export default {
             { cardType: "rich" },
             { cardType: "overlay" },
             { cardType: "horizontal" },
+          ],
+          $or: [
+            { horizontalCardColumnSplit: "16-84" },
+            { horizontalCardColumnSplit: "25-75" },
+            { horizontalCardColumnSplit: "33-67" },
+            { horizontalCardColumnSplit: "50-50" },
           ],
         },
       },

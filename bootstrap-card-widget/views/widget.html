@@ -1,4 +1,4 @@
-{%- import 'card-link-widget:card-link-layout-fragment.html' as cardLinkLayout -%}
+{%- import 'bootstrap-card-link-widget:card-link-layout-fragment.html' as cardLinkLayout -%}
 
 {%- if data.widget.cardType == 'simple' -%}
   {%- set cardType = 'simple' -%}
@@ -82,6 +82,9 @@
 {%- elif data.widget.horizontalCardColumnSplit == '50-50' -%}
   {%- set imageColumnClass = "col-12 col-md-6 col-lg-6" -%}
   {%- set contentColumnClass = "col-12 col-md-6 col-lg-6" -%}
+{%- elif data.widget.horizontalCardColumnSplit == '100-0' -%}
+  {%- set imageColumnClass = "col-12" -%}
+  {%- set contentColumnClass = "d-none" -%}
 {%- else -%}
   {%- set imageColumnClass = "col-12 col-md-6 col-lg-6" -%}
   {%- set contentColumnClass = "col-12 col-md-6 col-lg-6" -%}
@@ -153,7 +156,7 @@
 {%- elseif data.widget.cardProportionalHeight == '0' -%}
   {%- set cardHeightStyle = 'height:auto;' -%}
 {%- elseif data.widget.cardProportionalHeight > '0' and data.widget.cardProportionalHeight < '100' -%}
-  {%- set cardHeightStyle = 'max-height:' + data.widget.cardProportionalHeight + 'vh;' + 'min-height:' + data.widget.cardProportionalHeight + 'vh;overflow-y:scroll;' -%} 
+  {%- set cardHeightStyle = 'max-height:' + data.widget.cardProportionalHeight + 'vh;' + 'min-height:' + data.widget.cardProportionalHeight + 'vh;overflow-y:scroll;' -%}
 {%- endif -%}
 
 <div data-card-widget
@@ -200,7 +203,7 @@
             <p class="card-text">{{ data.widget.cardText }}</p>
             {%- elseif cardType == 'rich' or cardType == 'overlay' or cardType == 'horizontal' -%}
               {%- if cardType == 'overlay' -%}
-            <div class="card__overlay-wrapper {{ overlayPositionClass }}"> 
+            <div class="card__overlay-wrapper {{ overlayPositionClass }}">
               {%- endif -%}
               {%- if data.widget.cardTitle -%}<h5 class="card-title" style="{{ headerTextColourStyle }}">{{ data.widget.cardTitle }}</h5>{%- endif -%}
 

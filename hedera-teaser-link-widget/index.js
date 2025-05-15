@@ -1,3 +1,5 @@
+import linkConfig from "../link.js";
+
 export default {
   extend: "bootstrap-card-widget",
   options: {
@@ -8,88 +10,7 @@ export default {
   },
   fields: {
     add: {
-      linkType: {
-        label: "Link type",
-        type: "select",
-        choices: [
-          {
-            label: "Page",
-            value: "page",
-          },
-          {
-            label: "Article",
-            value: "article",
-          },
-          {
-            label: "Author",
-            value: "author",
-          },
-        ],
-      },
-      _page: {
-        label: "Page to link",
-        type: "relationship",
-        withType: "@apostrophecms/page",
-        max: 1,
-        required: true,
-        builders: {
-          project: {
-            title: 1,
-            _url: 1,
-          },
-        },
-        // Only if it's a page link
-        if: {
-          linkType: "page",
-        },
-      },
-      _article: {
-        label: "Article to link",
-        type: "relationship",
-        withType: "hedera-article",
-        withRelationships: [
-          "@apostrophecms/image",
-          "_featuredImage",
-          "_mastheadImage",
-        ],
-        max: 1,
-        required: true,
-        builders: {
-          project: {
-            title: 1,
-            subTitle: 1,
-            publishedAt: 1,
-            _url: 1,
-            _featuredImage: 1,
-            _mastheadImage: 1,
-          },
-        },
-        // Only if it's an article link
-        if: {
-          linkType: "article",
-        },
-      },
-      _author: {
-        label: "Author to link",
-        type: "relationship",
-        withType: "hedera-author",
-        withRelationships: ["@apostrophecms/image", "_mastheadImage"],
-        max: 1,
-        required: true,
-        builders: {
-          project: {
-            title: 1,
-            jobTitle: 1,
-            _url: 1,
-            profileImage: 1,
-            _mastheadImage: 1,
-          },
-        },
-        // Only if it's an author link
-        if: {
-          linkType: "author",
-        },
-      },
+      ...linkConfig.link,
       cardType: {
         type: "select",
         label: "Choose the card type",
@@ -121,7 +42,7 @@ export default {
       horizontalImageLeft: {
         type: "area",
         label: "Image",
-        help: "Left image on a horizontal card",
+        help: "Left (or main) image on a horizontal card",
         options: {
           widgets: {
             "hedera-image": {
@@ -132,8 +53,8 @@ export default {
           },
         },
         if: {
-          linkType: "page",
-          horizontalCardImagePlacement: "left",
+          // linkType: "page",
+          // horizontalCardImagePlacement: "left",
         },
       },
       horizontalImageRight: {
@@ -184,7 +105,14 @@ export default {
             "hedera-reusable-content-blocks": {},
           },
         },
-        if: {},
+        if: {
+          $or: [
+            { horizontalCardColumnSplit: "16-84" },
+            { horizontalCardColumnSplit: "25-75" },
+            { horizontalCardColumnSplit: "33-67" },
+            { horizontalCardColumnSplit: "50-50" },
+          ],
+        },
       },
       verticalAlignment: {
         type: "select",

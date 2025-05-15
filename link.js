@@ -76,7 +76,7 @@ const link = {
     },
     // Only if it's an article link
     if: {
-      linkType: "hedera-article",
+      linkType: "article",
     },
   },
   _author: {
@@ -94,7 +94,7 @@ const link = {
     },
     // Only if it's an author link
     if: {
-      linkType: "hedera-author",
+      linkType: "author",
     },
   },
   _topic: {
@@ -112,7 +112,7 @@ const link = {
     },
     // Only if it's a topic link
     if: {
-      linkType: "hedera-topic",
+      linkType: "topic",
     },
   },
   _tag: {
@@ -130,7 +130,7 @@ const link = {
     },
     // Only if it's a tag link
     if: {
-      linkType: "hedera-tag",
+      linkType: "tag",
     },
   },
   _file: {

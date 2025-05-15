@@ -136,6 +136,7 @@ export default {
       },
     },
     remove: [
+      "label",
       "cardWidth",
       "cardHeight",
       "wrapInColumn",
@@ -149,7 +150,20 @@ export default {
     group: {
       basic: {
         label: "Basics",
-        fields: ["linkType", "_page", "_article", "_author"],
+        fields: [
+          "linkType",
+          "_page",
+          "_article",
+          "_author",
+          "_topic",
+          "_tag",
+          "_file",
+          "_image",
+          "customUrl",
+          "downloadLink",
+          "overrideDownloadedFileName",
+          "target",
+        ],
       },
     },
   },

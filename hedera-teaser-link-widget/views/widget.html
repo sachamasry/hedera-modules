@@ -20,6 +20,9 @@
   {%- elseif apos.attachment.first(data.global._defaultArticleFeatureImage) -%}
     {%- set contentImageObject = apos.attachment.first(data.global._defaultArticleFeatureImage) -%}
   {%- endif -%}
+  {%- set contentType = 'article' -%}
+  {%- set contentPath = data.widget._article[0]._url -%}
+  {%- set contentTitle = data.widget._article[0].title -%}
 {%- elif data.widget.linkType === 'author' and data.widget._author and data.widget._author[0] -%}
   {%- set contentPath = data.widget._author[0]._url -%}
   {%- set contentTitle = data.widget._author[0].title -%}
@@ -31,6 +34,60 @@
   {%- elseif apos.attachment.first(data.global._defaultAuthorFeatureImage) -%}
     {%- set contentImageObject = apos.attachment.first(data.global._defaultAuthorFeatureImage) -%}
   {%- endif -%}
+  {%- set contentType = 'author' -%}
+  {%- set contentPath = data.widget._author[0]._url -%}
+  {%- set contentTitle = data.widget._author[0].title -%}
+{%- elif data.widget.linkType === 'topic' and data.widget._topic and data.widget._topic[0] -%}
+    {%- set contentPath = data.widget._topic[0]._url -%}
+    {%- set contentTitle = data.widget._topic[0].title -%}
+    {%- set contentSubTitle = data.widget._topic[0].subTitle -%}
+    {%- set contentPublishedAt = data.widget._topic[0].publishedAt -%}
+    {%- if data.widget._topic[0].featuredImageIds[0] -%}
+      {%- set contentImageObject = apos.attachment.first(data.widget._topic[0]._featuredImage) -%}
+    {%- elseif data.widget._topic[0].mastheadImageIds[0] -%}
+      {%- set contentImageObject = apos.attachment.first(data.widget._topic[0]._mastheadImage) -%}
+    {%- elseif apos.attachment.first(data.global._defaultTopicFeatureImage) -%}
+      {%- set contentImageObject = apos.attachment.first(data.global._defaultTopicFeatureImage) -%}
+    {%- endif -%}
+    {%- set contentType = 'topic' -%}
+    {%- set contentPath = data.widget._topic[0]._url -%}
+    {%- set contentTitle = data.widget._topic[0].title -%}
+{%- elif data.widget.linkType === 'tag' and data.widget._tag and data.widget._tag[0] -%}
+    {%- set contentPath = data.widget._tag[0]._url -%}
+    {%- set contentTitle = data.widget._tag[0].title -%}
+    {%- set contentSubTitle = data.widget._tag[0].subTitle -%}
+    {%- set contentPublishedAt = data.widget._tag[0].publishedAt -%}
+    {%- if data.widget._tag[0].featuredImageIds[0] -%}
+      {%- set contentImageObject = apos.attachment.first(data.widget._tag[0]._featuredImage) -%}
+    {%- elseif data.widget._tag[0].mastheadImageIds[0] -%}
+      {%- set contentImageObject = apos.attachment.first(data.widget._tag[0]._mastheadImage) -%}
+    {%- elseif apos.attachment.first(data.global._defaultTagFeatureImage) -%}
+      {%- set contentImageObject = apos.attachment.first(data.global._defaultTagFeatureImage) -%}
+    {%- endif -%}
+    {%- set contentType = 'tag' -%}
+    {%- set contentPath = data.widget._tag[0]._url -%}
+    {%- set contentTitle = data.widget._tag[0].title -%}
+{%- elif data.widget.linkType === 'modal' and data.widget._modal and data.widget._modal[0] -%}
+    {%- set contentType = 'modal' -%}
+    {%- set contentPath = "#" -%}
+    {%- set contentTitle = data.widget._modal[0].title -%}
+    {%- set aposDocId = data.widget._modal[0].aposDocId -%}
+    {%- set dataBsToggle = 'modal' -%}
+    {%- set targetElementId = data.widget._modal[0].slug -%}
+    {%- set onClickEvent = 'insertModalContentIntoDOM' -%}
+{%- elif data.widget.linkType === 'file' and data.widget._file and data.widget._file[0] -%}
+    {%- set contentType = 'file' -%}
+    {%- set fileObject = apos.attachment.first(data.widget._file) -%}
+    {%- set contentPath = apos.attachment.url(fileObject) -%}
+    {%- set linkTitle = data.widget._file[0].title -%}
+{%- elif data.widget.linkType === 'image' and data.widget._image and data.widget._image[0] -%}
+    {%- set contentType = 'image' -%}
+    {%- set imageObject = apos.attachment.first(data.widget._image) -%}
+    {%- set contentPath = apos.attachment.url(imageObject) -%}
+    {%- set linkTitle = data.widget._image[0].title -%}
+{%- elif data.widget.linkType === 'custom' -%}
+    {%- set contentType = 'custom' -%}
+    {%- set contentPath = data.widget.customUrl -%}
 {%- endif -%}
 
 {%- set cardType = 'horizontal' -%}
@@ -120,7 +177,7 @@
             <div class="card__image-column--horizontal {% if imageColumnClass %}{{ imageColumnClass }}{% else %}col-md-4{% endif %}">
                 <div class="horizontal-card__image-container horizontal-card__image-container--image-left {{ imageBorderClass }}"
                      style="{{ imageBorderStyle }}">
-                    {%- if contentType == 'page' or contentType == 'article' -%}
+                    {%- if contentType in ['page', 'article', 'author', 'topic', 'tag', 'modal', 'file', 'image', 'custom'] -%}
                         {% area data.widget, 'horizontalImageLeft' %}
                     {%- else -%}
                     <img srcset="{{ apos.image.srcset(contentImageObject) }}"

@@ -3,6 +3,7 @@
 {%- set contentType = '' -%}
 {%- set contentPath = '' -%}
 {%- set contentTitle = '' -%}
+
 {%- if data.widget.linkType === 'page' and data.widget._page and data.widget._page[0] -%}
   {%- set contentType = 'page' -%}
   {%- set contentPath = data.widget._page[0]._url -%}
@@ -60,11 +61,39 @@
   {%- set horizontalCardImagePlacement = "left" -%}
 {%- endif -%}
 
+{%- if data.widget.horizontalCardColumnSplit == '16-84' -%}
+  {%- set imageColumnClass = "col-12 col-md-4 col-lg-2" -%}
+  {%- set contentColumnClass = "col-12 col-md-8 col-lg-10" -%}
+{%- elif data.widget.horizontalCardColumnSplit == '25-75' -%}
+  {%- set imageColumnClass = "col-12 col-md-5 col-lg-3" -%}
+  {%- set contentColumnClass = "col-12 col-md-7 col-lg-9" -%}
+{%- elif data.widget.horizontalCardColumnSplit == '33-67' -%}
+  {%- set imageColumnClass = "col-12 col-md-4 col-lg-4" -%}
+  {%- set contentColumnClass = "col-12 col-md-8 col-lg-8" -%}
+{%- elif data.widget.horizontalCardColumnSplit == '50-50' -%}
+  {%- set imageColumnClass = "col-12 col-md-6 col-lg-6" -%}
+  {%- set contentColumnClass = "col-12 col-md-6 col-lg-6" -%}
+{%- elif data.widget.horizontalCardColumnSplit == '100-0' -%}
+  {%- set imageColumnClass = "col-12" -%}
+  {%- set contentColumnClass = "d-none" -%}
+{%- else -%}
+  {%- set imageColumnClass = "col-12 col-md-6 col-lg-6" -%}
+  {%- set contentColumnClass = "col-12 col-md-6 col-lg-6" -%}
+{%- endif -%}
+
 {%- if data.widget.cardBorderColour -%}
   {%- set cardBorderClass = 'border-1 border-solid' -%}
   {%- set cardBorderStyle = 'border-color:' + data.widget.cardBorderColour + '; ' -%}
 {%- endif -%}
 
+{%- if data.widget.drawImageBorders -%}
+  {%- set imageBorderClass = 'card__image--draw-border' -%}
+  {%- set imageBorderColour = data.widget.cardBorderColour -%}
+  {%- set imageForegroundColour = (imageBorderColour | truncate(7, true, "")) -%}
+  {%- set imageBorderStyle = 'color:' + imageForegroundColour + '22; border-color:' + imageBorderColour + ';' -%}
+{%- endif -%}
+
+{%- set textColourStyle = 'color:var(--body-colour);' -%}
 {%- if data.widget.textColour -%}
   {%- set textColourStyle = 'color:' + data.widget.textColour + '; ' -%}
 {%- endif -%}
@@ -82,16 +111,17 @@
 {%- endif -%}
 
 <div data-teaser-link-widget
-     class="teaser-link-card card purple-border {{ horizontalAlignmentClass }} {{ cardBorderClass }} mt-4"
+     class="teaser-link-card card {{ horizontalAlignmentClass }} {{ cardBorderClass }} mt-4"
      style="{{ cardBorderStyle }} {{ cardBackgroundColourStyle }}">
     <a class="teaser-link-card__wrapping-link"
        href="{{ contentPath }}" alt="{{ contentTitle }}">
         <div class="row g-0 {{ rowAlignmentClass }} overflow-hidden">
             {%- if horizontalCardImagePlacement == 'left' -%}
-            <div class="col-md-4">
-                <div class="horizontal-card__image-container--image-left">
-                    {%- if contentType == 'page' -%}
-                    {% area data.widget, 'horizontalImageLeft' %}
+            <div class="card__image-column--horizontal {% if imageColumnClass %}{{ imageColumnClass }}{% else %}col-md-4{% endif %}">
+                <div class="horizontal-card__image-container horizontal-card__image-container--image-left {{ imageBorderClass }}"
+                     style="{{ imageBorderStyle }}">
+                    {%- if contentType == 'page' or contentType == 'article' -%}
+                        {% area data.widget, 'horizontalImageLeft' %}
                     {%- else -%}
                     <img srcset="{{ apos.image.srcset(contentImageObject) }}"
                          src="{{ apos.attachment.url(contentImageObject) }}"
@@ -103,7 +133,7 @@
             </div>
             {%- endif -%}
 
-            <div class="col-md-8">
+            <div class="card__copy-container{% if contentColumnClass %} {{ contentColumnClass }} {% else %} col-md-8 {% endif %}">
                 <div class="card-body"
                      style="{{ cardBackgroundStyle }} {{ textColourStyle }}">
                     <h4 class="article-listing__title">{{ contentTitle }}</h4>

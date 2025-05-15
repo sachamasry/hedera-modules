@@ -26,6 +26,12 @@
               <div class="page-banner__content">
                   <h1 class='page-banner__title {% if pageBannerTitleClass %}{{ pageBannerTitleClass }}{% endif %} font-weight-bold mb-2'>{{ data.piece.title }}</h1>
               </div>
+
+              {%- if data.piece.subTitle -%}
+              <div class="page-banner__subtitle">
+                  <h2 class="article-display__subtitle mt-4">{{ data.piece.subTitle }}</h2>
+              </div>
+              {%- endif -%}
           </div>
       </div>
     </div>
@@ -79,10 +85,6 @@
                         {%- endif -%}
                     </div>
                     </div>
-
-                    {%- if data.piece.subTitle -%}
-                    <h2 class="article-display__subtitle mt-4">{{ data.piece.subTitle }}</h2>
-                    {%- endif -%}
 
                     {% area data.piece, 'body' %}
 

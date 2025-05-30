@@ -130,14 +130,14 @@
 
         {%- if data.totalPages > 1 -%}
         <nav aria-label="Article page navigation" class="index-pager">
-            <ul class="pagination index-pager__pagination">
-                <li class="page-item pagination__page-item {% if data.currentPage == 1 %}disabled{%- endif -%}">
+            <ul class="index-pager__pagination pagination">
+                <li class="pagination__page-item page-item {% if data.currentPage == 1 %}disabled{%- endif -%}">
                     <a
                         class="page-link pagination__page-link pagination__page-link--previous"
                         href="{% if data.currentPage > 1 %}/articles?page={%- set i = (data.currentPage -1) -%}{{ i }}{%- endif -%}"
                         aria-label="Previous"
                     >
-                        <i class="ti-angle-left ml-1 mr-3"></i> Previous page
+                        <i class="bi bi-chevron-left"></i> Previous page
                     </a>
                 </li>
                 {%- for i in range(1,(data.totalPages+1)) -%}
@@ -157,7 +157,7 @@
                         href="{% if data.currentPage < data.totalPages -%}/articles?page={%- set i = (data.currentPage + 1) -%}{{ i }}{%- endif -%}"
                         aria-label="Next"
                     >
-                        Next page <i class="ti-angle-right ml-3 mr-1"></i>
+                        Next page <i class="bi bi-chevron-right"></i>
                     </a>
                 </li>
             </ul>

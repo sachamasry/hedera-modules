@@ -1,49 +1,58 @@
-{# modules/article-page/views/index.html #}
-
-{% extends "layout.html" %}
-{% import "filters.html" as filters %}
-{% import '@apostrophecms/pager:macros.html' as pager with context %}
-{%- import 'hedera-default-page:page-layout-fragment.html' as pageLayout -%}
+{# modules/article-page/views/index.html #} {% extends "layout.html" %} {%
+import "filters.html" as filters %} {% import '@apostrophecms/pager:macros.html'
+as pager with context %} {%- import
+'hedera-default-page:page-layout-fragment.html' as pageLayout -%}
 
 <!-- Use article masthead, if defined, otherwise fall back to default global masthead -->
-{%- if apos.attachment.first(data.page._pageMastheadImage) -%}
-  {%- set imageObjectMasthead = apos.attachment.first(data.page._pageMastheadImage) -%}
-{%- elseif data.page._pageSection[0] and data.page._pageSection[0].applyMastheadImageToAllPagesInSection == true and data.page._pageSection[0]._sectionMastheadImage[0] -%}
-  {%- set imageObjectMasthead = apos.attachment.first(data.page._pageSection[0]._sectionMastheadImage) -%}
-{%- elseif apos.attachment.first(data.global._defaultPageMastheadImage) -%}
-  {%- set imageObjectMasthead = apos.attachment.first(data.global._defaultPageMastheadImage) -%}
-{%- endif -%}
-
+{%- if apos.attachment.first(data.page._pageMastheadImage) -%} {%- set
+imageObjectMasthead = apos.attachment.first(data.page._pageMastheadImage) -%}
+{%- elseif data.page._pageSection[0] and
+data.page._pageSection[0].applyMastheadImageToAllPagesInSection == true and
+data.page._pageSection[0]._sectionMastheadImage[0] -%} {%- set
+imageObjectMasthead =
+apos.attachment.first(data.page._pageSection[0]._sectionMastheadImage) -%} {%-
+elseif apos.attachment.first(data.global._defaultPageMastheadImage) -%} {%- set
+imageObjectMasthead =
+apos.attachment.first(data.global._defaultPageMastheadImage) -%} {%- endif -%}
 {% block main %}
 <main class="main-page-content">
     {%- render pageLayout.masthead(imageObjectMasthead, data.page.title) -%}
 
-    <section class="section section-page-listing article-listing-page container">
+    <section
+        class="section section-page-listing article-listing-page container"
+    >
         <div class="col-12 col-xl-8 offset-xl-2">
             {% for article in data.pieces %}
             <article class="article-listing">
                 <a href="{{ article._url }}" alt="{{ article.title }}">
-                <div class="article-listing__card card mb-3">
-                    <div class="row g-0 align-items-center">
-                        <div class="col-12 col-md-6">
-                            {%- if article.featuredImageIds[0] -%}
-                                {%- set imageObject = apos.attachment.first(article._featuredImage) -%}
+                    <div class="article-listing__card card mb-3">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-12 col-md-6">
+                                {%- if article.featuredImageIds[0] -%} {%- set
+                                imageObject =
+                                apos.attachment.first(article._featuredImage)
+                                -%}
                                 <img
                                     srcset="{{ apos.image.srcset(imageObject) }}"
                                     src="{{ apos.attachment.url(imageObject) }}"
                                     class="article-listing__image img-fluid w-100"
                                     alt="{{ imageObject._alt }}"
                                 />
-                            {%- elseif article.mastheadImageIds[0] -%}
-                                {%- set imageObject = apos.attachment.first(article._mastheadImage) -%}
+                                {%- elseif article.mastheadImageIds[0] -%} {%-
+                                set imageObject =
+                                apos.attachment.first(article._mastheadImage)
+                                -%}
                                 <img
                                     srcset="{{ apos.image.srcset(imageObject) }}"
                                     src="{{ apos.attachment.url(imageObject) }}"
                                     class="article-listing__image img-fluid w-100"
                                     alt="{{ imageObject._alt }}"
                                 />
-                            {%- elseif apos.attachment.first(data.global._defaultArticleFeatureImage) -%}
-                                {%- set imageObject = apos.attachment.first(data.global._defaultArticleFeatureImage) -%}
+                                {%- elseif
+                                apos.attachment.first(data.global._defaultArticleFeatureImage)
+                                -%} {%- set imageObject =
+                                apos.attachment.first(data.global._defaultArticleFeatureImage)
+                                -%}
                                 <img
                                     srcset="{{ apos.image.srcset(imageObject) }}"
                                     src="{{ apos.attachment.url(imageObject) }}"
@@ -51,35 +60,42 @@
                                     style="background-color:{{ imagePlaceholderColour }};"
                                     alt="{{ imageObject._alt }}"
                                 />
-                            {%- endif -%}
-                        </div>
-                        <div class="col-12 col-md-6 px-md-3">
-                            <div class="card-body">
-                                <div
-                                    class="article-listing__published-date violet-text"
-                                >
-                                    {{ article.publishedAt | date("D MMMM YYYY") }}
-                                </div>
-                                <h2 class="card-title article-listing__title">
-                                    {{ article.title }}
-                                </h2>
-
-                                {%- if article.subTitle -%}
-                                <h3
-                                    class="article-listing__subtitle purple-text"
-                                >
-                                    {{ article.subTitle }}
-                                </h3>
                                 {%- endif -%}
+                            </div>
+                            <div class="col-12 col-md-6 px-md-3">
+                                <div class="card-body">
+                                    <div
+                                        class="article-listing__published-date violet-text"
+                                    >
+                                        {{ article.publishedAt | date("D MMMM
+                                        YYYY") }}
+                                    </div>
+                                    <h2
+                                        class="card-title article-listing__title"
+                                    >
+                                        {{ article.title }}
+                                    </h2>
 
-                                <div class="article-listing__author-and-topic-container d-flex flex-row justify-content-start align-items-center gap-2">
-                                    {%- if article.authorIds[0] -%}
-                                        {%- set comma = joiner() -%}
-                                        {%- for author in article._author -%}
-                                            {%- set imageObjectProfile = apos.attachment.first(author.profileImage) -%}
+                                    {%- if article.subTitle -%}
+                                    <h3
+                                        class="article-listing__subtitle purple-text"
+                                    >
+                                        {{ article.subTitle }}
+                                    </h3>
+                                    {%- endif -%}
 
-                                            {%- if imageObjectProfile -%}
-                                        <div class="article-listing__author-profile-image-window">
+                                    <div
+                                        class="article-listing__author-and-topic-container d-flex flex-row justify-content-start align-items-center gap-2"
+                                    >
+                                        {%- if article.authorIds[0] -%} {%- set
+                                        comma = joiner() -%} {%- for author in
+                                        article._author -%} {%- set
+                                        imageObjectProfile =
+                                        apos.attachment.first(author.profileImage)
+                                        -%} {%- if imageObjectProfile -%}
+                                        <div
+                                            class="article-listing__author-profile-image-window"
+                                        >
                                             <img
                                                 srcset="{{ apos.attachment.url(imageObjectProfile) }}"
                                                 src="{{ apos.attachment.url(imageObjectProfile) }}"
@@ -89,40 +105,46 @@
                                         </div>
                                         {%- endif -%}
 
-                                    <span class="article-listing__author-name d-inline-block">
-                                        {{ author.title }}
-                                    </span>
-                                        {%- endfor -%}
-                                    {%- endif -%}
+                                        <span
+                                            class="article-listing__author-name d-inline-block"
+                                        >
+                                            {{ author.title }}
+                                        </span>
+                                        {%- endfor -%} {%- endif -%} {%- if
+                                        article.authorIds[0] and
+                                        article.topicsIds[0] -%}
+                                        <span class="">&nbsp;in&nbsp;</span>
+                                        {%- elseif article.topicsIds[0] -%}
+                                        <span class="">In&nbsp;</span>
+                                        {%- endif -%} {% if article.topicsIds[0]
+                                        %}
+                                        <span
+                                            class="article-listing__topics d-inline-block"
+                                        >
+                                            {%- set comma = joiner() -%} {%- for
+                                            topic in article._topics -%} {{
+                                            comma() }} {{ topic.title }} {%-
+                                            endfor -%}
+                                        </span>
+                                        {%- endif -%}
+                                    </div>
 
-                                    {%- if article.authorIds[0] and article.topicsIds[0] -%}
-                                    <span class="">&nbsp;in&nbsp;</span>
-                                    {%- elseif article.topicsIds[0] -%}
-                                    <span class="">In&nbsp;</span>
-                                    {%- endif -%}
-
-                                    {% if article.topicsIds[0] %}
-                                    <span class="article-listing__topics d-inline-block">
-                                        {%- set comma = joiner() -%}
-
-                                        {%- for topic in article._topics -%} {{ comma() }}
-                                        {{ topic.title }}
-                                        {%- endfor -%}
-                                    </span>
+                                    {%- if data.piece.tagsIds[0] -%}
+                                    <div class="article-listing__tags-listing">
+                                        {% for tag in article._tags %}
+                                        <a
+                                            href="{{ tag._url }}"
+                                            class="btn btn-light btn-sm mb-2"
+                                            alt="{{ tag.title }}"
+                                            >{{ tag.title }}</a
+                                        >
+                                        {% endfor %}
+                                    </div>
                                     {%- endif -%}
                                 </div>
-
-                                {%- if data.piece.tagsIds[0] -%}
-                                <div class="article-listing__tags-listing">
-                                    {% for tag in article._tags %}
-                                    <a href="{{ tag._url }}" class="btn btn-light btn-sm mb-2" alt="{{ tag.title }}" >{{ tag.title }}</a>
-                                    {% endfor %}
-                                </div>
-                                {%- endif -%}
                             </div>
                         </div>
                     </div>
-                </div>
                 </a>
             </article>
             {% endfor %}
@@ -131,9 +153,11 @@
         {%- if data.totalPages > 1 -%}
         <nav aria-label="Article page navigation" class="index-pager">
             <ul class="index-pager__pagination pagination">
-                <li class="pagination__page-item page-item {% if data.currentPage == 1 %}disabled{%- endif -%}">
+                <li
+                    class="pagination__page-item page-item {% if data.currentPage == 1 %}disabled{%- endif -%}"
+                >
                     <a
-                        class="page-link pagination__page-link pagination__page-link--previous"
+                        class="pagination__page-link pagination__page-link--previous page-link"
                         href="{% if data.currentPage > 1 %}/articles?page={%- set i = (data.currentPage -1) -%}{{ i }}{%- endif -%}"
                         aria-label="Previous"
                     >
@@ -142,18 +166,20 @@
                 </li>
                 {%- for i in range(1,(data.totalPages+1)) -%}
                 <li
-                    class="page-item pagination__page-item {% if i==data.currentPage %}active{%- endif -%}"
+                    class="pagination__page-item page-item {% if i==data.currentPage %}active{%- endif -%}"
                 >
-                    <a class="page-link" href="/articles?page={{ i }}"
+                    <a
+                        class="pagination__page-link pagination__page-link--page-number page-link {% if i==data.currentPage %}pagination__page-link--current-page{%- endif -%}"
+                        href="/articles?page={{ i }}"
                         >{{ i }}</a
                     >
                 </li>
                 {%- endfor -%}
                 <li
-                    class="page-item pagination__page-item {% if data.currentPage == data.totalPages -%}disabled{%- endif -%}"
+                    class="pagination__page-item page-item {% if data.currentPage == data.totalPages -%}disabled{%- endif -%}"
                 >
                     <a
-                        class="page-link pagination__page-link pagination__page-link--next"
+                        class="pagination__page-link pagination__page-link--next page-link"
                         href="{% if data.currentPage < data.totalPages -%}/articles?page={%- set i = (data.currentPage + 1) -%}{{ i }}{%- endif -%}"
                         aria-label="Next"
                     >

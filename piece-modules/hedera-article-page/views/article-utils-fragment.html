@@ -1,32 +1,29 @@
-{% fragment listArticles(articles, defaultArticleFeatureImage) %} {% for article
-in articles %}
+{% fragment listArticles(articles, defaultArticleFeatureImage) %}
+
+{% for article in articles %}
 <article class="article-listing">
     <a href="{{ article._url }}" alt="{{ article.title }}">
         <div class="article-listing__card card mb-3">
             <div class="article-listing__card-row row g-0 align-items-center">
                 <div class="article-listing__image-column col-12 col-md-6">
-                    {%- if article.featuredImageIds[0] -%} {%- set imageObject =
-                    apos.attachment.first(article._featuredImage) -%}
+                    {%- if article.featuredImageIds[0] -%}
+                        {%- set imageObject = apos.attachment.first(article._featuredImage) -%}
                     <img
                         srcset="{{ apos.image.srcset(imageObject) }}"
                         src="{{ apos.attachment.url(imageObject) }}"
                         class="article-listing__image img-fluid w-100"
                         alt="{{ imageObject._alt }}"
                     />
-                    {%- elseif article.mastheadImageIds[0] -%} {%- set
-                    imageObject = apos.attachment.first(article._mastheadImage)
-                    -%}
+                    {%- elseif article.mastheadImageIds[0] -%}
+                        {%- set imageObject = apos.attachment.first(article._mastheadImage) -%}
                     <img
                         srcset="{{ apos.image.srcset(imageObject) }}"
                         src="{{ apos.attachment.url(imageObject) }}"
                         class="article-listing__image img-fluid w-100"
                         alt="{{ imageObject._alt }}"
                     />
-                    {%- elseif
-                    apos.attachment.first(data.global._defaultArticleFeatureImage)
-                    -%} {%- set imageObject =
-                    apos.attachment.first(data.global._defaultArticleFeatureImage)
-                    -%}
+                    {%- elseif apos.attachment.first(data.global._defaultArticleFeatureImage) -%}
+                        {%- set imageObject = apos.attachment.first(data.global._defaultArticleFeatureImage) -%}
                     <img
                         srcset="{{ apos.image.srcset(imageObject) }}"
                         src="{{ apos.attachment.url(imageObject) }}"
@@ -36,28 +33,35 @@ in articles %}
                     />
                     {%- endif -%}
                 </div>
-                <div
-                    class="article-listing__body-column col-12 col-md-6 px-md-3"
-                >
+                <div class="article-listing__body-column col-12 col-md-6 px-md-3">
                     <div class="card-body">
-                        <div class="article-listing__published-date">
+                        <div
+                            class="article-listing__published-date"
+                        >
                             {{ article.publishedAt | date("D MMMM YYYY") }}
                         </div>
 
                         {%- if article.topicsIds[0] -%}
-                        <div class="article-listing__topics">
-                            {%- set comma = joiner() -%} {%- for topic in
-                            article._topics -%} {{ comma() }} {{ topic.title }}
+                        <div
+                            class="article-listing__topics"
+                        >
+                            {%- set comma = joiner() -%}
+                            {%- for topic in article._topics -%}
+                                {{ comma() }} {{ topic.title }}
                             {%- endfor -%}
                         </div>
                         {%- endif -%}
 
-                        <h2 class="card-title article-listing__title">
+                        <h2
+                            class="card-title article-listing__title"
+                        >
                             {{ article.title }}
                         </h2>
 
                         {%- if article.subTitle -%}
-                        <h3 class="article-listing__subtitle purple-text">
+                        <h3
+                            class="article-listing__subtitle purple-text"
+                        >
                             {{ article.subTitle }}
                         </h3>
                         {%- endif -%}
@@ -65,11 +69,11 @@ in articles %}
                         <div
                             class="article-listing__author-and-topic-container d-flex flex-row justify-content-start align-items-center gap-2"
                         >
-                            {%- if article.authorIds[0] -%} {%- set comma =
-                            joiner() -%} {%- for author in article._author -%}
-                            {%- set imageObjectProfile =
-                            apos.attachment.first(author.profileImage) -%} {%-
-                            if imageObjectProfile -%}
+                            {%- if article.authorIds[0] -%}
+                                {%- set comma = joiner() -%}
+                                {%- for author in article._author -%}
+                                {%- set imageObjectProfile = apos.attachment.first(author.profileImage) -%}
+                                    {%- if imageObjectProfile -%}
                             <div
                                 class="article-listing__author-profile-image-window"
                             >
@@ -80,14 +84,15 @@ in articles %}
                                     alt="{{ imageObjectProfile._alt }}"
                                 />
                             </div>
-                            {%- endif -%}
+                                    {%- endif -%}
 
                             <span
                                 class="article-listing__author-name d-inline-block"
                             >
                                 {{ author.title }}
                             </span>
-                            {%- endfor -%} {%- endif -%}
+                                {%- endfor -%}
+                            {%- endif -%}
                         </div>
 
                         {%- if data.piece.tagsIds[0] -%}
@@ -108,4 +113,6 @@ in articles %}
         </div>
     </a>
 </article>
-{% endfor %} {% endfragment %}
+{% endfor %}
+
+{% endfragment %}

@@ -60,7 +60,7 @@ export default {
         type: "relationshipReverse",
         withType: "hedera-article",
         reverseOf: "_tags",
-        withRelationships: ["_featuredImage"],
+        withRelationships: ["_featuredImage", "_mastheadImage"],
       },
     },
     group: {

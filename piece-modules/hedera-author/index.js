@@ -70,7 +70,7 @@ export default {
         type: "relationshipReverse",
         withType: "hedera-article",
         reverseOf: "_author",
-        withRelationships: ["_featuredImage"],
+        withRelationships: ["_featuredImage", "_mastheadImage"],
       },
     },
     group: {

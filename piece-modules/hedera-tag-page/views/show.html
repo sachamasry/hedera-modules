@@ -1,7 +1,9 @@
 {# modules/hedera-tag-page/views/show.html #}
-{% extends "layout.html" %}
+{%- extends "layout.html" -%}
 
 {%- import 'hedera-default-page:page-layout-fragment.html' as pageLayout -%}
+{%- import 'hedera-article-page:article-utils-fragment.html' as articleUtils with context -%}
+{%- import 'hedera-article-page:pager-fragment.html' as articlePager with context -%}
 
 <!-- Use tag masthead, if defined, otherwise fall back to default
      global masthead -->
@@ -25,63 +27,16 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="tag-display__row row">
                 <div class="tag-display__articles col-12 col-md-8 offset-md-2">
-                    <div class="tag-display__article-listing violet-border pt-4">
+                    <div class="tag-display__article-listing pt-4">
                         {%- if data.piece._articles and data.piece._articles.length -%}
                         <h2 class="tag-display__article-listing-title">Articles tagged <em>{{ data.piece.title }}</em></h2>
                         {%- else -%}
                         <p class="tag-display__article-listing-title">No articles</p>
                         {%- endif -%}
 
-                        {%- for article in data.piece._articles -%}
-                        <article class="article-listing mt-4">
-                            <div class="article-listing__card card mb-3 purple-border pt-4">
-                                <div class="row g-0 align-items-center">
-                                    <div class="col-12 col-lg-4">
-                                        <a href="{{ article._url }}" alt="{{ article.title }}">
-                                            {% set imageObjectArticle = apos.attachment.first(article._featuredImage) %}
-                                            {%- if imageObjectArticle -%}
-                                            <img srcset="{{ apos.image.srcset(imageObjectArticle) }}"
-                                                 src="{{ apos.attachment.url(imageObjectArticle) }}"
-                                                 class="img-fluid rounded-start w-100"
-                                                 alt="{{ apos.imageObjectArticle._alt }}" />
-                                            {%- elseif apos.attachment.first(data.global._defaultArticleFeatureImage) -%}
-                                            {%- set imageObjectArticle = apos.attachment.first(data.global._defaultArticleFeatureImage) -%}
-                                            <img srcset="{{ apos.image.srcset(imageObjectArticle) }}"
-                                                 src="{{ apos.attachment.url(imageObjectArticle) }}"
-                                                 class="img-fluid rounded-start w-100"
-                                                 alt="{{ imageObjectArticle._alt }}" />
-                                            {%- else -%}
-                                            {%- endif -%}
-                                        </a>
-                                    </div>
-                                    <div class="col-12 col-lg-8 px-lg-4">
-                                        <div class="article-listing__published-date violet-text">{{ article.publishedOn | date("MMMM D, YYYY") }}</div>
-                                        <a href="{{ article._url }}" alt="{{ article.title }}">
-                                            <h2 class="card-title article-listing__title">{{ article.title }}</h2>
-                                        </a>
-
-                                        {%- if article.subTitle -%}
-                                        <h3 class="article-listing__subtitle purple-text">{{ article.subTitle }}</h3>
-                                        {%- endif -%}
-
-                                        <p class="card-text">
-                                            {% if article.openGraphDescription %}
-                                            {{ article.openGraphDescription }}
-                                            {% else %}
-                                            {{ article.body.items[0].content | safe | truncate }}
-                                            {% endif %}</p>
-                                        <p class="card-text article-listing__read-more-link"><small class="text-muted">
-                                            <a href="{{ article._url }}"
-                                               alt="{{ article.title }}"
-                                               class="button btn-outline-primary">Read more <i class="ti-angle-right ml-3"></i></a></small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        {%- endfor -%}
+                        {%- render articleUtils.listArticles(data.piece._articles) -%}
                     </div>
                 </div>
             </div>

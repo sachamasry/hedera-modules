@@ -1,11 +1,11 @@
 {# modules/topic-page/views/index.html #}
 
-{% extends "layout.html" %}
-{% import '@apostrophecms/pager:macros.html' as pager with context %}
+{%- extends "layout.html" -%}
+{%- import 'hedera-default-page:page-layout-fragment.html' as pageLayout -%}
+{%- import 'hedera-article-page:article-utils-fragment.html' as articleUtils with context -%}
+{%- import 'hedera-article-page:pager-fragment.html' as articlePager with context -%}
 
-{%- import 'default-page:page-layout-fragment.html' as pageLayout -%}
-
-<!-- Use topic masthead, if defined, otherwise fall back to default 
+<!-- Use topic masthead, if defined, otherwise fall back to default
      global masthead -->
 {%- if apos.attachment.first(data.piece._mastheadImage) -%}
   {%- set imageObjectMasthead = apos.attachment.first(data.piece._mastheadImage) -%}

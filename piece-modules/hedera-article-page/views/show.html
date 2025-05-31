@@ -1,5 +1,5 @@
 {# modules/article-page/views/show.html #}
-{% extends "layout.html" %}
+{%- extends "layout.html" -%}
 
 {%- import 'hedera-default-page:page-layout-fragment.html' as pageLayout -%}
 
@@ -21,19 +21,29 @@
     {%- render pageLayout.masthead(imageObjectMasthead, "") -%}
 
     <div class="article-display__page-header container">
-      <div class="row">
-          <div class="col-12 px-5 py-5">
-              <div class="page-banner__content">
-                  <h1 class='page-banner__title {% if pageBannerTitleClass %}{{ pageBannerTitleClass }}{% endif %} font-weight-bold mb-2'>{{ data.piece.title }}</h1>
-              </div>
+        <div class="row">
+            <div class="col-12 px-5 py-5">
+                {% if data.piece.topicsIds[0] %}
+                <div class="article-display__topics d-inline-block">
+                    {%- set comma = joiner() -%}
+                    {%- for topic in data.piece._topics -%}
+                    {{ comma() }} <a href="{{ topic._url }}"
+                                    alt="{{ topic.title }}">{{ topic.title }}</a>
+                    {%- endfor -%}
+                </div>
+                {%- endif -%}
 
-              {%- if data.piece.subTitle -%}
-              <div class="page-banner__subtitle">
-                  <h2 class="article-display__subtitle mt-4">{{ data.piece.subTitle }}</h2>
-              </div>
-              {%- endif -%}
-          </div>
-      </div>
+                <div class="page-banner__content">
+                    <h1 class='page-banner__title {% if pageBannerTitleClass %}{{ pageBannerTitleClass }}{% endif %} font-weight-bold mb-2'>{{ data.piece.title }}</h1>
+                </div>
+
+                {%- if data.piece.subTitle -%}
+                <div class="page-banner__subtitle">
+                    <h2 class="article-display__subtitle mt-4">{{ data.piece.subTitle }}</h2>
+                </div>
+                {%- endif -%}
+            </div>
+        </div>
     </div>
 
     <article class="section section-page-display article-display-page page-body container">
@@ -67,21 +77,6 @@
                                              alt="{{ author.title }}">{{ author.title }}</a>
                         </span>
                         {%- endfor -%}
-                        {%- endif -%}
-
-                        {%- if data.piece.authorIds[0] and data.piece.topicsIds[0] %}
-                        <span class="d-inline-block ml-1 mr-1"> in </span>
-                        {%- elseif data.piece.topicsIds[0] -%}
-                        <span class="d-inline-block mr-2">In </span>
-                        {%- endif -%}
-
-                        {% if data.piece.topicsIds[0] %}
-                        <span class="article-display__topics d-inline-block">
-                            {%- set comma = joiner() -%}
-                            {%- for topic in data.piece._topics -%}
-                            {{ comma() }} <a href="{{ topic._url }}"
-                                             alt="{{ topic.title }}">{{ topic.title }}</a>
-                            {%- endfor -%}</span>
                         {%- endif -%}
                     </div>
                     </div>

@@ -42,5 +42,7 @@
             </div>
         </div>
     </section>
+
+    {%- render articlePager.pager({page: data.currentPage, total: data.totalPages}, data.url) -%}
 </main>
 {% endblock %}

@@ -21,10 +21,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-8 offset-md-2">
-                    <ul class="list-group list-group-flush mb-5">
+                    <ul class="tag-list">
                         {%- for tag in data.pieces -%}
-                        <li class="list-group-item">
-                            <a href="{{ tag._url }}">{{ tag.title | capitalize }}</a>
+                        <li class="tag-list__tag-item list-group-item">
+                            <a class="tag-list__tag-item-link" href="{{ tag._url }}">
+                                <div class="tag-list__tag-name">
+                                    <h2 class="">{{ tag.title | capitalize }}</h2>
+                                </div>
+                                {%- set excerpt = tag.searchSummary | truncate(300, true, '...') -%}
+                                {%- if excerpt -%}
+                                <div class="tag-list__tag-description">
+                                    <p class="">{{ excerpt }}</p>
+                                </div>
+                                {%- endif -%}
+                            </a>
                         </li>
                         {%- endfor -%}
                     </ul>

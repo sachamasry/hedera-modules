@@ -1,0 +1,49 @@
+{% fragment pager(options, url) %}
+
+{%- set currentPage = options.page -%}
+{%- set totalPages = options.total -%}
+{%- set shownPages = options.shown or 5 -%}
+{%- set pagerClass = options.class -%}
+{%- set gapClass = pagerClass + '__gap' if pagerClass else '' -%}
+
+{%- if totalPages > 1 -%}
+<nav aria-label="Article page navigation" class="index-pager">
+    <ul class="index-pager__pagination pagination">
+        <li
+            class="pagination__page-item page-item {% if currentPage == 1 %}disabled{%- endif -%}"
+        >
+            <a
+                class="pagination__page-link pagination__page-link--previous page-link"
+                href="{% if currentPage > 1 %}/articles?page={%- set i = (currentPage -1) -%}{{ i }}{%- endif -%}"
+                aria-label="Previous"
+            >
+                <i class="pagination__page-link-icon pagination__page-link-icon--prev bi bi-chevron-left"></i> <span class="pagination__page-link-text pagination__page-link-text--prev">Previous page</span>
+            </a>
+        </li>
+        {%- for i in range(1,(totalPages + 1)) -%}
+        <li
+            class="pagination__page-item page-item {% if i==currentPage %}active{%- endif -%}"
+        >
+            <a
+                class="pagination__page-link pagination__page-link--page-number page-link {% if i==currentPage %}pagination__page-link--current-page{%- endif -%}"
+                href="/articles?page={{ i }}"
+                >{{ i }}</a
+            >
+        </li>
+        {%- endfor -%}
+        <li
+            class="pagination__page-item page-item {% if currentPage == totalPages -%}disabled{%- endif -%}"
+        >
+            <a
+                class="pagination__page-link pagination__page-link--next page-link"
+                href="{% if currentPage < totalPages -%}/articles?page={%- set i = (currentPage + 1) -%}{{ i }}{%- endif -%}"
+                aria-label="Next"
+            >
+                <span class="pagination__page-link-text pagination__page-link-text--next">Next page</span> <i class="pagination__page-link-icon pagination__page-link-icon--next bi bi-chevron-right"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+{%- endif -%}
+
+{% endfragment %}

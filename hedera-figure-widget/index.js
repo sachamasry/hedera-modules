@@ -22,6 +22,7 @@ export default {
               dimensionAttrs: true,
             },
             "@apostrophecms/video": {},
+            "hedera-quote": {},
             "hedera-html": {},
             "bootstrap-columns": {},
             "bootstrap-container-block": {},

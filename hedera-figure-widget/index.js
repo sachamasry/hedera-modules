@@ -16,21 +16,62 @@ export default {
         label: "Figure content",
         help: "Figures are commonly used to present images or any other content, usually with a legend or caption attached. For example, a figure can present illustrations, diagrams, graphics, charts, reference tables, videos, poems, code snippets, etc.",
         options: {
-          widgets: {
-            "hedera-image": {
-              size: "one-sixth",
-              dimensionAttrs: true,
+          expanded: true,
+          groups: {
+            media: {
+              label: "Media",
+              columns: 2,
+              widgets: {
+                "hedera-image": {
+                  size: "one-sixth",
+                  dimensionAttrs: true,
+                },
+                "@apostrophecms/video": {},
+              },
             },
-            "@apostrophecms/video": {},
-            "hedera-quote": {},
-            "hedera-html": {},
-            "bootstrap-columns": {},
-            "bootstrap-container-block": {},
-            "hedera-horizontal-rule": {},
-            "hedera-verse": {},
-            "bootstrap-card": {},
-            "hedera-teaser-link": {},
-            "hedera-reusable-content-blocks": {},
+            text: {
+              label: "Text",
+              columns: 4,
+              widgets: {
+                "hedera-quote": {},
+                "hedera-verse": {},
+                "@apostrophecms/rich-text": {},
+                "bootstrap-list": {},
+                "hedera-definition-list": {},
+                "bootstrap-list-group": {},
+              },
+            },
+            layout: {
+              label: "Design and layout",
+              columns: 2,
+              widgets: {
+                "bootstrap-columns": {},
+                "bootstrap-container-block": {},
+                "bootstrap-spacer": {},
+                "hedera-horizontal-rule": {},
+                "hedera-button": {},
+                "bootstrap-card": {},
+                "bootstrap-carousel": {},
+              },
+            },
+            special: {
+              label: "Special content",
+              columns: 2,
+              widgets: {
+                "hedera-teaser-link": {},
+                "hedera-testimonial": {},
+                "hedera-newsletter-subscription": {},
+              },
+            },
+            advanced: {
+              label: "Advanced layout options",
+              columns: 2,
+              widgets: {
+                "hedera-reusable-content-blocks": {},
+                "hedera-aside": {},
+                "hedera-html": {},
+              },
+            },
           },
         },
       },

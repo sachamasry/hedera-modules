@@ -85,12 +85,12 @@ export default {
               columns: 4,
               widgets: {
                 "@apostrophecms/rich-text": {},
-                "bootstrap-list": {},
-                "hedera-definition-list": {},
-                "bootstrap-list-group": {},
                 "hedera-quote": {},
                 "hedera-verse": {},
                 "hedera-link": {},
+                "bootstrap-list": {},
+                "hedera-definition-list": {},
+                "bootstrap-list-group": {},
               },
             },
             media: {

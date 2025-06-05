@@ -3,13 +3,13 @@
     <a href="{{ tag._url }}" alt="{{ tag.title }}">
         <div class="tag-listing__card card mb-3">
             <div class="tag-listing__card-row row g-0 align-items-center">
-                <div class="tag-listing__tag-name-column col-12 col-md-6">
+                <div class="tag-listing__tag-name-column col-12 col-xl-6">
                     <h2 class="tag-listing__title card-title">
                         {{ tag.title }}
                     </h2>
                 </div>
 
-                <div class="tag-listing__body-column col-12 col-md-6 px-md-3">
+                <div class="tag-listing__body-column col-12 col-xl-6 px-xl-3">
                     <div class="card-body">
                         {%- set excerpt = tag.searchSummary | truncate(300,
                         true, '...') -%} {%- if excerpt -%}

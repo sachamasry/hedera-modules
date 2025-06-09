@@ -21,8 +21,8 @@
     {%- render pageLayout.masthead(imageObjectMasthead, "") -%}
 
     <div class="article-display__page-header container">
-        <div class="row">
-            <div class="col-12 px-5 py-5">
+        <div class="article-display__row row">
+            <div class="article-display__column col-12">
                 {% if data.piece.topicsIds[0] %}
                 <div class="article-display__topics d-inline-block">
                     {%- set comma = joiner() -%}
@@ -33,13 +33,13 @@
                 </div>
                 {%- endif -%}
 
-                <div class="page-banner__content">
-                    <h1 class='page-banner__title {% if pageBannerTitleClass %}{{ pageBannerTitleClass }}{% endif %} font-weight-bold mb-2'>{{ data.piece.title }}</h1>
+                <div class="page-banner__title">
+                    <h1 class='article-display__title {% if pageBannerTitleClass %}{{ pageBannerTitleClass }}{% endif %}'>{{ data.piece.title }}</h1>
                 </div>
 
                 {%- if data.piece.subTitle -%}
                 <div class="page-banner__subtitle">
-                    <h2 class="article-display__subtitle mt-4">{{ data.piece.subTitle }}</h2>
+                    <h2 class="article-display__subtitle">{{ data.piece.subTitle }}</h2>
                 </div>
                 {%- endif -%}
             </div>
@@ -49,7 +49,7 @@
     <article class="section section-page-display article-display-page page-body container">
         <div class="row">
             <div class="col-12 col-md-8 offset-md-2">
-                <div class="article-display__author-and-date-container d-flex flex-row justify-content-between align-items-center gap-3 my-4">
+                <div class="article-display__author-and-date-container d-flex flex-row justify-content-between align-items-center gap-3">
                     <div class="article-display__published-date">{{ data.piece.publishedAt | date("D MMMM YYYY") }}</div>
 
                     <div class="article-display__author-and-topic-container d-flex flex-row justify-content-between align-items-center gap-2">

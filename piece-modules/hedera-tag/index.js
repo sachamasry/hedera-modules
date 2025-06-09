@@ -1,8 +1,8 @@
 export default {
   extend: "@apostrophecms/piece-type",
   options: {
-    label: "Tag",
-    pluralLabel: "Tags",
+    label: "Article category",
+    pluralLabel: "Article categories",
     alias: "article-tag",
     quickCreate: false,
     searchable: true,

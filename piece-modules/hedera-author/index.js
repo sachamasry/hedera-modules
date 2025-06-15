@@ -15,7 +15,15 @@ export default {
     add: {
       title: {
         type: "string",
-        label: "Name",
+        label: "Profile name",
+      },
+      firstName: {
+        type: "string",
+        label: "Forename",
+      },
+      lastName: {
+        type: "string",
+        label: "Surname",
       },
       jobTitle: {
         type: "string",
@@ -76,7 +84,15 @@ export default {
     group: {
       basics: {
         label: "Basics",
-        fields: ["title", "jobTitle", "profileImage", "_mastheadImage", "body"],
+        fields: [
+          "title",
+          "firstName",
+          "lastName",
+          "jobTitle",
+          "profileImage",
+          "_mastheadImage",
+          "body",
+        ],
       },
     },
   },

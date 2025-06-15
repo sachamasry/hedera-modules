@@ -69,6 +69,8 @@ export default {
         builders: {
           project: {
             title: 1,
+            firstName: 1,
+            lastName: 1,
             profileImage: 1,
             _url: 1,
           },

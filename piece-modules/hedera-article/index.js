@@ -146,6 +146,12 @@ export default {
           },
         },
       },
+      openGraphType: {
+        label: "aposOg:type",
+        type: "string",
+        def: "article",
+        htmlHelp: "aposOg:typeHelp",
+      },
     },
     group: {
       basics: {

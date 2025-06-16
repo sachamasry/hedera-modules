@@ -2,7 +2,7 @@
 
 {%- extends "layout.html" -%}
 {%- import 'hedera-default-page:page-layout-fragment.html' as pageLayout -%}
-{%- import 'hedera-article-page:article-utils-fragment.html' as articleUtils with context -%}
+{%- import 'hedera-topic-page:topic-utils-fragment.html' as topicUtils with context -%}
 {%- import 'hedera-article-page:pager-fragment.html' as articlePager with context -%}
 
 <!-- Use topic masthead, if defined, otherwise fall back to default
@@ -21,42 +21,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-8 offset-md-2">
-                    <ul class="list-group list-group-flush mb-5">
-                        {%- for topic in data.pieces -%}
-                        <li class="list-group-item">
-                            <a href="{{ topic._url }}">{{ topic.title | capitalize }}</a>
-                        </li>
-                        {%- endfor -%}
+                    <ul class="topic-list">
+                        {%- render topicUtils.listTopics(data.pieces) -%}
                     </ul>
                 </div>
             </div>
         </div>
-
-        {%- if data.totalPages > 1 -%}
-        <nav aria-label="Topic page navigation"
-             class="index-pager">
-            <ul class="pagination index-pager__pagination">
-                <li class="page-item pagination__page-item {% if data.currentPage == 1 %}disabled{%- endif -%}">
-                    <a class="page-link pagination__page-link pagination__page-link--previous"
-                       href="{% if data.currentPage > 1 %}/topics?page={%- set i = (data.currentPage -1) -%}{{ i }}{%- endif -%}"
-                       aria-label="Previous">
-                        <i class="ti-angle-left ml-1 mr-3"></i> Previous page
-                    </a>
-                </li>
-                {%- for i in range(1,(data.totalPages+1)) -%}
-                <li class="page-item pagination__page-item {% if i==data.currentPage %}active{%- endif -%}"><a class="page-link" href="/topics?page={{ i }}">{{ i }}</a></li>
-                {%- endfor -%}
-                <li class="page-item pagination__page-item {% if data.currentPage == data.totalPages -%}disabled{%- endif -%}">
-                    <a class="page-link pagination__page-link pagination__page-link--next"
-                       href="{% if data.currentPage < data.totalPages -%}/topics?page={%- set i = (data.currentPage + 1) -%}{{ i }}{%- endif -%}"
-                       aria-label="Next">
-                        Next page <i class="ti-angle-right ml-3 mr-1"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        {%- endif -%}
-
     </section>
+
+    {%- render articlePager.pager({page: data.currentPage, total: data.totalPages}, data.url) -%}
 </main>
 {% endblock %}

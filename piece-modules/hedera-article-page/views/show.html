@@ -13,7 +13,7 @@
 {%- endif -%}
 
 {%- block standardHead -%}
-  <meta property="og:type" content="article" />
+  <meta property="og:type" content="{{ data.piece.openGraphType }}" />
   {% if data.piece.authorIds[0] -%}
     {%- for author in data.piece._author -%}
   <meta name="author" content="{{ author.title }}" />

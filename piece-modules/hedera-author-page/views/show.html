@@ -13,6 +13,15 @@
   {%- set imageObjectMasthead = apos.attachment.first(data.global._defaultAuthorMastheadImage) -%}
 {%- endif -%}
 
+{%- block standardHead -%}
+    <meta name="author" content="{{ data.piece.title }}" />
+    <meta name="profile:first_name" content="{{ data.piece.firstName }}" />
+    <meta name="profile:last_name" content="{{ data.piece.lastName }}" />
+    <meta name="article:author" content="{{ data.piece._url }}" />
+    <meta property="og:url" content="{{ data.piece._url }}" />
+    <meta property="og:type" content="{{ data.piece.openGraphType }}" />
+{%- endblock -%}
+
 {% block main %}
 <main class="main-page-content">
     {%- render pageLayout.masthead(imageObjectMasthead, data.piece.title) -%}

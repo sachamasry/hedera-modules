@@ -80,6 +80,12 @@ export default {
         reverseOf: "_author",
         withRelationships: ["_featuredImage", "_mastheadImage"],
       },
+      openGraphType: {
+        label: "aposOg:type",
+        type: "string",
+        def: "profile",
+        htmlHelp: "aposOg:typeHelp",
+      },
     },
     group: {
       basics: {

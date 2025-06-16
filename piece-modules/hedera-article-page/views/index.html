@@ -19,6 +19,48 @@
 <main class="main-page-content">
     {%- render pageLayout.masthead(imageObjectMasthead, data.page.title) -%}
 
+    <section class="article-filter-section section container">
+        <div class="article-filter__row row">
+            <div class="article-filter__col article-filter__col--by-tag col-12 col-md-4 offset-md-2">
+                {%- if data.piecesFilters.tags -%}
+                <form method="get" action="{{ data.page._url }}">
+                    <select
+                        name="tags"
+                        class="form-select"
+                        aria-label="Filter articles by category"
+                        onchange="this.form.submit();">
+                        <option value="">All categories</option>
+                        {%- for choice in data.piecesFilters.tags -%}
+                        <option value="{{ choice.value }}" {% if choice.value == data.query.tags %}selected{% endif %}>
+                            {{ choice.label }}
+                        </option>
+                        {%- endfor -%}
+                    </select>
+                </form>
+                {%- endif -%}
+            </div>
+
+            <div class="article-filter__col article-filter__col--by-tag col-12 col-md-4">
+                {%- if data.piecesFilters.topics -%}
+                <form method="get" action="{{ data.page._url }}">
+                    <select
+                        name="topics"
+                        class="form-select"
+                        aria-label="Filter articles by topic"
+                        onchange="this.form.submit();">
+                        <option value="">All topics</option>
+                        {%- for choice in data.piecesFilters.topics -%}
+                        <option value="{{ choice.value }}" {% if choice.value == data.query.topics %}selected{% endif %}>
+                            {{ choice.label }}
+                        </option>
+                        {%- endfor -%}
+                    </select>
+                </form>
+                {%- endif -%}
+            </div>
+        </div>
+    </section>
+
     <section
         class="section section-page-listing article-listing-page container"
     >

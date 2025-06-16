@@ -6,11 +6,12 @@ export default {
     pieceModuleName: "hedera-article",
     previous: true,
     next: true,
+    piecesFilters: [{ name: "author" }, { name: "tags" }, { name: "topics" }],
   },
   fields: {
     add: {
       _pageMastheadImage: {
-        label: "Page background image",
+        label: "Page masthead image",
         help: "If this page has a section, then it will take that background image by default; override it by specifying a different image here",
         type: "relationship",
         withType: "@apostrophecms/image",

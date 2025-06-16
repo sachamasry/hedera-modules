@@ -23,38 +23,54 @@
         <div class="article-filter__row row">
             <div class="article-filter__col article-filter__col--by-tag col-12 col-md-4 offset-md-2">
                 {%- if data.piecesFilters.tags -%}
-                <form method="get" action="{{ data.page._url }}">
-                    <select
-                        name="tags"
-                        class="form-select"
-                        aria-label="Filter articles by category"
-                        onchange="this.form.submit();">
-                        <option value="">All categories</option>
-                        {%- for choice in data.piecesFilters.tags -%}
-                        <option value="{{ choice.value }}" {% if choice.value == data.query.tags %}selected{% endif %}>
-                            {{ choice.label }}
-                        </option>
-                        {%- endfor -%}
-                    </select>
+                <form
+                    class="article-filter__form"
+                    method="get" action="{{ data.page._url }}">
+                    <div class="form-floating">
+                        <select
+                            name="tags"
+                            id="floatingTagSelect"
+                            class="article-filter__select article-filter__select--tag form-select"
+                            aria-label="Filter articles by category"
+                            onchange="this.form.submit();">
+                            <option value="">All categories</option>
+                            {%- for choice in data.piecesFilters.tags -%}
+                            <option value="{{ choice.value }}" {% if choice.value == data.query.tags %}selected{% endif %}>
+                                {{ choice.label }}
+                            </option>
+                            {%- endfor -%}
+                        </select>
+                        <label
+                            class="article-filter__label article-filter__label--tag"
+                            for="floatingTagSelect">Filter articles by tag</label>
+                    </div>
                 </form>
                 {%- endif -%}
             </div>
 
             <div class="article-filter__col article-filter__col--by-tag col-12 col-md-4">
                 {%- if data.piecesFilters.topics -%}
-                <form method="get" action="{{ data.page._url }}">
-                    <select
-                        name="topics"
-                        class="form-select"
-                        aria-label="Filter articles by topic"
-                        onchange="this.form.submit();">
-                        <option value="">All topics</option>
-                        {%- for choice in data.piecesFilters.topics -%}
-                        <option value="{{ choice.value }}" {% if choice.value == data.query.topics %}selected{% endif %}>
-                            {{ choice.label }}
-                        </option>
-                        {%- endfor -%}
-                    </select>
+                <form
+                    class="article-filter__form"
+                    method="get" action="{{ data.page._url }}">
+                    <div class="form-floating">
+                        <select
+                            name="topics"
+                            id="floatingTopicSelect"
+                            class="article-filter__select article-filter__select--topic form-select"
+                            aria-label="Filter articles by topic"
+                            onchange="this.form.submit();">
+                            <option value="">All topics</option>
+                            {%- for choice in data.piecesFilters.topics -%}
+                            <option value="{{ choice.value }}" {% if choice.value == data.query.topics %}selected{% endif %}>
+                                {{ choice.label }}
+                            </option>
+                            {%- endfor -%}
+                        </select>
+                        <label
+                            class="article-filter__label article-filter__label--topic"
+                            for="floatingTopicSelect">Filter articles by topic</label>
+                    </div>
                 </form>
                 {%- endif -%}
             </div>

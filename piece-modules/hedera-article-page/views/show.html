@@ -54,8 +54,10 @@
                 <div class="article-display__topics d-inline-block">
                     {%- set comma = joiner() -%}
                     {%- for topic in data.piece._topics -%}
-                    {{ comma() }} <a href="{{ topic._url }}"
-                                    alt="{{ topic.title }}">{{ topic.title }}</a>
+                    {{ comma() }} <a
+                        class="article-display__topic-link"
+                        href="{{ topic._url }}"
+                        alt="{{ topic.title }}">{{ topic.title }}</a>
                     {%- endfor -%}
                 </div>
                 {%- endif -%}

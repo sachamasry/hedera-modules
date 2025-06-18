@@ -2,20 +2,20 @@
 
 {%- for topic in topics -%}
 <article class="topic-listing">
-    <a href="{{ topic._url }}" alt="{{ topic.title }}">
-        <div class="topic-listing__card card mb-3">
-            <div class="topic-listing__card-row row g-0 align-items-center">
-                <div class="topic-listing__topic-name-column col-12 col-xl-6">
+    <a href="{{ topic._url }}"  class="topic-listing__link" alt="{{ topic.title }}">
+        <div class="topic-listing__card card">
+            <div class="topic-listing__card-row row">
+                <div class="topic-listing__topic-name-col col-12 col-xl-6">
                     <h2 class="topic-listing__title card-title">
                         {{ topic.title }}
                     </h2>
                 </div>
 
-                <div class="topic-listing__body-column col-12 col-xl-6 px-xl-3">
-                    <div class="card-body">
+                <div class="topic-listing__body-col col-12 col-xl-6 px-xl-3">
+                    <div class="topic-listing__card-body card-body">
                         {%- set excerpt = topic.searchSummary | truncate(300, true, '...') -%}
                         {%- if excerpt -%}
-                        <p class="topic-listing__topic-description">
+                        <p class="topic-listing__description">
                             {{ excerpt }}
                         </p>
                         {%- endif -%}

@@ -5,8 +5,7 @@
 {%- import 'hedera-article-page:article-utils-fragment.html' as articleUtils with context -%}
 {%- import 'hedera-article-page:pager-fragment.html' as articlePager with context -%}
 
-<!-- Use topic masthead, if defined, otherwise fall back to default
-     global masthead -->
+<!-- Use topic masthead, if defined, otherwise fall back to default global masthead -->
 {%- if apos.attachment.first(data.piece._mastheadImage) -%}
   {%- set imageObjectMasthead = apos.attachment.first(data.piece._mastheadImage) -%}
 {%- elseif apos.attachment.first(data.global._defaultTopicMastheadImage) -%}
@@ -17,23 +16,23 @@
 <main class="main-page-content">
     {%- render pageLayout.masthead(imageObjectMasthead, data.piece.title) -%}
 
-    <section class="section section-page-body">
-        <div class="container">
-            <div class="topic-display__description row">
-                <div class="col-12 col-lg-8 offset-lg-2">
+    <section class="topic-display-section section">
+        <div class="topic-display-section__container container">
+            <div class="topic-display__description-row row">
+                <div class="topic-display__description-col col-12 col-lg-8 offset-lg-2">
                     {%- if data.piece.body -%}
                         {% area data.piece, 'body' %}
                     {%- endif -%}
                 </div>
             </div>
 
-            <div class="topic-display__row row">
-                <div class="topic-display__articles col-12 col-md-8 offset-md-2">
-                    <div class="topic-display__article-listing pt-4">
+            <div class="topic-display__articles-row row">
+                <div class="topic-display__articles-col col-12 col-md-8 offset-md-2">
+                    <div class="topic-display__article-listings">
                         {%- if data.piece._articles and data.piece._articles.length -%}
-                        <h2 class="topic-display__article-listing-title">Articles with topic <em>{{ data.piece.title }}</em></h2>
+                        <h2 class="topic-display__article-title">Articles with topic <em>{{ data.piece.title }}</em></h2>
                         {%- else -%}
-                        <p class="topic-display__article-listing-title">No articles</p>
+                        <p class="topic-display__article-title">No articles</p>
                         {%- endif -%}
 
                         {%- render articleUtils.listArticles(data.piece._articles) -%}

@@ -5,8 +5,7 @@
 {%- import 'hedera-topic-page:topic-utils-fragment.html' as topicUtils with context -%}
 {%- import 'hedera-article-page:pager-fragment.html' as articlePager with context -%}
 
-<!-- Use topic masthead, if defined, otherwise fall back to default
-     global masthead -->
+<!-- Use topic masthead, if defined, otherwise fall back to default global masthead -->
 {%- if apos.attachment.first(data.piece._mastheadImage) -%}
   {%- set imageObjectMasthead = apos.attachment.first(data.piece._mastheadImage) -%}
 {%- elseif apos.attachment.first(data.global._defaultTopicMastheadImage) -%}
@@ -17,10 +16,12 @@
 <main class="main-page-content">
     {%- render pageLayout.masthead(imageObjectMasthead, data.page.title) -%}
 
-    <section class="section section-page-body">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-8 offset-md-2">
+    <section
+        class="topic-listings-section section"
+        aria-label="Article topic listings">
+        <div class="topic-listings-section__container container">
+            <div class="topic-listings-section__row row">
+                <div class="topic-listings-section__col col-12 col-md-8 offset-md-2">
                     <ul class="topic-list">
                         {%- render topicUtils.listTopics(data.pieces) -%}
                     </ul>

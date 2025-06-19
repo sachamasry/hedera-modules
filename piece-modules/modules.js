@@ -12,5 +12,4 @@ export default {
   "hedera-tag": {},
   "hedera-tag-page": {},
   "hedera-topic": {},
-  "hedera-topic-page": {},
 };

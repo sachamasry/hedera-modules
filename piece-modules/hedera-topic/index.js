@@ -1,5 +1,9 @@
 export default {
   extend: "@apostrophecms/piece-type",
+  bundle: {
+    directory: "modules",
+    modules: ["hedera-topic-page"],
+  },
   options: {
     label: "Article topic",
     pluralLabel: "Article topics",
@@ -8,6 +12,7 @@ export default {
     sort: {
       slug: 1,
     },
+    perPage: 25,
     export: true,
     import: true,
   },

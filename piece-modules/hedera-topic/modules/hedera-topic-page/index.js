@@ -3,6 +3,7 @@ export default {
   options: {
     label: "Topic Page",
     pluralLabel: "Topic Pages",
+    pieceModuleName: "hedera-topic",
     perPage: 25,
   },
   fields: {

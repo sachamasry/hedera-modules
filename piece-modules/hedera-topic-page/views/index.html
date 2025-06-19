@@ -12,17 +12,15 @@
   {%- set imageObjectMasthead = apos.attachment.first(data.global._defaultTopicMastheadImage) -%}
 {%- endif -%}
 
-{% block main %}
+{%- block main -%}
 <main class="main-page-content">
     {%- render pageLayout.masthead(imageObjectMasthead, data.page.title) -%}
 
-    <section
-        class="topic-listings-section section"
-        aria-label="Article topic listings">
-        <div class="topic-listings-section__container container">
-            <div class="topic-listings-section__row row">
-                <div class="topic-listings-section__col col-12 col-md-8 offset-md-2">
-                    <ul class="topic-list">
+    <section class="topic-listings" aria-label="Article topic listings">
+        <div class="topic-listings__container">
+            <div class="topic-listings__row">
+                <div class="topic-listings__column">
+                    <ul class="topic-listings__topics">
                         {%- render topicUtils.listTopics(data.pieces) -%}
                     </ul>
                 </div>
@@ -32,4 +30,4 @@
 
     {%- render articlePager.pager({page: data.currentPage, total: data.totalPages}, data.url) -%}
 </main>
-{% endblock %}
+{%- endblock -%}

@@ -1,21 +1,21 @@
 {%- fragment listTopics(topics, defaultTopicFeatureImage) -%}
 
 {%- for topic in topics -%}
-<article class="topic-listing">
-    <a href="{{ topic._url }}"  class="topic-listing__link" alt="{{ topic.title }}">
-        <div class="topic-listing__card card">
-            <div class="topic-listing__card-row row">
-                <div class="topic-listing__topic-name-col col-12 col-xl-6">
-                    <h2 class="topic-listing__title card-title">
+<article class="topic-item">
+    <a href="{{ topic._url }}" class="topic-item__link" alt="{{ topic.title }}">
+        <div class="topic-item__card">
+            <div class="topic-item__card-row">
+                <div class="topic-item__heading-column">
+                    <h2 class="topic-item__title">
                         {{ topic.title }}
                     </h2>
                 </div>
 
-                <div class="topic-listing__body-col col-12 col-xl-6 px-xl-3">
-                    <div class="topic-listing__card-body card-body">
+                <div class="topic-item__body-column">
+                    <div class="topic-item__card-body">
                         {%- set excerpt = topic.searchSummary | truncate(300, true, '...') -%}
                         {%- if excerpt -%}
-                        <p class="topic-listing__description">
+                        <p class="topic-item__description">
                             {{ excerpt }}
                         </p>
                         {%- endif -%}

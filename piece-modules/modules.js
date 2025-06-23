@@ -10,6 +10,5 @@ export default {
   "hedera-reusable-content": {},
   "hedera-reusable-content-page": {},
   "hedera-tag": {},
-  "hedera-tag-page": {},
   "hedera-topic": {},
 };

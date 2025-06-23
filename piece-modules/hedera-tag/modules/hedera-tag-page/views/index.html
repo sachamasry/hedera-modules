@@ -17,11 +17,11 @@
 <main class="main-page-content">
     {%- render pageLayout.masthead(imageObjectMasthead, data.page.title) -%}
 
-    <section class="section section-page-body">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-8 offset-md-2">
-                    <ul class="tag-list">
+    <section class="tag-listings" aria-label="Article category listings">
+        <div class="tag-listings__container">
+            <div class="tag-listings__row">
+                <div class="tag-listings__column">
+                    <ul class="tag-listings__tags">
                         {%- render tagUtils.listTags(data.pieces) -%}
                     </ul>
                 </div>

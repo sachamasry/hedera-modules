@@ -1,0 +1,29 @@
+{%- fragment listTags(tags, defaultTagFeatureImage) -%}
+
+{%- for tag in tags -%}
+<article class="tag-item">
+    <a href="{{ tag._url }}" class="tag-item__link" alt="{{ tag.title }}">
+        <div class="tag-item__card">
+            <div class="tag-item__card-row">
+                <div class="tag-item__heading-column">
+                    <h2 class="tag-item__heading">
+                        {{ tag.title }}
+                    </h2>
+                </div>
+
+                <div class="tag-item__body-column">
+                    <div class="tag-item__card-body">
+                        {%- set excerpt = tag.searchSummary | truncate(300,
+                        true, '...') -%} {%- if excerpt -%}
+                        <p class="tag-item__description">
+                            {{ excerpt }}
+                        </p>
+                        {%- endif -%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</article>
+{%- endfor -%}
+{% endfragment %}

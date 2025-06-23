@@ -13,27 +13,26 @@
   {%- set imageObjectMasthead = apos.attachment.first(data.global._defaultTagMastheadImage) -%}
 {%- endif -%}
 
-{% block main %}
+{%- block main -%}
 <main class="main-page-content">
     {%- render pageLayout.masthead(imageObjectMasthead, data.piece.title) -%}
 
-    <section class="section section-page-body">
-        <div class="container">
-            <div class="tag-display__description row">
-                <div class="col-12 col-md-8 offset-md-2">
+    <section class="tag-display" aria-label="Article category listings">
+        <div class="tag-display__container">
+            <div class="tag-display__description-row">
+                <div class="tag-display__description-column">
                     {%- if data.piece.body -%}
                         {% area data.piece, 'body' %}
                     {%- endif -%}
                 </div>
             </div>
 
-            <div class="tag-display__row row">
-                <div class="tag-display__articles col-12 col-md-8 offset-md-2">
-                    <div class="tag-display__article-listing pt-4">
+            <div class="tag-display__articles-row">
+                <div class="tag-display__articles-column">
+                    <div class="tag-display__article-listings">
                         {%- if data.piece._articles and data.piece._articles.length -%}
-                        <h2 class="tag-display__article-listing-title">Articles tagged <em>{{ data.piece.title }}</em></h2>
                         {%- else -%}
-                        <p class="tag-display__article-listing-title">No articles</p>
+                        <p class="tag-display__article-listings-heading">No articles</p>
                         {%- endif -%}
 
                         {%- render articleUtils.listArticles(data.piece._articles) -%}
@@ -45,4 +44,4 @@
 
     {%- render articlePager.pager({page: data.currentPage, total: data.totalPages}, data.url) -%}
 </main>
-{% endblock %}
+{%- endblock -%}

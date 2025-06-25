@@ -12,6 +12,7 @@
                 </div>
 
                 <div class="tag-item__body-column">
+                    {%- if tag.searchSummary -%}
                     <div class="tag-item__card-body">
                         {%- set excerpt = tag.searchSummary | truncate(300,
                         true, '...') -%} {%- if excerpt -%}
@@ -20,6 +21,7 @@
                         </p>
                         {%- endif -%}
                     </div>
+                    {%- endif -%}
                 </div>
             </div>
         </div>

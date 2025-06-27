@@ -4,7 +4,6 @@ export default {
   "hedera-article": {},
   "hedera-article-page": {},
   "hedera-author": {},
-  "hedera-author-page": {},
   "hedera-notifications": {},
   "hedera-notifications-page": {},
   "hedera-reusable-content": {},

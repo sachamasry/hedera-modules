@@ -1,4 +1,4 @@
-{% fragment masthead(imageObjectMasthead, mastheadHeading, suppressPageHeading, skipStyleMastheadBackground, contrastingHeading) %}
+{%- fragment masthead(imageObjectMasthead, mastheadHeading, suppressPageHeading, skipStyleMastheadBackground, contrastingHeading) -%}
 
 {%- if data.global.defaultPlaceholderColour -%}
     {%- set imagePlaceholderColour = data.global.defaultPlaceholderColour -%}
@@ -7,27 +7,26 @@
 {%- import 'hedera-image-widget:image-layout-fragment.html' as imageLayoutFragment -%}
 
 <section class="page-banner"
-    {% if skipStyleMastheadBackground and imagePlaceholderColour %}{% else %}style="background-color:{{ imagePlaceholderColour }};"{% endif %}>
+    {% if skipStyleMastheadBackground and imagePlaceholderColour %}{% else %}style="background-color:{{ imagePlaceholderColour }};"{%- endif -%}>
+    {%- if imageObjectMasthead -%}
+        {%- set pageBannerHeadingClass = 'page-banner__heading' -%}
+    <div class="page-banner__masthead-wrapper">
+        {%- render imageLayoutFragment.image(imageObjectMasthead, 'sizes', 'page-banner__masthead-image img-fluid ', '', 'auto', 'auto') -%}
+    </div>
+    {%- elseif contrastingHeading -%}
+        {%- set pageBannerHeadingClass = 'page-banner__heading' -%}
+    {%- endif -%}
 
-  {%- if imageObjectMasthead -%}
-    {%- set pageBannerHeadingClass = 'page-banner__heading' -%}
-  <div class="page-banner__masthead-container">
-      {%- render imageLayoutFragment.image(imageObjectMasthead, 'sizes', 'page-banner__masthead-image img-fluid ', '', 'auto', 'auto') -%}
-  </div>
-  {%- elseif contrastingHeading -%}
-    {%- set pageBannerHeadingClass = 'page-banner__heading' -%}
-  {%- endif -%}
-
-  {%- if not(suppressPageHeading) -%}
-  <div class="page-banner__heading-container {% if not(imageObjectMasthead) %}page-banner__heading-container--no-masthead{% endif %} container">
-      <div class="page-banner__heading-row row justify-content-center">
-          <div class="page-banner__heading-column">
-              <div class="page-banner__heading-backdrop">
-                  <h1 class='page-banner__heading {% if pageBannerHeadingClass %}{{ pageBannerHeadingClass }}{% endif %} mb-2'>{{ mastheadHeading }}</h1>
-              </div>
-          </div>
-      </div>
-  </div>
-  {%- endif -%}
+    {%- if not(suppressPageHeading) -%}
+    <div class="page-banner__heading-container {% if not(imageObjectMasthead) %}page-banner__heading-container--no-masthead{% endif %}">
+        <div class="page-banner__heading-row">
+            <div class="page-banner__heading-column">
+                <div class="page-banner__heading-backdrop">
+                    <h1 class='page-banner__heading {% if pageBannerHeadingClass %}{{ pageBannerHeadingClass }}{% endif %}'>{{ mastheadHeading }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%- endif -%}
 </section>
 {% endfragment %}

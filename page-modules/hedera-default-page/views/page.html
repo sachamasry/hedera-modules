@@ -1,6 +1,6 @@
 {# This is an example home page template. It inherits and extends a layout template that lives in the top-level views/ folder for convenience #}
 
-{% extends "layout.html" %}
+{%- extends "layout.html" -%}
 
 {%- set imagePlaceholderColour = data.global.defaultPlaceholderColour -%}
 {%- import 'hedera-default-page:page-layout-fragment.html' as pageLayout -%}
@@ -16,29 +16,27 @@
 {%- endif -%}
 
 {% block main %}
-<main class="main-page-content">
+<main class="b-main-page-content">
     {%- render pageLayout.masthead(imageObjectMasthead, data.page.title) -%}
-    {%- set bodyContainerClass = 'container' -%}
-    {%- if data.page.appendToPageBodyContainerClass -%}
-        {%- set bodyContainerClass = bodyContainerClass + ' ' + data.page.pageBodyContainerClass -%}
-    {%- else -%}
-        {%- set bodyContainerClass = data.page.pageBodyContainerClass -%}
-    {%- endif -%}
-
-    {%- set bodyColumnClass = 'col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2' -%}
-
-    {%- if data.page.appendToPageBodyColumnClass -%}
-        {%- set bodyColumnClass = bodyColumnClass + ' ' + data.page.pageBodyColumnClass -%}
-    {%- else -%}
-        {%- set bodyColumnClass = data.page.pageBodyColumnClass -%}
-    {%- endif -%}
-
-    <section class="section section-page-body">
+    <section class="b-page-body">
+        {%- set bodyContainerClass = 'b-page-body__container' -%}
+        {%- if data.page.appendToPageBodyContainerClass -%}
+            {%- set bodyContainerClass = bodyContainerClass + ' ' + data.page.pageBodyContainerClass -%}
+        {%- else -%}
+            {%- set bodyContainerClass = data.page.pageBodyContainerClass -%}
+        {%- endif -%}
         <div
             class="{{ bodyContainerClass }}"
             {%- if data.page.bodyContainerStyle %} style="{{ data.page.bodyContainerStyle }}" {% endif -%}
         >
-            <div class="row">
+            <div class="b-page-body__row">
+                {%- set bodyColumnClass = 'b-page-body__column' -%}
+                {%- if data.page.appendToPageBodyColumnClass -%}
+                    {%- set bodyColumnClass = bodyColumnClass + ' ' + data.page.pageBodyColumnClass -%}
+                {%- else -%}
+                    {%- set bodyColumnClass = data.page.pageBodyColumnClass -%}
+                {%- endif -%}
+
                 <div
                     class="{{ bodyColumnClass }}"
                     {%- if data.page.bodyColumnStyle %} style="{{ data.page.bodyColumnStyle }}" {% endif -%}

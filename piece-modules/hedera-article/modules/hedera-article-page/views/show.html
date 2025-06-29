@@ -112,12 +112,12 @@
 
                     {% area data.piece, 'body' %}
 
-                    <hr class="mt-5 mb-5"></hr>
+                    <hr class="b-horizontal-rule" />
 
                     <p><small class="article-disclaimer small-text--muted">{{ data.global.articleDisclaimerText }}</small></p>
 
                     {%- if data.piece.tagsIds[0] -%}
-                    <hr class="mt-5 mb-5"></hr>
+                    <hr class="b-horizontal-rule" />
                     <div class="article-display__tags-list d-flex gap-3">
                         {% for tag in data.piece._tags %}
                         <a href="{{ tag._url }}"

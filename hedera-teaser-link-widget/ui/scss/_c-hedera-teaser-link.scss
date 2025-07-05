@@ -1,0 +1,48 @@
+// Hedera Modules: Teaser link component
+//
+// This component depends on the Bootstrap framework
+@use "@/asset/src/scss/theme" as theme;
+
+.c-teaser-link-card {
+    background-color: unset;
+    border-color: var(--colour-blue-200);
+    border-width: 2px;
+    border-radius: 1rem;
+    position: relative;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    transition: all 0.5s ease-in-out;
+
+    &::before {
+        background-image: url("/images/wavy_backdrop.svg");
+        background-size: 100%;
+        border-radius: inherit;
+        content: "";
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        position: absolute;
+        z-index: -10;
+    }
+
+    &::after {
+        background: linear-gradient(
+            theme.$gradient-angle,
+            var(--colour-pink-200) 5%,
+            33%,
+            var(--colour-blue-600) 80%
+        );
+        border-radius: inherit;
+        content: "";
+        inset: 0;
+        mix-blend-mode: hard-light;
+        overflow: hidden;
+        pointer-events: none;
+        position: absolute;
+        z-index: -5;
+    }
+
+    &:hover {
+        border-color: oklch(from var(--colour-pink-700) l c h / 0.3);
+    }
+}

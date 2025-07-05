@@ -3,7 +3,19 @@
 // This component depends on the Bootstrap framework
 @use "@/asset/src/scss/theme" as theme;
 
+$prefix: hedera- !default;
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+//@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/card";
+
 .c-teaser-link-card {
+    @extend .card;
+
     background-color: unset;
     border-color: var(--colour-blue-200);
     border-width: 2px;
@@ -45,4 +57,69 @@
     &:hover {
         border-color: oklch(from var(--colour-pink-700) l c h / 0.3);
     }
+}
+
+.c-teaser-link-card__wrapping-link {
+    padding-bottom: 1rem;
+    padding-top: 0;
+    position: relative;
+    text-decoration: none;
+
+    @include media-breakpoint-up(md) {
+        padding-top: 1rem;
+    }
+
+    &::after {
+        backdrop-filter: blur(1px) brightness(1) saturate(2.5);
+        border-radius: inherit;
+        clip-path: inset(0 round 1rem);
+        content: "";
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        position: absolute;
+        transition: all 1s ease-out;
+        z-index: -5;
+    }
+
+    &:hover::after {
+        backdrop-filter: blur(1px) brightness(1) saturate(2.5)
+            hue-rotate(250deg);
+    }
+}
+
+.c-teaser-link-card__row {
+    @include make-row(0);
+
+    align-items: center;
+}
+
+.c-teaser-link-card__image-column {
+    left: 0;
+    position: relative;
+    transition: all 2s ease-out;
+
+    @include media-breakpoint-up(md) {
+        left: -1.5rem;
+    }
+
+    &--horizontal {
+        border: 1px solid oklch(from var(--colour-pink-500) l c h / 0.4);
+        border-radius: 12px;
+        position: relative;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .c-teaser-link-card__wrapping-link:hover & {
+        @include media-breakpoint-up(md) {
+            left: -2rem;
+        }
+    }
+
+    .c-teaser-link-card__wrapping-link:hover &--horizontal {
+        border: 1px solid oklch(from var(--colour-pink-700) l c h / 0.3);
+    }
+}
+
+.c-teaser-link-card__image-column--horizontal {
 }

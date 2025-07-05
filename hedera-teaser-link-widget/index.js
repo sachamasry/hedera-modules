@@ -118,8 +118,12 @@ export default {
         type: "select",
         label: "Vertical alignment",
         help: "Choose how column contents should be vertically aligned within the parent row",
-        def: "centre",
+        def: "default",
         choices: [
+          {
+            label: "Default",
+            value: "default",
+          },
           {
             label: "Align to top",
             value: "top",

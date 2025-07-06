@@ -96,6 +96,8 @@
   {%- set horizontalAlignmentClass = 'text-center' -%}
 {%- elseif data.widget.horizontalAlignment == 'right' -%}
   {%- set horizontalAlignmentClass = 'text-end' -%}
+{%- elseif data.widget.horizontalAlignment == 'left' -%}
+  {%- set horizontalAlignmentClass = 'text-start' -%}
 {%- else -%}
   {%- set horizontalAlignmentClass = '' -%}
 {%- endif -%}
@@ -119,23 +121,23 @@
 {%- endif -%}
 
 {%- if data.widget.horizontalCardColumnSplit == '16-84' -%}
-  {%- set imageColumnClass = "col-12 col-md-4 col-lg-2" -%}
-  {%- set contentColumnClass = "col-12 col-md-8 col-lg-10" -%}
+  {%- set imageColumnClass = "c-teaser-link-card__image-column--16-84-split" -%}
+  {%- set contentColumnClass = "c-teaser-link-card__copy-column--16-84-split" -%}
 {%- elif data.widget.horizontalCardColumnSplit == '25-75' -%}
-  {%- set imageColumnClass = "col-12 col-md-5 col-lg-3" -%}
-  {%- set contentColumnClass = "col-12 col-md-7 col-lg-9" -%}
+  {%- set imageColumnClass = "c-teaser-link-card__image-column--25-75-split" -%}
+  {%- set contentColumnClass = "c-teaser-link-card__copy-column--25-75-split" -%}
 {%- elif data.widget.horizontalCardColumnSplit == '33-67' -%}
-  {%- set imageColumnClass = "col-12 col-md-4 col-lg-4" -%}
-  {%- set contentColumnClass = "col-12 col-md-8 col-lg-8" -%}
+  {%- set imageColumnClass = "c-teaser-link-card__image-column--33-67-split" -%}
+  {%- set contentColumnClass = "c-teaser-link-card__copy-column--33-67-split" -%}
 {%- elif data.widget.horizontalCardColumnSplit == '50-50' -%}
-  {%- set imageColumnClass = "col-12 col-md-6 col-lg-6" -%}
-  {%- set contentColumnClass = "col-12 col-md-6 col-lg-6" -%}
+  {%- set imageColumnClass = "c-teaser-link-card__image-column--50-50-split" -%}
+  {%- set contentColumnClass = "c-teaser-link-card__copy-column--50-50-split" -%}
 {%- elif data.widget.horizontalCardColumnSplit == '100-0' -%}
-  {%- set imageColumnClass = "col-12" -%}
-  {%- set contentColumnClass = "d-none" -%}
+  {%- set imageColumnClass = "c-teaser-link-card__image-column--100-0-split" -%}
+  {%- set contentColumnClass = "c-teaser-link-card__copy-column--100-0-split" -%}
 {%- else -%}
-  {%- set imageColumnClass = "col-12 col-md-6 col-lg-6" -%}
-  {%- set contentColumnClass = "col-12 col-md-6 col-lg-6" -%}
+  {%- set imageColumnClass = "c-teaser-link-card__image-column--50-50-split" -%}
+  {%- set contentColumnClass = "c-teaser-link-card__copy-column--50-50-split" -%}
 {%- endif -%}
 
 {%- if data.widget.cardBorderColour -%}
@@ -167,32 +169,23 @@
   {%- set headerTextColourStyle = 'color:' + data.widget.headerTextColour + '; ' -%}
 {%- endif -%}
 
-<div
+<div class="c-teaser-link-card {{ horizontalAlignmentClass }} {{ cardBorderClass }}"
     data-teaser-link-widget
-    class="c-teaser-link-card {{ horizontalAlignmentClass }} {{ cardBorderClass }}"
-    style="{{ cardBorderStyle }} {{ cardBackgroundColourStyle }}"
->
-    <a
-        class="c-teaser-link-card__wrapping-link"
+    style="{{ cardBorderStyle }} {{ cardBackgroundColourStyle }}">
+    <a class="c-teaser-link-card__wrapping-link"
         href="{{ contentPath }}"
-        alt="{{ contentTitle }}"
-    >
+        alt="{{ contentTitle }}">
         <div class="c-teaser-link-card__row {{ rowAlignmentClass }}">
             {%- if horizontalCardImagePlacement == 'left' -%}
-            <div
-                class="c-teaser-link-card__image-column c-teaser-link-card__image-column--horizontal {% if imageColumnClass %}{{ imageColumnClass }}{% else %}col-md-4{% endif %}"
-            >
-                <div
-                    class="c-teaser-link-card--horizontal__image-wrapper c-teaser-link-card--horizontal__image-wrapper--image-left {{ imageBorderClass }}"
-                    style="{{ imageBorderStyle }}"
-                >
+            <div class="c-teaser-link-card__image-column c-teaser-link-card__image-column--horizontal {% if imageColumnClass %}{{ imageColumnClass }}{% endif %}">
+                <div class="c-teaser-link-card--horizontal__image-wrapper c-teaser-link-card--horizontal__image-wrapper--image-left {{ imageBorderClass }}"
+                    style="{{ imageBorderStyle }}" >
                     {%- if contentType in ['page', 'article', 'author', 'topic',
                     'tag', 'modal', 'file', 'image', 'custom'] -%} {% area
                     data.widget, 'horizontalImageLeft' %} {%- else -%}
-                    <img
+                    <img class="img-fluid rounded-start w-100"
                         srcset="{{ apos.image.srcset(contentImageObject) }}"
                         src="{{ apos.attachment.url(contentImageObject) }}"
-                        class="img-fluid rounded-start w-100"
                         style="background-color:{{ imagePlaceholderColour }};"
                         alt="{{ contentImageObject._alt }}"
                     />
@@ -201,13 +194,9 @@
             </div>
             {%- endif -%}
 
-            <div
-                class="card__copy-container{% if contentColumnClass %} {{ contentColumnClass }} {% else %} col-md-8 {% endif %}"
-            >
-                <div
-                    class="card-body"
-                    style="{{ cardBackgroundStyle }} {{ textColourStyle }}"
-                >
+            <div class="c-teaser-link-card__copy-column {% if contentColumnClass %}{{ contentColumnClass }}{% endif %}">
+                <div class="card-body"
+                    style="{{ cardBackgroundStyle }} {{ textColourStyle }}" >
                     <h4 class="article-listing__title">
                         {{ contentTitle }}
                         <div class="next-arrow">
@@ -234,7 +223,7 @@
             </div>
 
             {%- if horizontalCardImagePlacement == 'right' -%}
-            <div class="col-md-4">
+            <div class="c-teaser-link-card__image-column c-teaser-link-card__image-column--horizontal">
                 <div class="horizontal-card__image-container--image-right">
                     {%- if contentType == 'page' -%} {% area data.widget,
                     'horizontalImageRight' %} {%- else -%}

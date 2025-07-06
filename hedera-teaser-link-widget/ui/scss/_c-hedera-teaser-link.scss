@@ -95,11 +95,18 @@ $prefix: hedera- !default;
 }
 
 .c-teaser-link-card__image-column {
+    @include make-col-ready();
+
     left: 0;
     position: relative;
     transition: all 2s ease-out;
 
+    @include media-breakpoint-down(sm) {
+        @include make-col(12);
+    }
+
     @include media-breakpoint-up(md) {
+        @include make-col(4);
         left: -1.5rem;
     }
 
@@ -108,6 +115,68 @@ $prefix: hedera- !default;
         border-radius: 12px;
         position: relative;
         transition: all 0.5s ease-in-out;
+    }
+
+    &--16-84-split {
+        @include media-breakpoint-down(sm) {
+            @include make-col(12);
+        }
+
+        @include media-breakpoint-down(md) {
+            @include make-col(4);
+        }
+
+        @include media-breakpoint-down(lg) {
+            @include make-col(2);
+        }
+    }
+
+    &--25-75-split {
+        @include media-breakpoint-down(sm) {
+            @include make-col(12);
+        }
+
+        @include media-breakpoint-down(md) {
+            @include make-col(5);
+        }
+
+        @include media-breakpoint-down(lg) {
+            @include make-col(3);
+        }
+    }
+
+    &--33-67-split {
+        @include media-breakpoint-down(sm) {
+            @include make-col(12);
+        }
+
+        @include media-breakpoint-down(md) {
+            @include make-col(4);
+        }
+
+        @include media-breakpoint-down(lg) {
+            @include make-col(4);
+        }
+    }
+
+    &--50-50-split {
+        @include media-breakpoint-down(sm) {
+            @include make-col(12);
+        }
+
+        @include media-breakpoint-down(md) {
+            @include make-col(6);
+        }
+
+        @include media-breakpoint-down(lg) {
+            @include make-col(6);
+        }
+    }
+
+    &--100-0-split {
+        @include media-breakpoint-down(sm) {
+            @include make-col(12);
+        }
     }
 
     .c-teaser-link-card__wrapping-link:hover & {
@@ -121,5 +190,79 @@ $prefix: hedera- !default;
     }
 }
 
-.c-teaser-link-card__image-column--horizontal {
+.c-teaser-link-card__copy-column {
+    @include make-col-ready();
+    margin-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    @include media-breakpoint-down(sm) {
+        @include make-col(12);
+    }
+
+    @include media-breakpoint-up(md) {
+        @include make-col(8);
+        margin-top: 0;
+        padding-left: 0rem;
+    }
+
+    &--16-84-split {
+        @include media-breakpoint-down(sm) {
+            @include make-col(12);
+        }
+
+        @include media-breakpoint-down(md) {
+            @include make-col(8);
+        }
+
+        @include media-breakpoint-down(lg) {
+            @include make-col(10);
+        }
+    }
+
+    &--25-75-split {
+        @include media-breakpoint-down(sm) {
+            @include make-col(12);
+        }
+
+        @include media-breakpoint-down(md) {
+            @include make-col(7);
+        }
+
+        @include media-breakpoint-down(lg) {
+            @include make-col(9);
+        }
+    }
+
+    &--33-67-split {
+        @include media-breakpoint-down(sm) {
+            @include make-col(12);
+        }
+
+        @include media-breakpoint-down(md) {
+            @include make-col(8);
+        }
+
+        @include media-breakpoint-down(lg) {
+            @include make-col(8);
+        }
+    }
+
+    &--50-50-split {
+        @include media-breakpoint-down(sm) {
+            @include make-col(12);
+        }
+
+        @include media-breakpoint-down(md) {
+            @include make-col(6);
+        }
+
+        @include media-breakpoint-down(lg) {
+            @include make-col(6);
+        }
+    }
+
+    &--100-0-split {
+        display: none;
+    }
 }

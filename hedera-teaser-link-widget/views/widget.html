@@ -141,15 +141,22 @@
 {%- endif -%}
 
 {%- if data.widget.cardBorderColour -%}
-  {%- set cardBorderClass = 'border-1 border-solid' -%}
+  {%- set cardBorderClass = 'c-teaser-link-card--solid-border-1' -%}
   {%- set cardBorderStyle = 'border-color:' + data.widget.cardBorderColour + '; ' -%}
 {%- endif -%}
 
+{%- set imageClass = 'c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal__image--image-on-left' -%}
+
 {%- if data.widget.drawImageBorders -%}
   {%- set imageBorderClass = 'c-teaser-link-card__image--with-border' -%}
+  {%- set imageClass = imageClass + ' ' + imageBorderClass -%}
   {%- set imageBorderColour = data.widget.cardBorderColour -%}
   {%- set imageForegroundColour = (imageBorderColour | truncate(7, true, "")) -%}
-  {%- set imageBorderStyle = 'color:' + imageForegroundColour + '22; border-color:' + imageBorderColour + ';' -%}
+  {%- set imageBorderStyle = '' + (
+    'color:' + imageForegroundColour + ';' if imageForegroundColour
+    ) + (
+    'border-color:' + imageBorderColour + ';' if imageBorderColour
+  ) -%}
 {%- endif -%}
 
 {%- set textColourStyle = 'color:var(--body-colour);' -%}
@@ -178,10 +185,10 @@
         <div class="c-teaser-link-card__row {{ rowAlignmentClass }}">
             {%- if horizontalCardImagePlacement == 'left' -%}
             <div class="c-teaser-link-card__image-column c-teaser-link-card__image-column--horizontal {% if imageColumnClass %}{{ imageColumnClass }}{% endif %}">
-                <div class="c-teaser-link-card--horizontal__image-wrapper c-teaser-link-card--horizontal__image-wrapper--image-on-left {{ imageBorderClass }}"
+                <div class="c-teaser-link-card--horizontal__image-wrapper c-teaser-link-card--horizontal__image-wrapper--image-on-left"
                     style="{{ imageBorderStyle }}">
                     {%- if contentType in ['page', 'article', 'author', 'topic', 'tag', 'modal', 'file', 'image', 'custom'] -%}
-                        {% area data.widget, 'horizontalImageLeft' %}
+                        {% area data.widget, 'horizontalImageLeft' with { 'hedera-image': { className: imageClass } } %}
                     {%- else -%}
                     <img class="c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal__image--image-on-left"
                         srcset="{{ apos.image.srcset(contentImageObject) }}"
@@ -225,7 +232,7 @@
             <div class="c-teaser-link-card__image-column c-teaser-link-card__image-column--horizontal">
                 <div class="c-teaser-link-card--horizontal__image-wrapper c-teaser-link-card--horizontal__image-wrapper--image-on-right">
                     {%- if contentType == 'page' -%}
-                        {% area data.widget, 'horizontalImageRight' %}
+                        {% area data.widget, 'horizontalImageRight' with { 'hedera-image': { className: 'c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal__image--image-on-right' } } %}
                     {%- else -%}
                     <img class="c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal__image--image-on-right"
                         srcset="{{ apos.image.srcset(contentImageObject) }}"

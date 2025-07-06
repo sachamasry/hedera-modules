@@ -9,7 +9,9 @@ $prefix: hedera- !default;
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/maps";
 @import "bootstrap/scss/mixins";
-//@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/containers";
 @import "bootstrap/scss/grid";
 @import "bootstrap/scss/card";
 
@@ -24,6 +26,11 @@ $prefix: hedera- !default;
     margin-bottom: 1.5rem;
     margin-top: 1.5rem;
     transition: all 0.5s ease-in-out;
+
+    &--solid-border-1 {
+        border-width: 1px;
+        border-style: solid;
+    }
 
     &::before {
         background-image: url("/images/wavy_backdrop.svg");
@@ -111,8 +118,6 @@ $prefix: hedera- !default;
     }
 
     &--horizontal {
-        border: 1px solid oklch(from var(--colour-pink-500) l c h / 0.4);
-        border-radius: 12px;
         position: relative;
         transition: all 0.5s ease-in-out;
     }
@@ -122,11 +127,11 @@ $prefix: hedera- !default;
             @include make-col(12);
         }
 
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-up(md) {
             @include make-col(4);
         }
 
-        @include media-breakpoint-down(lg) {
+        @include media-breakpoint-up(lg) {
             @include make-col(2);
         }
     }
@@ -136,11 +141,11 @@ $prefix: hedera- !default;
             @include make-col(12);
         }
 
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-up(md) {
             @include make-col(5);
         }
 
-        @include media-breakpoint-down(lg) {
+        @include media-breakpoint-up(lg) {
             @include make-col(3);
         }
     }
@@ -150,11 +155,11 @@ $prefix: hedera- !default;
             @include make-col(12);
         }
 
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-up(md) {
             @include make-col(4);
         }
 
-        @include media-breakpoint-down(lg) {
+        @include media-breakpoint-up(lg) {
             @include make-col(4);
         }
     }
@@ -164,11 +169,11 @@ $prefix: hedera- !default;
             @include make-col(12);
         }
 
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-up(md) {
             @include make-col(6);
         }
 
-        @include media-breakpoint-down(lg) {
+        @include media-breakpoint-up(lg) {
             @include make-col(6);
         }
     }
@@ -190,13 +195,6 @@ $prefix: hedera- !default;
     }
 }
 
-.c-teaser-link-card--horizontal__image-wrapper {
-    &--image-on-left {
-    }
-    &--image-on-right {
-    }
-}
-
 .c-teaser-link-card__image {
     &--with-border {
         border-style: solid;
@@ -205,10 +203,17 @@ $prefix: hedera- !default;
 }
 
 .c-teaser-link-card--horizontal__image {
+    border-color: oklch(from var(--colour-pink-500) l c h / 0.4);
     border-radius: 0.75rem;
     box-shadow: 0 0.5rem 1rem oklch(from var(--colour-pink-700) l c h / 0.3);
     height: auto;
     max-width: 100%;
+
+    &--image-on-left {
+    }
+
+    &--image-on-right {
+    }
 }
 
 .c-teaser-link-card__copy-column {
@@ -232,11 +237,11 @@ $prefix: hedera- !default;
             @include make-col(12);
         }
 
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-up(md) {
             @include make-col(8);
         }
 
-        @include media-breakpoint-down(lg) {
+        @include media-breakpoint-up(lg) {
             @include make-col(10);
         }
     }
@@ -246,11 +251,11 @@ $prefix: hedera- !default;
             @include make-col(12);
         }
 
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-up(md) {
             @include make-col(7);
         }
 
-        @include media-breakpoint-down(lg) {
+        @include media-breakpoint-up(lg) {
             @include make-col(9);
         }
     }
@@ -260,11 +265,11 @@ $prefix: hedera- !default;
             @include make-col(12);
         }
 
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-up(md) {
             @include make-col(8);
         }
 
-        @include media-breakpoint-down(lg) {
+        @include media-breakpoint-up(lg) {
             @include make-col(8);
         }
     }
@@ -274,11 +279,11 @@ $prefix: hedera- !default;
             @include make-col(12);
         }
 
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-up(md) {
             @include make-col(6);
         }
 
-        @include media-breakpoint-down(lg) {
+        @include media-breakpoint-up(lg) {
             @include make-col(6);
         }
     }

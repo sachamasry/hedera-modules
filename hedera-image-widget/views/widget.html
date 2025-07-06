@@ -1,12 +1,14 @@
 {%- import 'hedera-image-widget:image-layout-fragment.html' as imageLayoutFragment -%}
 
-{%- set defaultImgClass = "apostrophe-widget--image img-fluid rounded" -%}
-{%- if data.options.className -%}
-  {%- set imageClass = data.options.className -%}
+{%- set defaultImgClass = "apostrophe-widget--image" -%}
+{%- if data.contextOptions.className -%}
+    {%- set imageClass = data.contextOptions.className -%}
+{%- elif data.options.className -%}
+    {%- set imageClass = data.options.className -%}
 {%- elif data.manager.options.className -%}
-  {%- set imageClass = data.manager.options.className -%}
+    {%- set imageClass = data.manager.options.className -%}
 {%- else -%}
-  {%- set imageClass = defaultImgClass -%}
+    {%- set imageClass = defaultImgClass -%}
 {%- endif -%}
 
 {%- if data.widget.imageClass -%}
@@ -48,7 +50,9 @@
 
 {%- set imagePlaceholderColour = data.global.defaultPlaceholderColour -%}
 
-{%- set imageStyle = "background-color: " + imagePlaceholderColour + ";" -%}
+{%- set imageStyle = "" + (
+    "background-color: " + imagePlaceholderColour + ";" if imagePlaceholderColour
+    ) -%}
 
 {%- set imageObject = apos.image.first(data.widget._image) -%}
 {%- set imageWidth = imageObject.width -%}

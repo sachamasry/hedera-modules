@@ -146,7 +146,7 @@
 {%- endif -%}
 
 {%- if data.widget.drawImageBorders -%}
-  {%- set imageBorderClass = 'card__image--draw-border' -%}
+  {%- set imageBorderClass = 'c-teaser-link-card__image--with-border' -%}
   {%- set imageBorderColour = data.widget.cardBorderColour -%}
   {%- set imageForegroundColour = (imageBorderColour | truncate(7, true, "")) -%}
   {%- set imageBorderStyle = 'color:' + imageForegroundColour + '22; border-color:' + imageBorderColour + ';' -%}
@@ -178,17 +178,16 @@
         <div class="c-teaser-link-card__row {{ rowAlignmentClass }}">
             {%- if horizontalCardImagePlacement == 'left' -%}
             <div class="c-teaser-link-card__image-column c-teaser-link-card__image-column--horizontal {% if imageColumnClass %}{{ imageColumnClass }}{% endif %}">
-                <div class="c-teaser-link-card--horizontal__image-wrapper c-teaser-link-card--horizontal__image-wrapper--image-left {{ imageBorderClass }}"
-                    style="{{ imageBorderStyle }}" >
-                    {%- if contentType in ['page', 'article', 'author', 'topic',
-                    'tag', 'modal', 'file', 'image', 'custom'] -%} {% area
-                    data.widget, 'horizontalImageLeft' %} {%- else -%}
-                    <img class="img-fluid rounded-start w-100"
+                <div class="c-teaser-link-card--horizontal__image-wrapper c-teaser-link-card--horizontal__image-wrapper--image-on-left {{ imageBorderClass }}"
+                    style="{{ imageBorderStyle }}">
+                    {%- if contentType in ['page', 'article', 'author', 'topic', 'tag', 'modal', 'file', 'image', 'custom'] -%}
+                        {% area data.widget, 'horizontalImageLeft' %}
+                    {%- else -%}
+                    <img class="c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal__image--image-on-left"
                         srcset="{{ apos.image.srcset(contentImageObject) }}"
                         src="{{ apos.attachment.url(contentImageObject) }}"
                         style="background-color:{{ imagePlaceholderColour }};"
-                        alt="{{ contentImageObject._alt }}"
-                    />
+                        alt="{{ contentImageObject._alt }}" />
                     {%- endif -%}
                 </div>
             </div>
@@ -224,16 +223,15 @@
 
             {%- if horizontalCardImagePlacement == 'right' -%}
             <div class="c-teaser-link-card__image-column c-teaser-link-card__image-column--horizontal">
-                <div class="horizontal-card__image-container--image-right">
-                    {%- if contentType == 'page' -%} {% area data.widget,
-                    'horizontalImageRight' %} {%- else -%}
-                    <img
+                <div class="c-teaser-link-card--horizontal__image-wrapper c-teaser-link-card--horizontal__image-wrapper--image-on-right">
+                    {%- if contentType == 'page' -%}
+                        {% area data.widget, 'horizontalImageRight' %}
+                    {%- else -%}
+                    <img class="c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal__image--image-on-right"
                         srcset="{{ apos.image.srcset(contentImageObject) }}"
                         src="{{ apos.attachment.url(contentImageObject) }}"
-                        class="img-fluid rounded-end w-100"
                         style="background-color:{{ imagePlaceholderColour }};"
-                        alt="{{ contentImageObject._alt }}"
-                    />
+                        alt="{{ contentImageObject._alt }}" />
                     {%- endif -%}
                 </div>
             </div>

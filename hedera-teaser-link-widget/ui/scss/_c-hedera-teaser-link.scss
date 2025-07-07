@@ -15,50 +15,17 @@ $prefix: hedera- !default;
     @extend .card;
 
     background-color: unset;
-    border-color: var(--colour-blue-200);
-    border-width: 2px;
-    border-radius: 1rem;
     position: relative;
-    margin-bottom: 1.5rem;
-    margin-top: 1.5rem;
-    transition: all 0.5s ease-in-out;
 
     &--solid-border-1 {
         border-width: 1px;
         border-style: solid;
     }
 
-    &::before {
-        background-image: url("/images/wavy_backdrop.svg");
-        background-size: 100%;
-        border-radius: inherit;
-        content: "";
-        inset: 0;
-        overflow: hidden;
-        pointer-events: none;
-        position: absolute;
-        z-index: -10;
-    }
-
-    &::after {
-        background: linear-gradient(
-            theme.$gradient-angle,
-            var(--colour-pink-200) 5%,
-            33%,
-            var(--colour-blue-600) 80%
-        );
-        border-radius: inherit;
-        content: "";
-        inset: 0;
-        mix-blend-mode: hard-light;
-        overflow: hidden;
-        pointer-events: none;
-        position: absolute;
-        z-index: -5;
-    }
-
-    &:hover {
-        border-color: oklch(from var(--colour-pink-700) l c h / 0.2);
+    &:focus,
+    &:focus-visible,
+    &:hover,
+    &:active {
     }
 
     &--align-text-centre {
@@ -79,31 +46,10 @@ $prefix: hedera- !default;
 }
 
 .c-teaser-link-card__wrapping-link {
-    padding-bottom: 1rem;
-    padding-top: 0;
     position: relative;
     text-decoration: none;
 
     @include media-breakpoint-up(md) {
-        padding-top: 1rem;
-    }
-
-    &::after {
-        backdrop-filter: blur(1px) brightness(1) saturate(2.5);
-        border-radius: inherit;
-        clip-path: inset(0 round 1rem);
-        content: "";
-        inset: 0;
-        overflow: hidden;
-        pointer-events: none;
-        position: absolute;
-        transition: all 1s ease-out;
-        z-index: -5;
-    }
-
-    &:hover::after {
-        backdrop-filter: blur(1px) brightness(1) saturate(2.5)
-            hue-rotate(250deg);
     }
 }
 
@@ -112,8 +58,6 @@ $prefix: hedera- !default;
 
 .c-teaser-link-card__row {
     @include make-row(0);
-
-    align-items: center;
 
     &--align-top {
         align-items: flex-start;
@@ -142,9 +86,7 @@ $prefix: hedera- !default;
 .c-teaser-link-card--horizontal__image-column {
     @include make-col-ready();
 
-    left: 0;
     position: relative;
-    transition: all 0.5s ease-in-out;
 
     @include media-breakpoint-down(sm) {
         @include make-col(12);
@@ -152,12 +94,13 @@ $prefix: hedera- !default;
 
     @include media-breakpoint-up(md) {
         @include make-col(4);
-        left: -1.5rem;
     }
 
-    .c-teaser-link-card__wrapping-link:hover & {
+    .c-teaser-link-card__wrapping-link:focus &,
+    .c-teaser-link-card__wrapping-link:focus-visible &,
+    .c-teaser-link-card__wrapping-link:hover &,
+    .c-teaser-link-card__wrapping-link:active & {
         @include media-breakpoint-up(md) {
-            left: -2rem;
         }
     }
 
@@ -246,16 +189,13 @@ $prefix: hedera- !default;
 }
 
 .c-teaser-link-card--horizontal__image {
-    border-color: oklch(from var(--colour-pink-500) l c h / 0.4);
-    border-radius: 0.75rem;
-    box-shadow: 0 0.5rem 1rem oklch(from var(--colour-pink-700) l c h / 0.3);
     height: auto;
     max-width: 100%;
-    transition: all 0.5s ease-in-out;
 
-    .c-teaser-link-card__wrapping-link:hover & {
-        border: 1px solid oklch(from var(--colour-pink-700) l c h / 0.6);
-        box-shadow: 0 0.5rem 1rem oklch(from var(--colour-pink-700) l c h / 0.5);
+    .c-teaser-link-card__wrapping-link:focus &,
+    .c-teaser-link-card__wrapping-link:focus-visible &,
+    .c-teaser-link-card__wrapping-link:hover &,
+    .c-teaser-link-card__wrapping-link:active & {
     }
 }
 
@@ -267,9 +207,6 @@ $prefix: hedera- !default;
 
 .c-teaser-link-card--horizontal__copy-column {
     @include make-col-ready();
-    margin-top: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
 
     @include media-breakpoint-down(sm) {
         @include make-col(12);
@@ -277,8 +214,6 @@ $prefix: hedera- !default;
 
     @include media-breakpoint-up(md) {
         @include make-col(8);
-        margin-top: 0;
-        padding-left: 0rem;
     }
 
     &--16-84-split {
@@ -345,69 +280,34 @@ $prefix: hedera- !default;
 .c-teaser-link-card--horizontal__card-body {
     @extend .card-body;
 
-    background: oklch(100% 0 0 / 0.1);
-    border: 1px solid oklch(from var(--colour-blue-100) l c h / 0.5);
-    border-radius: $border-radius;
-    padding-left: 1.5rem;
-    padding-right: 4rem;
     position: relative;
-    transition: all 0.5s ease-in-out;
 
-    &::after {
-        backdrop-filter: blur(5px) brightness(1.1) saturate(0.7);
-        border-radius: inherit;
-        content: "";
-        inset: 0;
-        overflow: hidden;
-        pointer-events: none;
-        position: absolute;
-        transition: all 0.5s ease-in-out;
-        z-index: -5;
-    }
-
-    .c-teaser-link-card__wrapping-link:hover & {
-        border: 1px solid oklch(from var(--colour-pink-700) l c h / 0.2);
-    }
-
-    .c-teaser-link-card__wrapping-link:hover &::after {
-        backdrop-filter: blur(1rem) brightness(1.1) saturate(2);
+    .c-teaser-link-card__wrapping-link:focus &,
+    .c-teaser-link-card__wrapping-link:focus-visible &,
+    .c-teaser-link-card__wrapping-link:hover &,
+    .c-teaser-link-card__wrapping-link:active & {
     }
 }
 
 .c-teaser-link-card--horizontal__title {
-    color: var(--colour-pink-600);
-    font-family: "Alegreya Sans HT", sans-serif;
-    font-size: 1.5rem;
-    font-weight: 400;
 }
 
 .c-teaser-link-card--horizontal__link-arrow {
     display: inline-block;
-    fill: var(--colour-pink-600);
     height: 1.5rem;
-    position: absolute;
-    right: 2.5rem;
-    transition: all 0.5s ease-out;
     width: 1.5rem;
 
-    .c-teaser-link-card__wrapping-link:hover & {
-        right: 1rem;
+    .c-teaser-link-card__wrapping-link:focus &,
+    .c-teaser-link-card__wrapping-link:focus-visible &,
+    .c-teaser-link-card__wrapping-link:hover &,
+    .c-teaser-link-card__wrapping-link:active & {
     }
 }
 
 .c-teaser-link-card--horizontal__subtitle {
-    color: var(--colour-pink-400);
-    font-family: theme.$display-font-family-serif;
-    font-size: 1.25rem;
-    font-weight: 400;
 }
 
 .c-teaser-link-card--horizontal__published-date {
-    color: var(--colour-pink-500);
-    font-family: "Alegreya Sans HT", sans-serif;
-    font-size: 1rem;
-    font-weight: 300;
-    text-transform: uppercase;
 }
 
 .c-teaser-link-card--horizontal__manual-content {

@@ -205,7 +205,7 @@
             {%- endif -%}
 
             <div class="c-teaser-link-card__copy-column c-teaser-link-card--horizontal__copy-column {% if contentColumnClass %}{{ contentColumnClass }}{% endif %}">
-                <div class="c-teaser-link-card--horizontal__card-body card-body"
+                <div class="c-teaser-link-card--horizontal__card-body"
                     style="{{ cardBackgroundStyle }} {{ textColourStyle }}" >
                     <h4 class="c-teaser-link-card__title c-teaser-link-card--horizontal__title">
                         {{ contentTitle }}
@@ -221,14 +221,15 @@
                         </div>
                     </h4>
                     {%- if contentSubTitle -%}
-                    <h3 class="article-listing__subtitle">
+                    <h3 class="c-teaser-link-card__subtitle c-teaser-link-card__subtitle">
                         {{ contentSubTitle }}
                     </h3>
                     {%- endif -%} {%- if contentPublishedAt -%}
-                    <div class="article-listing__published-date">
+                    <div class="c-teaser-link-card__published-date c-teaser-link-card--horizontal__published-date">
                         {{ contentPublishedAt | date("MMMM D, YYYY") }}
                     </div>
-                    {%- endif -%} {% area data.widget, 'body' %}
+                    {%- endif -%}
+                    {% area data.widget, 'body' %}
                 </div>
             </div>
 

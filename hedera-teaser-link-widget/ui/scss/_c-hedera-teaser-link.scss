@@ -62,7 +62,7 @@ $prefix: hedera- !default;
     }
 
     &:hover {
-        border-color: oklch(from var(--colour-pink-700) l c h / 0.3);
+        border-color: oklch(from var(--colour-pink-700) l c h / 0.2);
     }
 
     &--align-text-centre {
@@ -332,9 +332,12 @@ $prefix: hedera- !default;
 }
 
 .c-teaser-link-card--horizontal__card-body {
+    @extend .card-body;
+
     background: oklch(100% 0 0 / 0.1);
     border: 1px solid oklch(from var(--colour-blue-100) l c h / 0.5);
     border-radius: $border-radius;
+    padding-left: 1.5rem;
     padding-right: 4rem;
     position: relative;
     transition: all 0.5s ease-in-out;
@@ -349,6 +352,10 @@ $prefix: hedera- !default;
         position: absolute;
         transition: all 0.5s ease-in-out;
         z-index: -5;
+    }
+
+    .c-teaser-link-card__wrapping-link:hover & {
+        border: 1px solid oklch(from var(--colour-pink-700) l c h / 0.2);
     }
 
     .c-teaser-link-card__wrapping-link:hover &::after {
@@ -375,4 +382,19 @@ $prefix: hedera- !default;
     .c-teaser-link-card__wrapping-link:hover & {
         right: 1rem;
     }
+}
+
+.c-teaser-link-card--horizontal__subtitle {
+    color: var(--colour-pink-400);
+    font-family: theme.$display-font-family-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.c-teaser-link-card--horizontal__published-date {
+    color: var(--colour-pink-500);
+    font-family: "Alegreya Sans HT", sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    text-transform: uppercase;
 }

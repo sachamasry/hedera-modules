@@ -93,21 +93,25 @@
 {%- set cardType = 'horizontal' -%}
 
 {%- if data.widget.horizontalAlignment == 'centre' -%}
-  {%- set horizontalAlignmentClass = 'text-center' -%}
+  {%- set horizontalAlignmentClass = "c-teaser-link-card--align-text-centre" -%}
 {%- elseif data.widget.horizontalAlignment == 'right' -%}
-  {%- set horizontalAlignmentClass = 'text-end' -%}
+  {%- set horizontalAlignmentClass = "c-teaser-link-card--align-text-right" -%}
 {%- elseif data.widget.horizontalAlignment == 'left' -%}
-  {%- set horizontalAlignmentClass = 'text-start' -%}
+  {%- set horizontalAlignmentClass = "c-teaser-link-card--align-text-left" -%}
 {%- else -%}
   {%- set horizontalAlignmentClass = '' -%}
 {%- endif -%}
 
 {%- if data.widget.verticalAlignment == 'top' -%}
-  {%- set rowAlignmentClass = "align-items-start" -%}
+    {%- set rowAlignmentClass = "c-teaser-link-card__row--align-top" -%}
 {%- elseif data.widget.verticalAlignment == 'centre' -%}
-  {%- set rowAlignmentClass = "align-items-center" -%}
+    {%- set rowAlignmentClass = "c-teaser-link-card__row--align-centre" -%}
 {%- elseif data.widget.verticalAlignment == 'bottom' -%}
-  {%- set rowAlignmentClass = "align-items-end" -%}
+    {%- set rowAlignmentClass = "c-teaser-link-card__row--align-bottom" -%}
+{%- elseif data.widget.verticalAlignment == 'baseline' -%}
+    {%- set rowAlignmentClass = "c-teaser-link-card__row--align-baseline" -%}
+{%- elseif data.widget.verticalAlignment == 'stretch' -%}
+    {%- set rowAlignmentClass = "c-teaser-link-card__row--align-stretch" -%}
 {%- else -%}
   {%- set rowAlignmentClass = "" -%}
 {%- endif -%}
@@ -121,23 +125,23 @@
 {%- endif -%}
 
 {%- if data.widget.horizontalCardColumnSplit == '16-84' -%}
-  {%- set imageColumnClass = "c-teaser-link-card__image-column--16-84-split" -%}
-  {%- set contentColumnClass = "c-teaser-link-card__copy-column--16-84-split" -%}
+  {%- set imageColumnClass = "c-teaser-link-card--horizontal__image-column--16-84-split" -%}
+  {%- set contentColumnClass = "c-teaser-link-card--horizontal__copy-column--16-84-split" -%}
 {%- elif data.widget.horizontalCardColumnSplit == '25-75' -%}
-  {%- set imageColumnClass = "c-teaser-link-card__image-column--25-75-split" -%}
-  {%- set contentColumnClass = "c-teaser-link-card__copy-column--25-75-split" -%}
+  {%- set imageColumnClass = "c-teaser-link-card--horizontal__image-column--25-75-split" -%}
+  {%- set contentColumnClass = "c-teaser-link-card--horizontal__copy-column--25-75-split" -%}
 {%- elif data.widget.horizontalCardColumnSplit == '33-67' -%}
-  {%- set imageColumnClass = "c-teaser-link-card__image-column--33-67-split" -%}
-  {%- set contentColumnClass = "c-teaser-link-card__copy-column--33-67-split" -%}
+  {%- set imageColumnClass = "c-teaser-link-card--horizontal__image-column--33-67-split" -%}
+  {%- set contentColumnClass = "c-teaser-link-card--horizontal__copy-column--33-67-split" -%}
 {%- elif data.widget.horizontalCardColumnSplit == '50-50' -%}
-  {%- set imageColumnClass = "c-teaser-link-card__image-column--50-50-split" -%}
-  {%- set contentColumnClass = "c-teaser-link-card__copy-column--50-50-split" -%}
+  {%- set imageColumnClass = "c-teaser-link-card--horizontal__image-column--50-50-split" -%}
+  {%- set contentColumnClass = "c-teaser-link-card--horizontal__copy-column--50-50-split" -%}
 {%- elif data.widget.horizontalCardColumnSplit == '100-0' -%}
-  {%- set imageColumnClass = "c-teaser-link-card__image-column--100-0-split" -%}
-  {%- set contentColumnClass = "c-teaser-link-card__copy-column--100-0-split" -%}
+  {%- set imageColumnClass = "c-teaser-link-card--horizontal__image-column--100-0-split" -%}
+  {%- set contentColumnClass = "c-teaser-link-card--horizontal__copy-column--100-0-split" -%}
 {%- else -%}
-  {%- set imageColumnClass = "c-teaser-link-card__image-column--50-50-split" -%}
-  {%- set contentColumnClass = "c-teaser-link-card__copy-column--50-50-split" -%}
+  {%- set imageColumnClass = "c-teaser-link-card--horizontal__image-column--50-50-split" -%}
+  {%- set contentColumnClass = "c-teaser-link-card--horizontal__copy-column--50-50-split" -%}
 {%- endif -%}
 
 {%- if data.widget.cardBorderColour -%}
@@ -148,8 +152,8 @@
 {%- set imageClass = 'c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal__image--image-on-left' -%}
 
 {%- if data.widget.drawImageBorders -%}
-  {%- set imageBorderClass = 'c-teaser-link-card__image--with-border' -%}
-  {%- set imageClass = imageClass + ' ' + imageBorderClass -%}
+  {%- set imageBorderClass = "c-teaser-link-card__image--with-border" -%}
+  {%- set imageClass = imageClass + " " + imageBorderClass -%}
   {%- set imageBorderColour = data.widget.cardBorderColour -%}
   {%- set imageForegroundColour = (imageBorderColour | truncate(7, true, "")) -%}
   {%- set imageBorderStyle = '' + (
@@ -184,13 +188,13 @@
         alt="{{ contentTitle }}">
         <div class="c-teaser-link-card__row {{ rowAlignmentClass }}">
             {%- if horizontalCardImagePlacement == 'left' -%}
-            <div class="c-teaser-link-card__image-column c-teaser-link-card__image-column--horizontal {% if imageColumnClass %}{{ imageColumnClass }}{% endif %}">
+            <div class="c-teaser-link-card--horizontal__image-column c-teaser-link-card--horizontal__image-column--on-left {% if imageColumnClass %}{{ imageColumnClass }}{% endif %}">
                 <div class="c-teaser-link-card--horizontal__image-wrapper c-teaser-link-card--horizontal__image-wrapper--image-on-left"
                     style="{{ imageBorderStyle }}">
                     {%- if contentType in ['page', 'article', 'author', 'topic', 'tag', 'modal', 'file', 'image', 'custom'] -%}
                         {% area data.widget, 'horizontalImageLeft' with { 'hedera-image': { className: imageClass } } %}
                     {%- else -%}
-                    <img class="c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal__image--image-on-left"
+                    <img class="c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal--image-on-left__image"
                         srcset="{{ apos.image.srcset(contentImageObject) }}"
                         src="{{ apos.attachment.url(contentImageObject) }}"
                         style="background-color:{{ imagePlaceholderColour }};"
@@ -200,12 +204,12 @@
             </div>
             {%- endif -%}
 
-            <div class="c-teaser-link-card__copy-column {% if contentColumnClass %}{{ contentColumnClass }}{% endif %}">
-                <div class="card-body"
+            <div class="c-teaser-link-card__copy-column c-teaser-link-card--horizontal__copy-column {% if contentColumnClass %}{{ contentColumnClass }}{% endif %}">
+                <div class="c-teaser-link-card--horizontal__card-body card-body"
                     style="{{ cardBackgroundStyle }} {{ textColourStyle }}" >
-                    <h4 class="article-listing__title">
+                    <h4 class="c-teaser-link-card__title c-teaser-link-card--horizontal__title">
                         {{ contentTitle }}
-                        <div class="next-arrow">
+                        <div class="c-teaser-link-card__link-arrow c-teaser-link-card--horizontal__link-arrow">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 8 17.5"
@@ -229,12 +233,12 @@
             </div>
 
             {%- if horizontalCardImagePlacement == 'right' -%}
-            <div class="c-teaser-link-card__image-column c-teaser-link-card__image-column--horizontal">
+            <div class="c-teaser-link-card--horizontal__image-column c-teaser-link-card--horizontal__image-column--on-right {% if imageColumnClass %}{{ imageColumnClass }}{% endif %}">
                 <div class="c-teaser-link-card--horizontal__image-wrapper c-teaser-link-card--horizontal__image-wrapper--image-on-right">
                     {%- if contentType == 'page' -%}
                         {% area data.widget, 'horizontalImageRight' with { 'hedera-image': { className: 'c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal__image--image-on-right' } } %}
                     {%- else -%}
-                    <img class="c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal__image--image-on-right"
+                    <img class="c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal--image-on-right__image"
                         srcset="{{ apos.image.srcset(contentImageObject) }}"
                         src="{{ apos.attachment.url(contentImageObject) }}"
                         style="background-color:{{ imagePlaceholderColour }};"

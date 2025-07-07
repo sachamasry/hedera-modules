@@ -64,6 +64,22 @@ $prefix: hedera- !default;
     &:hover {
         border-color: oklch(from var(--colour-pink-700) l c h / 0.3);
     }
+
+    &--align-text-centre {
+        text-align: center;
+    }
+
+    &--align-text-justify {
+        text-align: justify;
+    }
+
+    &--align-text-left {
+        text-align: left;
+    }
+
+    &--align-text-right {
+        text-align: right;
+    }
 }
 
 .c-teaser-link-card__wrapping-link {
@@ -99,14 +115,34 @@ $prefix: hedera- !default;
     @include make-row(0);
 
     align-items: center;
+
+    &--align-top {
+        align-items: flex-start;
+    }
+
+    &--align-centre {
+        align-items: center;
+    }
+
+    &--align-bottom {
+        align-items: flex-end;
+    }
+
+    &--align-baseline {
+        align-items: baseline;
+    }
+
+    &--align-stretch {
+        align-items: stretch;
+    }
 }
 
-.c-teaser-link-card__image-column {
+.c-teaser-link-card--horizontal__image-column {
     @include make-col-ready();
 
     left: 0;
     position: relative;
-    transition: all 2s ease-out;
+    transition: all 0.5s ease-in-out;
 
     @include media-breakpoint-down(sm) {
         @include make-col(12);
@@ -117,9 +153,10 @@ $prefix: hedera- !default;
         left: -1.5rem;
     }
 
-    &--horizontal {
-        position: relative;
-        transition: all 0.5s ease-in-out;
+    .c-teaser-link-card__wrapping-link:hover & {
+        @include media-breakpoint-up(md) {
+            left: -2rem;
+        }
     }
 
     &--16-84-split {
@@ -184,14 +221,10 @@ $prefix: hedera- !default;
         }
     }
 
-    .c-teaser-link-card__wrapping-link:hover & {
-        @include media-breakpoint-up(md) {
-            left: -2rem;
-        }
+    &--on-left {
     }
 
-    .c-teaser-link-card__wrapping-link:hover &--horizontal {
-        border: 1px solid oklch(from var(--colour-pink-700) l c h / 0.3);
+    &--on-right {
     }
 }
 
@@ -208,15 +241,20 @@ $prefix: hedera- !default;
     box-shadow: 0 0.5rem 1rem oklch(from var(--colour-pink-700) l c h / 0.3);
     height: auto;
     max-width: 100%;
+    transition: all 0.5s ease-in-out;
 
-    &--image-on-left {
-    }
-
-    &--image-on-right {
+    .c-teaser-link-card__wrapping-link:hover & {
+        border: 1px solid oklch(from var(--colour-pink-700) l c h / 0.6);
+        box-shadow: 0 0.5rem 1rem oklch(from var(--colour-pink-700) l c h / 0.5);
     }
 }
 
-.c-teaser-link-card__copy-column {
+.c-teaser-link-card--horizontal--image-on-left__image {
+}
+.c-teaser-link-card--horizontal--image-on-right__image {
+}
+
+.c-teaser-link-card--horizontal__copy-column {
     @include make-col-ready();
     margin-top: 1rem;
     padding-left: 1rem;
@@ -290,5 +328,51 @@ $prefix: hedera- !default;
 
     &--100-0-split {
         display: none;
+    }
+}
+
+.c-teaser-link-card--horizontal__card-body {
+    background: oklch(100% 0 0 / 0.1);
+    border: 1px solid oklch(from var(--colour-blue-100) l c h / 0.5);
+    border-radius: $border-radius;
+    padding-right: 4rem;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+
+    &::after {
+        backdrop-filter: blur(5px) brightness(1.1) saturate(0.7);
+        border-radius: inherit;
+        content: "";
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        position: absolute;
+        transition: all 0.5s ease-in-out;
+        z-index: -5;
+    }
+
+    .c-teaser-link-card__wrapping-link:hover &::after {
+        backdrop-filter: blur(1rem) brightness(1.1) saturate(2);
+    }
+}
+
+.c-teaser-link-card--horizontal__title {
+    color: var(--colour-pink-600);
+    font-family: "Alegreya Sans HT", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.c-teaser-link-card--horizontal__link-arrow {
+    display: inline-block;
+    fill: var(--colour-pink-600);
+    height: 1.5rem;
+    position: absolute;
+    right: 2.5rem;
+    transition: all 0.5s ease-out;
+    width: 1.5rem;
+
+    .c-teaser-link-card__wrapping-link:hover & {
+        right: 1rem;
     }
 }

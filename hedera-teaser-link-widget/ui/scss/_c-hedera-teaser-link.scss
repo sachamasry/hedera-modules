@@ -1,6 +1,11 @@
 // Hedera Modules: Teaser link component
 //
 // This component depends on the Bootstrap framework
+//
+// To override, copy to project's `/modules/asset/ui/src/scss/`
+// directory, removing defined variable line below, adding:
+// `@forward "@/hedera-teaser-link-widget/scss/_c-hedera-teaser-link";`
+// to the file to read definitions made here.
 @use "@/asset/src/scss/theme" as theme;
 
 $prefix: hedera- !default;

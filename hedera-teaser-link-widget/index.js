@@ -48,8 +48,7 @@ export default {
             "hedera-image": {
               size: "one-sixth",
               dimensionAttrs: true,
-              className:
-                "c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal__image--image-on-left",
+              className: "",
             },
           },
         },
@@ -67,8 +66,7 @@ export default {
             "hedera-image": {
               size: "one-sixth",
               dimensionAttrs: true,
-              className:
-                "c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal__image--image-on-right",
+              className: "",
             },
           },
         },

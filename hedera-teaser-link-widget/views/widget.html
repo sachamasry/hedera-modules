@@ -99,7 +99,7 @@
 {%- elseif data.widget.horizontalAlignment == 'left' -%}
   {%- set horizontalAlignmentClass = "c-teaser-link-card--align-text-left" -%}
 {%- else -%}
-  {%- set horizontalAlignmentClass = '' -%}
+  {%- set horizontalAlignmentClass = "" -%}
 {%- endif -%}
 
 {%- if data.widget.verticalAlignment == 'top' -%}
@@ -149,7 +149,7 @@
   {%- set cardBorderStyle = 'border-color:' + data.widget.cardBorderColour + '; ' -%}
 {%- endif -%}
 
-{%- set imageClass = 'c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal__image--image-on-left' -%}
+{%- set imageClass = "c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal__image--image-on-" + horizontalCardImagePlacement -%}
 
 {%- if data.widget.drawImageBorders -%}
   {%- set imageBorderClass = "c-teaser-link-card__image--with-border" -%}
@@ -180,24 +180,24 @@
   {%- set headerTextColourStyle = 'color:' + data.widget.headerTextColour + '; ' -%}
 {%- endif -%}
 
-<div class="c-teaser-link-card {{ horizontalAlignmentClass }} {{ cardBorderClass }}"
+<div class="c-teaser-link-card c-teaser-link-card--horizontal {{ horizontalAlignmentClass }} {{ cardBorderClass }}"
     data-teaser-link-widget
-    style="{{ cardBorderStyle }} {{ cardBackgroundColourStyle }}">
-    <a class="c-teaser-link-card__wrapping-link"
+    {% if cardBorderStyle or cardBackgroundColourStyle %}style="{{ cardBorderStyle }} {{ cardBackgroundColourStyle }}"{% endif %}>
+    <a class="c-teaser-link-card__wrapping-link c-teaser-link-card--horizontal__wrapping-link"
         href="{{ contentPath }}"
         alt="{{ contentTitle }}">
-        <div class="c-teaser-link-card__row {{ rowAlignmentClass }}">
+        <div class="c-teaser-link-card__row c-teaser-link-card--horizontal__row {{ rowAlignmentClass }}">
             {%- if horizontalCardImagePlacement == 'left' -%}
             <div class="c-teaser-link-card--horizontal__image-column c-teaser-link-card--horizontal__image-column--on-left {% if imageColumnClass %}{{ imageColumnClass }}{% endif %}">
                 <div class="c-teaser-link-card--horizontal__image-wrapper c-teaser-link-card--horizontal__image-wrapper--image-on-left"
-                    style="{{ imageBorderStyle }}">
+                    {% if imageBorderStyle %}style="{{ imageBorderStyle }}"{% endif %}>
                     {%- if contentType in ['page', 'article', 'author', 'topic', 'tag', 'modal', 'file', 'image', 'custom'] -%}
                         {% area data.widget, 'horizontalImageLeft' with { 'hedera-image': { className: imageClass } } %}
                     {%- else -%}
-                    <img class="c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal--image-on-left__image"
+                    <img class="{{ imageClass }}"
                         srcset="{{ apos.image.srcset(contentImageObject) }}"
                         src="{{ apos.attachment.url(contentImageObject) }}"
-                        style="background-color:{{ imagePlaceholderColour }};"
+                        {% if imagePlaceholderColour %}style="background-color:{{ imagePlaceholderColour }};"{% endif %}
                         alt="{{ contentImageObject._alt }}" />
                     {%- endif -%}
                 </div>
@@ -206,30 +206,31 @@
 
             <div class="c-teaser-link-card__copy-column c-teaser-link-card--horizontal__copy-column {% if contentColumnClass %}{{ contentColumnClass }}{% endif %}">
                 <div class="c-teaser-link-card--horizontal__card-body"
-                    style="{{ cardBackgroundStyle }} {{ textColourStyle }}" >
+                    {% if cardBackgroundStyle or textColourStyle %}style="{{ cardBackgroundStyle }} {{ textColourStyle }}"{% endif %}>
                     <h4 class="c-teaser-link-card__title c-teaser-link-card--horizontal__title">
                         {{ contentTitle }}
                         <div class="c-teaser-link-card__link-arrow c-teaser-link-card--horizontal__link-arrow">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 8 17.5"
-                            >
+                                viewBox="0 0 8 17.5">
                                 <path
-                                    d="M.72 2.03A.75.75 0 0 1 1.78.97l5.5 5.5c.3.3.3.77 0 1.06l-5.5 5.5a.75.75 0 0 1-1.06-1.06L5.69 7 .72 2.03Z"
-                                />
+                                    d="M.72 2.03A.75.75 0 0 1 1.78.97l5.5 5.5c.3.3.3.77 0 1.06l-5.5 5.5a.75.75 0 0 1-1.06-1.06L5.69 7 .72 2.03Z"/>
                             </svg>
                         </div>
                     </h4>
                     {%- if contentSubTitle -%}
-                    <h3 class="c-teaser-link-card__subtitle c-teaser-link-card__subtitle">
+                    <h3 class="c-teaser-link-card__subtitle c-teaser-link-card--horizontal__subtitle">
                         {{ contentSubTitle }}
                     </h3>
-                    {%- endif -%} {%- if contentPublishedAt -%}
+                    {%- endif -%}
+                    {%- if contentPublishedAt -%}
                     <div class="c-teaser-link-card__published-date c-teaser-link-card--horizontal__published-date">
-                        {{ contentPublishedAt | date("MMMM D, YYYY") }}
+                        {{ contentPublishedAt | date("D MMMM YYYY") }}
                     </div>
                     {%- endif -%}
+                    <div class="c-teaser-link-card__manual-content c-teaser-link-card--horizontal__manual-content">
                     {% area data.widget, 'body' %}
+                    </div>
                 </div>
             </div>
 
@@ -237,12 +238,12 @@
             <div class="c-teaser-link-card--horizontal__image-column c-teaser-link-card--horizontal__image-column--on-right {% if imageColumnClass %}{{ imageColumnClass }}{% endif %}">
                 <div class="c-teaser-link-card--horizontal__image-wrapper c-teaser-link-card--horizontal__image-wrapper--image-on-right">
                     {%- if contentType == 'page' -%}
-                        {% area data.widget, 'horizontalImageRight' with { 'hedera-image': { className: 'c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal__image--image-on-right' } } %}
+                        {% area data.widget, 'horizontalImageRight' with { 'hedera-image': { className: imageClass } } %}
                     {%- else -%}
-                    <img class="c-teaser-link-card--horizontal__image c-teaser-link-card--horizontal--image-on-right__image"
+                    <img class="{{ imageClass }}"
                         srcset="{{ apos.image.srcset(contentImageObject) }}"
                         src="{{ apos.attachment.url(contentImageObject) }}"
-                        style="background-color:{{ imagePlaceholderColour }};"
+                        {% if imagePlaceholderColour %}style="background-color:{{ imagePlaceholderColour }};"{% endif %}
                         alt="{{ contentImageObject._alt }}" />
                     {%- endif -%}
                 </div>

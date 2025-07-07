@@ -9,10 +9,6 @@ $prefix: hedera- !default;
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/maps";
 @import "bootstrap/scss/mixins";
-@import "bootstrap/scss/root";
-@import "bootstrap/scss/utilities";
-@import "bootstrap/scss/containers";
-@import "bootstrap/scss/grid";
 @import "bootstrap/scss/card";
 
 .c-teaser-link-card {
@@ -111,6 +107,9 @@ $prefix: hedera- !default;
     }
 }
 
+.c-teaser-link-card--horizontal__wrapping-link {
+}
+
 .c-teaser-link-card__row {
     @include make-row(0);
 
@@ -135,6 +134,9 @@ $prefix: hedera- !default;
     &--align-stretch {
         align-items: stretch;
     }
+}
+
+.c-teaser-link-card--horizontal__row {
 }
 
 .c-teaser-link-card--horizontal__image-column {
@@ -228,6 +230,14 @@ $prefix: hedera- !default;
     }
 }
 
+.c-teaser-link-card--horizontal__image-wrapper {
+    &--image-on-left {
+    }
+
+    &--image-on-left {
+    }
+}
+
 .c-teaser-link-card__image {
     &--with-border {
         border-style: solid;
@@ -251,6 +261,7 @@ $prefix: hedera- !default;
 
 .c-teaser-link-card--horizontal--image-on-left__image {
 }
+
 .c-teaser-link-card--horizontal--image-on-right__image {
 }
 
@@ -397,4 +408,7 @@ $prefix: hedera- !default;
     font-size: 1rem;
     font-weight: 300;
     text-transform: uppercase;
+}
+
+.c-teaser-link-card--horizontal__manual-content {
 }
